@@ -7,9 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--  Charizard  -->
     <color name="charizard_500">#FFD60A</color>
     <color name="charizard_400">#FEE440</color>
     <color name="charizard_300">#FEEB70</color>
     <color name="charizard_200">#FEF2A0</color>
     <color name="charizard_100">#FFF8CF</color>
+
+    <!--  Giratina  -->
+    <color name="giratina_500">#9E9E9E</color>
+    <color name="giratina_400">#BDBDBD</color>
+    <color name="giratina_300">#FEEB70</color>
+    <color name="giratina_200">#E0E0E0</color>
+    <color name="giratina_100">#F5F5F5</color>
 </resources>
