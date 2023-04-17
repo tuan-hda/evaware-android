@@ -17,4 +17,10 @@
     <string name="menu_bag">Bag</string>
     <string name="log_in">Log in</string>
     <string name="Login_Email">Email address</string>
+    <string name="button">Log in</string>
+    <string name="forgot_pass">Forgot password?</string>
+    <string name="email_title">Email address</string>
+    <string name="password_title">Password</string>
+    <string name="don_t_have_">Don\'t have an account? <b>Sign up</b></string>
+    <string name="or_login_wi">Or Login with</string>
 </resources>
