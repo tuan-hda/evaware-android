@@ -15,4 +15,6 @@
     <string name="menu_user">User</string>
     <string name="menu_wishlist">Wishlist</string>
     <string name="menu_bag">Bag</string>
+    <string name="log_in">Log in</string>
+    <string name="Login_Email">Email address</string>
 </resources>
