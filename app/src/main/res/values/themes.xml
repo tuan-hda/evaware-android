@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Evaware" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/charizard_300</item>
+        <item name="colorPrimary">@color/charizard_400</item>
         <item name="colorPrimaryVariant">@color/charizard_500</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
