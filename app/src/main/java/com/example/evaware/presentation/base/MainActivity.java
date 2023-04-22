@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class MainActivity extends FragmentActivity {
     private static final String TAG = "MainActivity";
-    private ActivityMainBinding binding;
+    private  ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

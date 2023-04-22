@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  
-</selector>
+<!-- drawable/state_activ.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="11dp"
+    android:height="5dp"
+    android:viewportWidth="11"
+    android:viewportHeight="5"
+    >
+    <group>
+        <clip-path
+            android:pathData="M2.5 0H8.5C9.88071 0 11 1.11929 11 2.5C11 3.88071 9.88071 5 8.5 5H2.5C1.11929 5 0 3.88071 0 2.5C0 1.11929 1.11929 0 2.5 0Z"
+            />
+        <path
+            android:pathData="M0 0V5H11V0"
+            android:fillColor="#212121"
+            />
+    </group>
+</vector>
