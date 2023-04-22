@@ -22,6 +22,7 @@ import com.example.evaware.databinding.FragmentBagBinding;
 import com.example.evaware.presentation.checkout.ContactInfoActivity;
 import com.example.evaware.presentation.checkout.DeliveryAddressActivity;
 import com.example.evaware.utils.LinearScrollListView;
+import com.example.evaware.utils.LoadingDialog;
 
 
 public class BagFragment extends Fragment {
@@ -30,7 +31,7 @@ public class BagFragment extends Fragment {
     private final boolean isEmpty = false;
     private BagListAdapter adapter;
     private FragmentActivity activity;
-    private ProgressDialog progressDialog;
+    private LoadingDialog dialog;
 
     public BagFragment() {
         // Required empty public constructor
@@ -53,8 +54,8 @@ public class BagFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (!isEmpty) {
-            initProgressDialog();
-            progressDialog.show();
+            dialog = new LoadingDialog(activity);
+            dialog.showDialog();
 
             binding.layoutEmptyBag.setVisibility(GONE);
             binding.btnClearPromo.setOnClickListener(view1 -> {
@@ -65,7 +66,7 @@ public class BagFragment extends Fragment {
                 adapter = new BagListAdapter(activity, bagItemModels);
                 binding.listBagItem.setAdapter(adapter);
                 LinearScrollListView.justifyListViewHeightBasedOnChildren(binding.listBagItem);
-                progressDialog.dismiss();
+                dialog.dismissDialog();
             });
 
             setUpCheckoutButton();
@@ -74,13 +75,6 @@ public class BagFragment extends Fragment {
         }
     }
 
-    private void initProgressDialog() {
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Loading...");
-//        progressDialog.setTitle("ProgressDialog bar example");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-    }
 
     private void setUpCheckoutButton() {
         binding.btnCheckout.setOnClickListener(view -> {
