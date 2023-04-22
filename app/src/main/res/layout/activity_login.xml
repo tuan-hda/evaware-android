@@ -98,84 +98,84 @@
         android:background="@drawable/line_20"
         />
     <!-- Input Email -->
-    <RelativeLayout
-        android:layout_width="353dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="22dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="198dp"
-        android:background="@drawable/input">
-        <!-- title -->
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="93dp"
-            android:layout_height="18dp"
-            android:text="@string/email_title"
-            android:textAppearance="@style/title"
-            android:lineSpacingExtra="1sp"
-            android:translationY="0.28sp"
-            android:gravity="bottom"
-            />
-        <!-- Input field -->
-        <RelativeLayout
+<!--    <RelativeLayout-->
+<!--        android:layout_width="353dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="22dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="198dp"-->
+<!--        android:background="@drawable/input">-->
+<!--        &lt;!&ndash; title &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/title"-->
+<!--            android:layout_width="93dp"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:text="@string/email_title"-->
+<!--            android:textAppearance="@style/title"-->
+<!--            android:lineSpacingExtra="1sp"-->
+<!--            android:translationY="0.28sp"-->
+<!--            android:gravity="bottom"-->
+<!--            />-->
+<!--        &lt;!&ndash; Input field &ndash;&gt;-->
+<!--        <RelativeLayout-->
 
-            android:layout_width="353dp"
-            android:layout_height="56dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/input_field">
+<!--            android:layout_width="353dp"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginTop="22dp"-->
+<!--            android:background="@drawable/input_field">-->
 
-            <ImageButton
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/ic_tick" />
-        </RelativeLayout>
+<!--            <ImageButton-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginTop="18dp"-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:background="@drawable/ic_tick" />-->
+<!--        </RelativeLayout>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <!-- Input Password -->
-    <RelativeLayout
-        android:id="@+id/input"
-        android:layout_width="353dp"
-        android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="300dp"
-        android:background="@drawable/input">
-        <!-- title -->
-        <TextView
-            android:layout_width="65dp"
-            android:layout_height="18dp"
-            android:text="@string/password_title"
-            android:textAppearance="@style/title"
-            android:lineSpacingExtra="1sp"
-            android:translationY="0.28sp"
-            android:gravity="bottom"
-            />
-        <!-- Input field -->
-        <RelativeLayout
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/input"-->
+<!--        android:layout_width="353dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="300dp"-->
+<!--        android:background="@drawable/input">-->
+<!--        &lt;!&ndash; title &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:layout_width="65dp"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:text="@string/password_title"-->
+<!--            android:textAppearance="@style/title"-->
+<!--            android:lineSpacingExtra="1sp"-->
+<!--            android:translationY="0.28sp"-->
+<!--            android:gravity="bottom"-->
+<!--            />-->
+<!--        &lt;!&ndash; Input field &ndash;&gt;-->
+<!--        <RelativeLayout-->
 
-            android:layout_width="353dp"
-            android:layout_height="56dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/input_field" >
-            <ImageButton
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="18dp"
-                android:layout_marginRight="12dp"
-                android:background="@drawable/ic_eye_close" />
-        </RelativeLayout>
+<!--            android:layout_width="353dp"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginTop="22dp"-->
+<!--            android:background="@drawable/input_field" >-->
+<!--            <ImageButton-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginTop="18dp"-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:background="@drawable/ic_eye_close" />-->
+<!--        </RelativeLayout>-->
 
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
     <!-- Button / primary -->
     <RelativeLayout
         android:id="@+id/button_prim"
