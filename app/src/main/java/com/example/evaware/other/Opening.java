@@ -1,10 +1,9 @@
 package com.example.evaware.other;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import com.example.evaware.R;
+
 
 public class Opening extends AppCompatActivity {
 

@@ -25,4 +25,8 @@
     <string name="or_login_wi">Or Login with</string>
     <string name="bag">bag</string>
     <string name="start_shopping">Start shopping</string>
+    <string-array name="rangeSlider">
+        <item>0</item>
+        <item>500</item>
+    </string-array>
 </resources>
