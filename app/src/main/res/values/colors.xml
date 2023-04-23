@@ -6,7 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#EFF2F4</color>
+    <color name="white">#ffffffff</color>
     <color name="blue">#FF2196F3</color>
     <color name='transparent'>#00ffffff</color>
 
@@ -20,7 +20,7 @@
     <!--  Giratina  -->
     <color name="giratina_500">#9E9E9E</color>
     <color name="giratina_400">#BDBDBD</color>
-    <color name="giratina_300">#FEEB70</color>
+    <color name="giratina_300">#E0E0E0</color>
     <color name="giratina_200">#E0E0E0</color>
     <color name="giratina_100">#F5F5F5</color>
 </resources>
