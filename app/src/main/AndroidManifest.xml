@@ -12,13 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Evaware"
         tools:targetApi="31">
+<!--&lt;!&ndash;        login&ndash;&gt;-->
+<!--        <activity-->
+<!--            android:name=".presentation.base.LoginActivity"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
 
+<!--        <activity-->
+<!--            android:name=".presentation.checkout.ContactInfoActivity"-->
+<!--            android:exported="false">-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
+<!--        </activity>-->
+<!--        main_activity-->
         <activity
             android:name=".presentation.base.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -26,6 +41,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

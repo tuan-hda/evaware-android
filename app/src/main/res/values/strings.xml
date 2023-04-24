@@ -25,4 +25,11 @@
     <string name="or_login_wi">Or Login with</string>
     <string name="bag">bag</string>
     <string name="start_shopping">Start shopping</string>
+    <string name="your_bag_is_empty">your bag is empty</string>
+    <string name="items_remain_in_your_bag_for_1_hour_and_then_they_re_moved_to_your_saved_items">items remain in your bag for 1 hour, and then they’re moved to your Saved items</string>
+    <string name="surprised_image">Surprised Image</string>
+    <string name="bag_item_image">bag_item_image</string>
+    <string name="decrease_quantity">Decrease quantity</string>
+    <string name="increase_quantity">Increase quantity</string>
+    <string name="promocode">promocode</string>
 </resources>
