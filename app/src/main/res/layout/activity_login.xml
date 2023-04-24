@@ -16,7 +16,7 @@
         android:layout_marginTop="121dp"
         android:text="@string/log_in"
         android:textAppearance="@style/log_in"
-        android:lineSpacingExtra="-6sp"
+        android:lineSpacingExtra="6sp"
         android:gravity="top"
         />
     <!-- arrow-left -->
@@ -104,8 +104,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="22dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="198dp"
-        android:background="@drawable/input">
+        android:layout_marginTop="198dp">
         <!-- title -->
         <TextView
             android:id="@+id/title"
@@ -119,7 +118,6 @@
             />
         <!-- Input field -->
         <RelativeLayout
-
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
@@ -145,8 +143,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="300dp"
-        android:background="@drawable/input">
+        android:layout_marginTop="300dp">
         <!-- title -->
         <TextView
             android:layout_width="65dp"
@@ -159,7 +156,7 @@
             />
         <!-- Input field -->
         <RelativeLayout
-
+            android:id="@+id/email_field"
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"

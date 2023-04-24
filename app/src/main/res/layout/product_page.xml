@@ -1,6 +1,7 @@
 <!-- 1.4 Product page -->
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/product_pag"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -15,9 +16,19 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:background="@drawable/product_ima">
+        <!-- Product picture -->
+        <RelativeLayout
+            android:id="@+id/overlapping_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="-20dp"
+            android:layout_marginTop="-8dp"
+            android:background="@drawable/product1" />
         <!-- Navigation Bar -->
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/navigation_"
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_alignParentLeft="true"
@@ -28,10 +39,11 @@
             <RelativeLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
+
                 android:background="@drawable/main_fr_product_page"
-                >
-                <ImageButton
+                tools:ignore="UnknownId">
+                <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -40,7 +52,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/arrow_left"/>
                 <!-- Right-icon -->
-                <ImageButton
+                <ImageView
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/right_icon"
                     android:layout_width="36dp"
@@ -53,16 +65,6 @@
                     />
             </RelativeLayout>
         </RelativeLayout>
-        <!-- Product picture -->
-        <ImageView
-            android:id="@+id/product_ima"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/product1" />
         <!-- Active Bar -->
         <RelativeLayout
             android:layout_width="55dp"
