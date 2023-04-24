@@ -121,8 +121,17 @@
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/input_field">
+            android:layout_marginTop="22dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="-1dp"
+                android:fontFamily="@font/lexend_medium"
+                android:paddingLeft="16dp"
+                android:textColorLink="@color/white"
+                android:background="@drawable/input_field" />
 
             <ImageView
                 android:layout_width="20dp"
@@ -156,12 +165,21 @@
             />
         <!-- Input field -->
         <RelativeLayout
-            android:id="@+id/email_field"
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/input_field" >
+            android:layout_marginTop="22dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="-1dp"
+                android:fontFamily="@font/lexend_medium"
+                android:paddingLeft="16dp"
+                android:textColorLink="@color/white"
+                android:background="@drawable/input_field" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -174,29 +192,40 @@
 
     </RelativeLayout>
     <!-- Button / primary -->
-    <RelativeLayout
+    <Button
         android:id="@+id/button_prim"
         android:layout_width="353dp"
-        android:layout_height="56dp"
+        android:layout_height="70dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="451dp"
-        android:background="@drawable/button_prima">
-        <!-- Button -->
-        <TextView
-            android:id="@+id/button"
-            android:layout_width="47dp"
-            android:layout_height="25dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:lineSpacingExtra="1sp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="153dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="18dp"
-            android:text="@string/button"
-            android:textAppearance="@style/button" />
-    </RelativeLayout>
+        android:text="Log in"
+        android:textColor="@color/black"
+        />
+<!--    <RelativeLayout-->
+
+<!--        android:layout_width="353dp"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="451dp"-->
+<!--        android:background="@drawable/button_prima">-->
+<!--        &lt;!&ndash; Button &ndash;&gt;-->
+<!--        <TextView-->
+<!--            android:id="@+id/button"-->
+<!--            android:layout_width="47dp"-->
+<!--            android:layout_height="25dp"-->
+<!--            android:gravity="center_vertical|center_horizontal"-->
+<!--            android:lineSpacingExtra="1sp"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_marginLeft="153dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_marginTop="18dp"-->
+<!--            android:text="@string/button"-->
+<!--            android:textAppearance="@style/button" />-->
+<!--    </RelativeLayout>-->
     <!-- Don’t have an account? Sign up -->
     <TextView
         android:id="@+id/don_t_have_"
@@ -212,6 +241,20 @@
         android:translationY="0.28sp"
         android:gravity="bottom"
         />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/Sign_up"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="589dp"
+        android:gravity="bottom"
+        android:lineSpacingExtra="1sp"
+        android:text="Sign up"
+        android:textColor="@color/black"
+        android:background="match_parent"
+        android:translationY="0.28sp" />
+</RelativeLayout>
 
 
