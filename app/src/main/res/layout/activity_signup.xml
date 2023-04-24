@@ -126,6 +126,7 @@
                 android:translationY="0.32sp" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
@@ -136,6 +137,8 @@
         android:ems="10"
         android:text="Login" />
 =======
+=======
+>>>>>>> acee47ab08b0e8dbbd185bc4f7c3c6d630f74a8b
             <RelativeLayout
                 android:id="@+id/icon"
                 android:layout_width="20dp"
@@ -149,6 +152,9 @@
                 android:clipToOutline="true" />
         </RelativeLayout>
     </RelativeLayout>
+<<<<<<< HEAD
+>>>>>>> acee47ab08b0e8dbbd185bc4f7c3c6d630f74a8b
+=======
 >>>>>>> acee47ab08b0e8dbbd185bc4f7c3c6d630f74a8b
 
     <RelativeLayout
