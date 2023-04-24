@@ -42,6 +42,7 @@
         android:textAppearance="@style/sign_up" />
 
     <RelativeLayout
+        android:id="@+id/email_field"
         android:layout_width="353dp"
         android:layout_height="80dp"
         android:layout_alignParentLeft="true"
@@ -60,6 +61,7 @@
             android:translationY="0.28sp" />
         <!-- Input field -->
         <RelativeLayout
+            android:id="@+id/text_email"
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
@@ -103,6 +105,7 @@
             android:translationY="0.28sp" />
 
         <RelativeLayout
+            android:id="@+id/cre_pass"
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
@@ -156,6 +159,7 @@
             android:translationY="0.28sp" />
 
         <RelativeLayout
+            android:id="@+id/cf_pass"
             android:layout_width="353dp"
             android:layout_height="56dp"
             android:layout_alignParentTop="true"
@@ -163,7 +167,7 @@
             android:background="@drawable/input_field">
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/text_cf2"
                 android:layout_width="291dp"
                 android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
@@ -309,13 +313,14 @@
         android:layout_width="215dp"
         android:layout_height="18dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="89dp"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
         android:layout_marginTop="762dp"
-        android:text="@string/already_hav"
-        android:textAppearance="@style/already_hav"
-        android:lineSpacingExtra="1sp"
-        android:translationY="0.28sp"
         android:gravity="bottom"
-        />
+        android:lineSpacingExtra="1sp"
+        android:text="@string/already_hav"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textStyle="bold"
+        android:translationY="0.28sp" />
+    
 </RelativeLayout>
