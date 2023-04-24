@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sign_up"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -7,6 +8,27 @@
     android:layout_centerVertical="true"
     android:background="@drawable/sign_up"
     android:clipToOutline="true">
+
+    <RelativeLayout
+        android:id="@+id/button_prim"
+        android:layout_width="353dp"
+        android:layout_height="56dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="520dp"
+        android:background="@drawable/button_prim">
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/button_s"
+            android:textAppearance="@style/button_s"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/arrow_left"
@@ -68,19 +90,15 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/input_field">
 
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="321dp"
-                android:layout_height="20dp"
+            <EditText
+                android:id="@+id/editTextEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="13dp"
-                android:gravity="bottom"
-                android:lineSpacingExtra="1sp"
-                android:text="@string/text"
-                android:textAppearance="@style/text"
-                android:translationY="0.32sp" />
-
+                android:layout_marginLeft="11dp"
+                android:ems="10"
+                android:hint="example@gmail.com"
+                android:inputType="textEmailAddress" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -111,19 +129,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="22dp"
             android:background="@drawable/input_field">
-
-            <TextView
-                android:id="@+id/text_cf"
-                android:layout_width="291dp"
-                android:layout_height="20dp"
+            <EditText
+                android:id="@+id/editTextEmailPass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="13dp"
-                android:gravity="bottom"
-                android:lineSpacingExtra="1sp"
-                android:text="@string/text_cr"
-                android:textAppearance="@style/text_cr"
-                android:translationY="0.32sp" />
+                android:layout_marginLeft="11dp"
+                android:ems="10"
+                android:hint="@string/text_cr"
+                android:inputType="textPassword" />
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -143,9 +157,8 @@
                 android:id="@+id/icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_alignTop="@id/text_cf"
-                android:layout_alignRight="@id/text_cf"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginTop="-2dp"
                 android:layout_marginRight="18dp"
                 android:background="@drawable/ic_eye_open"
@@ -183,19 +196,15 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="22dp"
             android:background="@drawable/input_field">
-
-            <TextView
-                android:id="@+id/text_cf2"
-                android:layout_width="291dp"
-                android:layout_height="20dp"
+            <EditText
+                android:id="@+id/editTextEmail_CfPass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="13dp"
-                android:gravity="bottom"
-                android:lineSpacingExtra="1sp"
-                android:text="@string/text_rp"
-                android:textAppearance="@style/text_rp"
-                android:translationY="0.32sp" />
+                android:layout_marginLeft="11dp"
+                android:ems="10"
+                android:hint="@string/text_rp"
+                android:inputType="textPassword" />
 
             <RelativeLayout
                 android:id="@+id/icon2"
@@ -210,37 +219,16 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/button_prim"
-        android:layout_width="353dp"
-        android:layout_height="56dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="520dp"
-        android:background="@drawable/button_prim">
-
-        <TextView
-            android:id="@+id/button"
-            android:layout_width="119dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:gravity="center_horizontal|center_vertical"
-            android:lineSpacingExtra="1sp"
-            android:text="@string/button_s"
-            android:textAppearance="@style/button_s"
-            android:textStyle="bold" />
-    </RelativeLayout>
-
     <View
         android:id="@+id/line_21"
         android:layout_width="122dp"
         android:layout_height="1dp"
+        android:layout_below="@+id/button_prim"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="624dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="622dp"
         android:background="@drawable/line_21" />
 
     <TextView
@@ -259,15 +247,17 @@
 
     <View
         android:id="@+id/line_20"
-        android:layout_width="127dp"
+        android:layout_width="122dp"
         android:layout_height="1dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="250dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="254dp"
         android:layout_marginTop="622dp"
         android:background="@drawable/line_20" />
 
     <RelativeLayout
+
         android:id="@+id/button_with"
         android:layout_width="108dp"
         android:layout_height="56dp"
@@ -282,9 +272,11 @@
             android:layout_width="36dp"
             android:layout_height="35dp"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:background="@drawable/ic_social"
             android:clipToOutline="true" />
+
+
+
     </RelativeLayout>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -332,7 +324,7 @@
         android:layout_height="18dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="89dp"
+        android:layout_marginLeft="91dp"
         android:layout_marginTop="762dp"
         android:gravity="bottom"
         android:lineSpacingExtra="1sp"
@@ -340,5 +332,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold"
         android:translationY="0.28sp" />
-    
+
+
 </RelativeLayout>
