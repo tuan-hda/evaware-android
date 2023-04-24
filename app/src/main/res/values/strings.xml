@@ -32,4 +32,15 @@
     <string name="decrease_quantity">Decrease quantity</string>
     <string name="increase_quantity">Increase quantity</string>
     <string name="promocode">promocode</string>
+    <string name="sign_up">Sign up</string>
+    <string name="title">Email</string>
+    <string name="text">example@gmail.com</string>
+    <string name="title_cre">Create a password</string>
+    <string name="text_cr">must be 8 characters</string>
+    <string name="title_cf">Confirm password</string>
+    <string name="text_rp">repeat password</string>
+    <string name="button_s">Create account</string>
+    <string name="or_register">Or Register with</string>
+    <string name="already_hav">Already have an account? Log in</string>
+
 </resources>
