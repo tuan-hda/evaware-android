@@ -30,7 +30,7 @@
 <!--        </activity>-->
 <!--        main_activity-->
         <activity
-            android:name=".presentation.base.LoginActivity"
+            android:name=".presentation.base.ReviewsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
