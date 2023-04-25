@@ -1,11 +1,13 @@
 <!-- 1.4 Product page -->
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/product_pag"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="1416dp"
     android:clipToOutline="true"
+    android:scrollbars="vertical"
+    android:scrollbarStyle="insideInset"
     android:background="@drawable/product_pag"
     >
     <!-- product image -->
@@ -20,11 +22,11 @@
         <RelativeLayout
             android:id="@+id/overlapping_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="458dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="-20dp"
-            android:layout_marginTop="-8dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/product1" />
         <!-- Navigation Bar -->
         <RelativeLayout
@@ -43,7 +45,8 @@
 
                 android:background="@drawable/main_fr_product_page"
                 tools:ignore="UnknownId">
-                <ImageView
+                <!--Left-icon -->
+                <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -52,7 +55,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/arrow_left"/>
                 <!-- Right-icon -->
-                <ImageView
+                <ImageButton
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/right_icon"
                     android:layout_width="36dp"
@@ -63,11 +66,12 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ic_heart"
                     />
+
             </RelativeLayout>
         </RelativeLayout>
         <!-- Active Bar -->
         <RelativeLayout
-            android:layout_width="55dp"
+            android:layout_width="50dp"
             android:layout_height="13dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="429dp"
@@ -77,12 +81,55 @@
             <!-- State=Active -->
             <View
                 android:id="@+id/state_activ"
-                android:layout_width="7dp"
-                android:layout_height="3dp"
+                android:layout_width="8dp"
+                android:layout_height="4dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/state_active" />
+            <View
+                android:id="@+id/state_inact1"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:background="@drawable/state_inact" />
+            <View
+                android:id="@+id/state_inact2"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/state_inact" />
+            <View
+                android:id="@+id/state_inact3"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="33dp"
+                android:background="@drawable/state_inact" />
+            <View
+                android:id="@+id/state_inact4"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="41dp"
+                android:background="@drawable/state_inact" />
         </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+    <!-- page content -->
+<!--    <RelativeLayout-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        android:id="@+id/page_conten"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="947dp"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="458dp"-->
+
+<!--        />-->
+   </ScrollView>
