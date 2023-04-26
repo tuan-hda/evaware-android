@@ -2,134 +2,239 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/product_pag"
     android:layout_width="fill_parent"
-    android:layout_height="1416dp"
-    android:clipToOutline="true"
-    android:scrollbars="vertical"
-    android:scrollbarStyle="insideInset"
+    android:layout_height="1400dp"
     android:background="@drawable/product_pag"
-    >
-    <!-- product image -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="458dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/product_ima">
-        <!-- Product picture -->
-        <RelativeLayout
-            android:id="@+id/overlapping_layout"
-            android:layout_width="match_parent"
-            android:layout_height="458dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/product1" />
-        <!-- Navigation Bar -->
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"
-            android:background="@drawable/navigation_">
-            <!-- main-frame -->
+    android:scrollbarStyle="insideInset"
+    android:verticalScrollbarPosition="right"
+    android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- product image -->
+        <LinearLayout
+            android:id="@+id/product_image"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_gravity="top"
+            android:layout_height="461dp">
             <RelativeLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="461dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="0dp">
+                <!-- Product picture -->
+                <RelativeLayout
+                        android:id="@+id/overlapping_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="458dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/product1" />
+                <!-- main-frame -->
+                <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/main_fr_product_page"
+                        tools:ignore="UnknownId">
+                        <!--Left-icon -->
+                        <ImageButton
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="25dp"
+                            android:background="@drawable/arrow_left" />
+                        <!-- Right-icon -->
+                        <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/right_icon"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/ic_heart" />
+                    </RelativeLayout>
+                <!-- Active Bar -->
+                <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="13dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="429dp"
+                        android:background="@drawable/page_contro">
+                        <!-- State=Active -->
+                        <View
+                            android:id="@+id/state_activ"
+                            android:layout_width="8dp"
+                            android:layout_height="4dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/state_active" />
 
-                android:background="@drawable/main_fr_product_page"
-                tools:ignore="UnknownId">
-                <!--Left-icon -->
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="25dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/arrow_left"/>
-                <!-- Right-icon -->
-                <ImageButton
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/right_icon"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="25dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_heart"
-                    />
+                        <View
+                            android:id="@+id/state_inact1"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="17dp"
+                            android:background="@drawable/state_inact" />
 
+                        <View
+                            android:id="@+id/state_inact2"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="25dp"
+                            android:background="@drawable/state_inact" />
+
+                        <View
+                            android:id="@+id/state_inact3"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="33dp"
+                            android:background="@drawable/state_inact" />
+
+                        <View
+                            android:id="@+id/state_inact4"
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="41dp"
+                            android:background="@drawable/state_inact" />
+                    </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
-        <!-- Active Bar -->
-        <RelativeLayout
-            android:layout_width="50dp"
-            android:layout_height="13dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="429dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/page_contro"
-            >
-            <!-- State=Active -->
-            <View
-                android:id="@+id/state_activ"
-                android:layout_width="8dp"
-                android:layout_height="4dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/state_active" />
-            <View
-                android:id="@+id/state_inact1"
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="17dp"
-                android:background="@drawable/state_inact" />
-            <View
-                android:id="@+id/state_inact2"
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:background="@drawable/state_inact" />
-            <View
-                android:id="@+id/state_inact3"
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="33dp"
-                android:background="@drawable/state_inact" />
-            <View
-                android:id="@+id/state_inact4"
-                android:layout_width="4dp"
-                android:layout_height="4dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="41dp"
-                android:background="@drawable/state_inact" />
-        </RelativeLayout>
-    </RelativeLayout>
-    <!-- page content -->
-<!--    <RelativeLayout-->
-<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        android:id="@+id/page_conten"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="947dp"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginTop="458dp"-->
+        </LinearLayout>
+        <!-- page content -->
+        <LinearLayout
+            android:id="@+id/page_content"
+            android:layout_width="match_parent"
+            android:layout_height="940dp"
+            android:orientation="vertical">
 
-<!--        />-->
-   </ScrollView>
+            <!-- product-info -->
+            <RelativeLayout
+                android:id="@+id/product_inf"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_marginTop="0dp"
+                android:background="#F5F5F5">
+                <!-- description -->
+                <RelativeLayout
+                    android:id="@+id/description"
+                    android:layout_width="400dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true" >
+                    <!--  Price-->
+                    <TextView
+                        android:id="@+id/some_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:gravity="top"
+                        android:lineSpacingExtra="-4sp"
+                        android:paddingStart="5sp"
+                        android:text="150.000 VND"
+                        android:textColor="#212121"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/wooden_beds"
+                        android:layout_width="match_parent"
+                        android:layout_height="83dp"
+                        android:gravity="start"
+                        android:lineSpacingExtra="0sp"
+                        android:layout_marginTop="39dp"
+                        android:paddingStart="5sp"
+                        android:text="This is a description"
+                        android:textColor="#9E9E9E"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+                <!-- colors zone-->
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/colors"
+                    android:layout_width="400dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="135dp"
+                    android:layout_centerHorizontal="true"
+                    >
+                    <!-- first color-->
+                    <RelativeLayout
+
+                        android:layout_width="102dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_choose_color"
+                        >
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_brown"
+                            android:layout_marginLeft="5dp"
+                            android:layout_centerVertical="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:onClick="onButtonClick"
+                            android:gravity="center"
+                            android:layout_marginLeft="40dp"
+                            android:layout_centerVertical="true"
+                            android:text="Brown"
+                            android:textStyle="bold"
+                            />
+                    </RelativeLayout>
+                    <!-- second color-->
+                    <RelativeLayout
+                        android:layout_width="102dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_choose_color"
+                        android:layout_marginLeft="122dp"
+                        >
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_black"
+                            android:layout_marginLeft="5dp"
+                            android:layout_centerVertical="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:onClick="onButtonClick"
+                            android:gravity="center"
+                            android:layout_marginLeft="40dp"
+                            android:layout_centerVertical="true"
+                            android:text="Black"
+                            android:textStyle="bold"
+                            />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/button_prim"
+                    android:layout_width="400dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="190dp"
+                    android:text="Add to bag"
+                    android:textColor="@color/black"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
