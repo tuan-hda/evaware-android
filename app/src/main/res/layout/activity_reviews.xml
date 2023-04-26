@@ -46,176 +46,382 @@
             android:layout_marginRight="15dp"
             android:gravity="center"
             android:lineSpacingExtra="6sp"
-            android:text="New Reviews"
+            android:text="New Review"
             android:textColor="#FF000000"
             android:onClick="onButtonClick"
             android:textSize="16dp" />
 
     </RelativeLayout>
-    <!-- page content -->
+    <!-- Search Field -->
     <RelativeLayout
-        android:id="@+id/page_conten"
-        android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp">
-        <!-- Rating -->
-        <RelativeLayout
-            android:id="@+id/rating"
-            android:layout_width="300dp"
-            android:layout_height="80dp"
-            android:layout_centerHorizontal="true">
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="60dp"
+        tools:layout_centerHorizontal="true"
+        >
 
-            <ImageButton
-                android:id="@+id/star1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/vote_star" />
+        <EditText
+            android:id="@+id/edt_phone"
+            style="@style/SearchText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search"
+            android:lineSpacingExtra="16sp" />
 
-            <ImageButton
-                android:id="@+id/star2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="60dp"
-                android:background="@drawable/vote_star" />
-
-            <ImageButton
-                android:id="@+id/star3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="120dp"
-                android:background="@drawable/vote_star" />
-
-            <ImageButton
-                android:id="@+id/star4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="180dp"
-                android:background="@drawable/vote_star" />
-
-            <ImageButton
-                android:id="@+id/star5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="240dp"
-                android:background="@drawable/unvote_star" />
-        </RelativeLayout>
-        <!--        Vote text-->
-        <TextView
-            android:id="@+id/Vote_text"
-            android:layout_width="343dp"
+        <ImageView
+            android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
-            android:gravity="center_horizontal|top"
-            android:lineSpacingExtra="0sp"
-            android:text="Nice"
-            android:textSize="20dp" />
-        <!-- Text Field -->
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/ic_search" />
+    </RelativeLayout>
+    <!-- reviews -->
+    <RelativeLayout
+        android:id="@+id/reviews"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_marginTop="130dp"
+        >
+        <!-- Review1 -->
         <RelativeLayout
-            android:id="@+id/text_field"
-            android:layout_width="370dp"
-            android:layout_height="64dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="120dp"
-            android:background="@drawable/text_field">
-            <!-- Label -->
-            <TextView
-                android:id="@+id/label"
-                android:layout_width="311dp"
+            android:id="@+id/review1"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="0dp">
+            <!-- Rating Field-->
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rating"
+                android:layout_width="110dp"
                 android:layout_height="21dp"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
-                android:gravity="top"
-                android:text="Your review"
-                android:textColor="#514E4E" />
-            <!-- Filled -->
-            <EditText
-                android:id="@+id/filled"
+                android:layout_marginTop="2dp">
+
+                <ImageView
+                    android:id="@+id/star1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+                    android:id="@+id/star2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+                    android:id="@+id/star3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="44dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+                    android:id="@+id/star4"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="66dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+                    android:id="@+id/star5"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="88dp"
+                    android:background="@drawable/unvote_star" />
+            </RelativeLayout>
+            <!-- Time Field -->
+            <TextView
+                android:id="@+id/today_12_30"
+                android:layout_width="111dp"
+                android:layout_height="21dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="7dp"
+
+                android:text="Today, 12:30 pm"
+                android:textColor="#9E9E9E"
+                android:textSize="14sp" />
+            <!-- name and avatar -->
+            <RelativeLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/lexend_medium"
-                android:gravity="left"
-                android:paddingLeft="16dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="27dp"
+                >
+                <!--         Name-->
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="Customer 1"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="0sp"
+                    android:gravity="top"
+                    android:textColor="#090808"
+                    android:textStyle="bold"
+                    tools:layout_centerVertical="true" />
+<!--                customer avt-->
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/example_pic1"
+                    />
+
+
+            </RelativeLayout>
+<!--            Customer review-->
+            <TextView
+                android:id="@+id/everything_"
+                android:layout_width="394dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="60dp"
+                android:gravity="top"
                 android:lineSpacingExtra="0sp"
-                android:text="This is my review"
-                android:backgroundTint="#D1CBCB" />
+                android:text="Review 1"
+                android:textColor="#9E9E9E"
+                android:textSize="16sp"
+                tools:layout_centerHorizontal="true" />
         </RelativeLayout>
-
-        <!--Add images zone -->
+        <!-- Review2 -->
         <RelativeLayout
-            android:id="@+id/images"
+            android:id="@+id/review2"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="220dp" >
+            android:layout_height="180dp"
+            android:layout_marginTop="190dp"
+            >
+            <!-- Rating Field-->
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
 
-            <ImageButton
-                android:id="@+id/add_images_btn"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_centerVertical="true"
+                android:layout_width="110dp"
+                android:layout_height="21dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="22dp"
-                android:background="@drawable/add_picture_ic" />
-            <RelativeLayout
-                android:id="@+id/added_pic1"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="106dp"
-                android:background="@drawable/example_pic1" >
-                <ImageButton
-                    android:id="@+id/remove_pic1"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp">
+
+                <ImageView
+
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/ic_x"
-                    />
-            </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/added_pic2"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="190dp"
-                android:background="@drawable/example_pic2" >
-                <ImageButton
-                    android:id="@+id/remove_pic2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/ic_x"
-                    />
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="44dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="66dp"
+                    android:background="@drawable/unvote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="88dp"
+                    android:background="@drawable/unvote_star" />
             </RelativeLayout>
+            <!-- Time Field -->
+            <TextView
+                android:layout_width="111dp"
+                android:layout_height="21dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="7dp"
+                android:text="3 days ago"
+                android:textColor="#9E9E9E"
+                android:textSize="14sp" />
+            <!-- name and avatar -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="27dp"
+                >
+                <!--         Name-->
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="Customer 2"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="0sp"
+                    android:gravity="top"
+                    android:textColor="#090808"
+                    android:textStyle="bold"
+                    tools:layout_centerVertical="true" />
+                <!--                customer avt-->
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/example_pic1"
+                    />
+
+
+            </RelativeLayout>
+            <!--            Customer review-->
+            <TextView
+
+                android:layout_width="394dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="60dp"
+                android:gravity="top"
+                android:lineSpacingExtra="0sp"
+                android:text="Review 2"
+                android:textColor="#9E9E9E"
+                android:textSize="16sp"
+                tools:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/review3"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="375dp"
+            >
+            <!-- Rating Field-->
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+
+                android:layout_width="110dp"
+                android:layout_height="21dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp">
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="0dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="44dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="66dp"
+                    android:background="@drawable/vote_star" />
+
+                <ImageView
+
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="88dp"
+                    android:background="@drawable/vote_star" />
+            </RelativeLayout>
+            <!-- Time Field -->
+            <TextView
+
+                android:layout_width="111dp"
+                android:layout_height="21dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="2dp"
+                android:text="1 month ago"
+                android:textColor="#9E9E9E"
+                android:textSize="14sp" />
+            <!-- name and avatar -->
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="27dp"
+                >
+                <!--         Name-->
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="45dp"
+                    android:text="Customer 3"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="0sp"
+                    android:gravity="top"
+                    android:textColor="#090808"
+                    android:textStyle="bold"
+                    tools:layout_centerVertical="true" />
+                <!--                customer avt-->
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/example_pic1"
+                    />
+
+
+            </RelativeLayout>
+            <!--            Customer review-->
+            <TextView
+
+                android:layout_width="394dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="60dp"
+                android:gravity="top"
+                android:lineSpacingExtra="0sp"
+                android:text="Review 3"
+                android:textColor="#9E9E9E"
+                android:textSize="16sp"
+                tools:layout_centerHorizontal="true" />
         </RelativeLayout>
     </RelativeLayout>
-<!--    Send review Button-->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_continue"
-        style="@style/Button"
-        android:layout_width="370dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginBottom="16dp"
-        android:text="Send review"
-        android:layout_centerHorizontal="true"
-        tools:layout_editor_absoluteX="16dp" />
+
 </RelativeLayout>
