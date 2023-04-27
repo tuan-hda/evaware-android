@@ -20,6 +20,7 @@ public class StartFragment extends Fragment {
 
     private MaterialButton loginBtn;
     private MaterialButton createAccBtn;
+    private MaterialButton testBtn;
     private FragmentStartBinding binding;
 
     public StartFragment() {
@@ -46,6 +47,7 @@ public class StartFragment extends Fragment {
     private void initView(View view) {
         loginBtn = binding.btnLoginMethod;
         createAccBtn =binding.btnCreateAccountMethod;
+        testBtn = binding.btnTest;
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +59,13 @@ public class StartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_sign_up_fragment);
+            }
+        });
+        testBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_countryListFragment);
             }
         });
     }

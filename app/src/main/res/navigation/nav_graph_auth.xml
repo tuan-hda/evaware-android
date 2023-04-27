@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_start_fragment_to_sign_up_fragment"
             app:destination="@id/sign_up_fragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_countryListFragment"
+            app:destination="@id/countryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/login_fragment"
@@ -39,4 +42,9 @@
             app:popUpTo="@id/sign_up_fragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/countryListFragment"
+        android:name="com.example.evaware.CountryListFragment"
+        android:label="fragment_country_list"
+        tools:layout="@layout/fragment_country_list" />
 </navigation>

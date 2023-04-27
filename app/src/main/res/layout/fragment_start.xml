@@ -32,6 +32,16 @@
             android:text="Create account"
 
             tools:layout_editor_absoluteX="16dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_test"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="CountryList"
+
+            tools:layout_editor_absoluteX="16dp" />
     </LinearLayout>
 
 

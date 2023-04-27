@@ -42,4 +42,6 @@
     <string name="create_account">Create account</string>
     <string name="or_register_with">Or Register with</string>
     <string name="already_have_account">Already have account?</string>
+    <string name="country_image_description">Vietnamese</string>
+    <string name="choose_your_country">Choose your country</string>
 </resources>
