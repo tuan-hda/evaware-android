@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    <!-- Title -->
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+        <!-- Title -->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="343dp"
+            android:layout_height="42dp"
+            android:text="Bag"
+            android:textSize="32sp"
+            android:textColor="#212121"
+            android:lineSpacingExtra="-6sp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="42dp"
+            />
+    </RelativeLayout>
+    <!-- page content -->
+    <LinearLayout
+        android:id="@+id/page_conten"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="610dp"
+        >
+        <!-- product list -->
+        <RelativeLayout
+            android:id="@+id/product_lis"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            >
+            <!-- small card -->
+            <RelativeLayout
+                android:id="@+id/small_card"
+                android:layout_width="370dp"
+                android:layout_height="140dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                >
+                <!-- img -->
+                <View
+                    android:id="@+id/img"
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/product1"
+                    />
+                <!-- main-container -->
+                <RelativeLayout
+                    android:id="@+id/main_contai"
+                    android:layout_width="233dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="130dp"
+                    >
+                    <!-- Price -->
+                    <TextView
+                        android:layout_width="201dp"
+                        android:layout_height="24dp"
+                        android:text="$280.50"
+                        android:textAppearance="@style/price"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="0sp"
+                        android:gravity="top"
+                        />
+                    <!--Description-->
+                    <TextView
+                        android:layout_width="201dp"
+                        android:layout_height="55dp"
+                        android:text="Thís is a description"
+                        android:textAppearance="@style/description"
+                        android:lineSpacingExtra="-2sp"
+                        android:layout_marginTop="24dp"
+                        />
+                    <!-- Stepper -->
+                    <RelativeLayout
+                        android:id="@+id/stepper"
+                        android:layout_width="98dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="79dp"
+                        >
+                        <!-- Minus-->
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="8dp"
+                            android:background="@drawable/minus"
+                            android:onClick="onButtonClick"/>
+                        <!-- number -->
+                        <TextView
+                            android:id="@+id/item_number"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="39dp"
+                            android:gravity="center"
+                            android:text="3" />
+                        <!-- Plus-->
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="70dp"
+                            android:background="@drawable/plus"
+                            android:onClick="onButtonClick"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <ImageButton
+                    android:id="@+id/clear_"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/clear"
+                    android:layout_alignParentRight="true"/>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <!-- promocode -->
+        <TextView
+            android:id="@+id/promocode"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical"
+            android:paddingStart="30dp"
+            android:text="promocode"
+            android:textColor="#212121"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <!-- code -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            >
+            <!-- Text Field -->
+            <RelativeLayout
+                android:id="@+id/text_field"
+                android:layout_width="343dp"
+                android:layout_height="74dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/text_field" >
+                <!-- Code -->
+                <TextView
+                    android:id="@+id/filled"
+                    android:layout_width="271dp"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:lineSpacingExtra="0sp"
+                    android:paddingStart="16dp"
+                    android:text="UOASDHFSDOJ"
+                    android:textColor="#212121"
+                    android:textSize="16sp" />
+                <ImageButton
+                    android:id="@+id/clear_code"
+                    android:layout_width="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/clear"
+                    android:layout_alignParentRight="true"/>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+        <!-- total -->
+        <RelativeLayout
+            android:id="@+id/total"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            >
+            <!-- total -->
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Total"
+                android:textAppearance="@style/price"
+                android:textSize="26sp"
+                android:lineSpacingExtra="-4sp"
+                android:gravity="top"
+                />
+            <!-- $420.50 -->
+            <TextView
+                android:id="@+id/some_id"
+                android:layout_width="99dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="259dp"
+                android:text="$420.50"
+                android:textSize="26sp"
+                android:textAppearance="@style/price"
+                android:lineSpacingExtra="-4sp"
+                />
+            <!-- Discount -->
+            <TextView
+                android:layout_width="93dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="59dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-4sp"
+                android:text="Discount"
+                android:textAppearance="@style/description"
+                android:textSize="16sp" />
+            <!-- −$25.00 -->
+            <TextView
+                android:layout_width="93dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="259dp"
+                android:layout_marginTop="56dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="-4sp"
+                android:text="−$25.00"
+                android:textAppearance="@style/description"
+                android:textSize="16sp" />
+        </RelativeLayout>
+        <!-- order button -->
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/order_button"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            >
+            <Button
+                android:id="@+id/large_prima"
+                android:layout_width="350dp"
+                android:layout_height="90dp"
+                android:layout_centerHorizontal="true"
+                android:text="Checkout"
+                android:textSize="24sp"
+                android:layout_centerVertical="true"
+            />
+        </RelativeLayout>
+    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:padding="0dp"
+        app:itemActiveIndicatorStyle="@style/Theme.Evaware.CustomIndicator"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/app_menu" />
+</LinearLayout>
