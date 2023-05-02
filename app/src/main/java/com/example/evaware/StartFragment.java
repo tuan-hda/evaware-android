@@ -65,7 +65,9 @@ public class StartFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_countryListFragment);
+//                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_countryListFragment);
+                NewCardBottomSheetFragment newCardBottomSheetFragment = new NewCardBottomSheetFragment();
+                newCardBottomSheetFragment.show(getChildFragmentManager(),"NewCardBottomSheetFragment");
             }
         });
     }
