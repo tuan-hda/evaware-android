@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_start_fragment_to_countryListFragment"
             app:destination="@id/countryListFragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_deliveryCountryFragment"
+            app:destination="@id/deliveryCountryFragment" />
     </fragment>
     <fragment
         android:id="@+id/login_fragment"
@@ -47,4 +50,9 @@
         android:name="com.example.evaware.CountryListFragment"
         android:label="fragment_country_list"
         tools:layout="@layout/fragment_country_list" />
+    <fragment
+        android:id="@+id/deliveryCountryFragment"
+        android:name="com.example.evaware.DeliveryCountryFragment"
+        android:label="fragment_delivery_country"
+        tools:layout="@layout/fragment_delivery_country" />
 </navigation>

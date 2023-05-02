@@ -47,4 +47,5 @@
     <string name="new_card">New card</string>
     <string name="expired_date">Expired date</string>
     <string name="save_card">Save card</string>
+    <string name="delivery_country">Delivery country</string>
 </resources>

@@ -21,6 +21,7 @@ public class StartFragment extends Fragment {
     private MaterialButton loginBtn;
     private MaterialButton createAccBtn;
     private MaterialButton testBtn;
+    private MaterialButton btnSearchCountry;
     private FragmentStartBinding binding;
 
     public StartFragment() {
@@ -48,6 +49,7 @@ public class StartFragment extends Fragment {
         loginBtn = binding.btnLoginMethod;
         createAccBtn =binding.btnCreateAccountMethod;
         testBtn = binding.btnTest;
+        btnSearchCountry = binding.btnSearchCountry;
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,13 @@ public class StartFragment extends Fragment {
 //                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_countryListFragment);
                 NewCardBottomSheetFragment newCardBottomSheetFragment = new NewCardBottomSheetFragment();
                 newCardBottomSheetFragment.show(getChildFragmentManager(),"NewCardBottomSheetFragment");
+            }
+        });
+        btnSearchCountry.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_deliveryCountryFragment);
             }
         });
     }
