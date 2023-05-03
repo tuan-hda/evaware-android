@@ -48,7 +48,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         AddressListAdapter adapter = new AddressListAdapter(DeliveryAddressActivity.this,
                 addresses);
         binding.listAddress.setAdapter(adapter);
-        justifyListViewHeightBasedOnChildren(48);
+        justifyListViewHeightBasedOnChildren(-24);
     }
 
     private void justifyListViewHeightBasedOnChildren(int offset) {
