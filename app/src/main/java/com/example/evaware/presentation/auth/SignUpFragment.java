@@ -1,4 +1,4 @@
-package com.example.evaware;
+package com.example.evaware.presentation.auth;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentSignUpBinding;
 import com.example.evaware.utils.PasswordUtils;
 import com.google.android.material.button.MaterialButton;

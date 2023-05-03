@@ -1,4 +1,4 @@
-package com.example.evaware;
+package com.example.evaware.presentation.auth;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -6,24 +6,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentLoginBinding;
-import com.example.evaware.databinding.FragmentStartBinding;
 import com.example.evaware.utils.PasswordUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

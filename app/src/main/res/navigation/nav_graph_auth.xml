@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/start_fragment"
-        android:name="com.example.evaware.StartFragment"
+        android:name="com.example.evaware.presentation.auth.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.example.evaware.LoginFragment"
+        android:name="com.example.evaware.presentation.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/sign_up_fragment"
-        android:name="com.example.evaware.SignUpFragment"
+        android:name="com.example.evaware.presentation.auth.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

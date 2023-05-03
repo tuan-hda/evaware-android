@@ -1,4 +1,4 @@
-package com.example.evaware;
+package com.example.evaware.presentation.auth;
 
 import android.os.Bundle;
 
@@ -8,13 +8,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
+import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentStartBinding;
 import com.google.android.material.button.MaterialButton;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.NotNull;
 
 public class StartFragment extends Fragment {
 
