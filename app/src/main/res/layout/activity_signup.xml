@@ -266,7 +266,7 @@
             android:layout_height="match_parent"
             android:text="Button"
             android:textColor="@color/white"
-            android:background="match_parent"/>
+            android:background="@color/transparent"/>
         <RelativeLayout
             android:id="@+id/social_icon"
             android:layout_width="36dp"
@@ -295,7 +295,7 @@
             android:layout_height="match_parent"
             android:text="Button"
             android:textColor="@color/white"
-            android:background="match_parent"/>
+            android:background="@color/transparent"/>
         <RelativeLayout
             android:id="@+id/social_icon2"
             android:layout_width="36dp"
@@ -321,7 +321,7 @@
             android:layout_height="match_parent"
             android:text="Button"
             android:textColor="@color/white"
-            android:background="match_parent"/>
+            android:background="@color/transparent"/>
         <RelativeLayout
             android:id="@+id/social_icon3"
             android:layout_width="35dp"
