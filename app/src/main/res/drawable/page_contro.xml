@@ -1,0 +1,19 @@
+<!-- drawable/page_contro.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="55dp"
+    android:height="13dp"
+    android:viewportWidth="55"
+    android:viewportHeight="13"
+    >
+    <group>
+        <clip-path
+            android:pathData="M4 0H51C53.2091 0 55 1.79086 55 4V9C55 11.2091 53.2091 13 51 13H4C1.79086 13 0 11.2091 0 9V4C0 1.79086 1.79086 0 4 0Z"
+            />
+        <path
+            android:pathData="M0 0V13H55V0"
+            android:fillColor="#B3FFFFFF"
+            />
+    </group>
+</vector>
