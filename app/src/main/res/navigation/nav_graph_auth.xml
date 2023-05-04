@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_auth"
+    app:startDestination="@id/start_fragment">
+
+    <fragment
+        android:id="@+id/start_fragment"
+        android:name="com.example.evaware.presentation.auth.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_start_fragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_sign_up_fragment"
+            app:destination="@id/sign_up_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.example.evaware.presentation.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login_fragment_to_sign_up_fragment"
+            app:destination="@id/sign_up_fragment"
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/sign_up_fragment"
+        android:name="com.example.evaware.presentation.auth.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_sign_up_fragment_to_login_fragment"
+            app:destination="@id/login_fragment"
+            app:popUpTo="@id/sign_up_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
