@@ -27,7 +27,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".other.Opening"
+            android:name=".presentation.other.Opening"
             android:exported="false"/>
         <activity
             android:name=".presentation.auth.TestLoginActivity"

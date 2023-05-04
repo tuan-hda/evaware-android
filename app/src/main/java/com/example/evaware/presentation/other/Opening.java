@@ -1,4 +1,4 @@
-package com.example.evaware.other;
+package com.example.evaware.presentation.other;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
