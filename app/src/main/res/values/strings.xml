@@ -56,5 +56,6 @@
     <string name="button_s">Create account</string>
     <string name="or_register">Or Register with</string>
     <string name="already_hav">Already have an account? Log in</string>
+    <string name="title_activity_payment_method">PaymentMethodActivity</string>
 
 </resources>

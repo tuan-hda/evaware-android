@@ -48,9 +48,11 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/body_1</item>
     </style>
+
     <style name="LoginButtonByMethod">
         <item name="android:background">@drawable/button_background</item>
     </style>
+
     <style name="MaterialButton" parent="ThemeOverlay.Material3.Button">
         <item name="cornerRadius">8dp</item>
         <item name="android:fontFamily">@font/lexend_medium</item>
@@ -64,5 +66,14 @@
         <item name="android:fontFamily">@font/lexend_medium</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/body_1</item>
+    </style>
+
+    <style name="TextHeading1">
+        <item name="android:textSize">32sp</item>
+        <item name="fontWeight">700</item>
+        <item name="android:fontWeight" tools:targetApi="o">700</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/lexend_semibold</item>
+        <item name="android:fontFamily">@font/lexend_semibold</item>
     </style>
 </resources>

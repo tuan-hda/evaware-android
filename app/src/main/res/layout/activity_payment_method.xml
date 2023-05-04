@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".presentation.checkout.PaymentMethodActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Theme.Evaware.PopupOverlay"
+        app:contentInsetStart="0dp">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:background="@color/transparent"
+            android:contentDescription="Go back"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_left" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_medium"
+                android:text="Checkout"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/lexend_medium"
+                android:text="2 of 3"
+                android:textColor="@color/giratina_500"
+                android:textSize="@dimen/body_3" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/text_payment_method"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:fontFamily="@font/lexend_semibold"
+                android:gravity="center"
+                android:text="payment method"
+                android:textColor="@color/black"
+                android:textSize="@dimen/heading_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ListView
+                android:id="@+id/list_payment_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                app:layout_constraintTop_toBottomOf="@id/text_payment_method" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginBottom="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/btn_add_payment_method"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add_payment_method"
+                style="@style/SecondaryMaterialButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_button"
+                android:text="Add new payment method"
+                app:layout_constraintBottom_toTopOf="@+id/btn_continue"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continue"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_button"
+                android:text="Continue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
+

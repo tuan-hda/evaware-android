@@ -1,37 +1,39 @@
-package com.example.evaware.presentation.address;
+package com.example.evaware.presentation.payment;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
 import com.example.evaware.R;
-import com.example.evaware.data.model.AddressModel;
+import com.example.evaware.data.model.PaymentMethodModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class AddressListAdapter extends BaseAdapter {
+public class PaymentListAdapter extends BaseAdapter {
     private final Activity context;
-    private final List<AddressModel> addresses;
+    private final List<PaymentMethodModel> paymentMethods;
     private int selectedIndex = 0;
 
-    public AddressListAdapter(Activity context, List<AddressModel> addresses) {
+    public PaymentListAdapter(Activity context, List<PaymentMethodModel> paymentMethods) {
         this.context = context;
-        this.addresses = addresses;
+        this.paymentMethods = paymentMethods;
     }
 
     @Override
     public int getCount() {
-        return addresses.size();
+        return paymentMethods.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return addresses.get(i);
+        return paymentMethods.get(i);
     }
 
     @Override
@@ -42,25 +44,30 @@ public class AddressListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
+
         if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = context.getLayoutInflater();
-            view = inflater.inflate(R.layout.delivery_address_item, viewGroup, false);
+            view = inflater.inflate(R.layout.payment_method_item, viewGroup, false);
 
-            viewHolder.textAddress = view.findViewById(R.id.text_card);
-            viewHolder.textContact = view.findViewById(R.id.text_exp);
+            viewHolder.logo = view.findViewById(R.id.logo);
+            viewHolder.textCard = view.findViewById(R.id.text_card);
+            viewHolder.textExp = view.findViewById(R.id.text_exp);
             viewHolder.indicator = view.findViewById(R.id.indicator);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        AddressModel address = addresses.get(i);
-        String addressStr = address.province +  ", " + address.district + ", " + address.ward + "," +
-                " " + address.street;
-        String contactStr = address.fullName + ", " + address.phone;
-        viewHolder.textAddress.setText(addressStr);
-        viewHolder.textContact.setText(contactStr);
+        PaymentMethodModel paymentMethod = paymentMethods.get(i);
+        Picasso.with(context).load(paymentMethod.logo).into(viewHolder.logo);
+        if (paymentMethod.isCard) {
+            viewHolder.textCard.setText(paymentMethod.provider + " " + paymentMethod.accountNo);
+            viewHolder.textExp.setText(paymentMethod.exp);
+        } else {
+            viewHolder.textCard.setText(paymentMethod.provider);
+            viewHolder.textExp.setVisibility(View.GONE);
+        }
 
         if (selectedIndex == i) {
             viewHolder.indicator.setBackgroundResource(R.drawable.select_indicator);
@@ -77,7 +84,8 @@ public class AddressListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView textAddress, textContact;
+        ImageView logo;
+        TextView textCard, textExp;
         CardView indicator;
     }
 }
