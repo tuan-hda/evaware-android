@@ -29,6 +29,10 @@
     <string name="or_login_wi">Or Login with</string>
     <string name="bag">bag</string>
     <string name="start_shopping">Start shopping</string>
+    <string-array name="rangeSlider">
+        <item>0</item>
+        <item>500</item>
+    </string-array>
     <string name="your_bag_is_empty">your bag is empty</string>
     <string name="items_remain_in_your_bag_for_1_hour_and_then_they_re_moved_to_your_saved_items">items
         remain in your bag for 1 hour, and then they’re moved to your Saved items</string>
