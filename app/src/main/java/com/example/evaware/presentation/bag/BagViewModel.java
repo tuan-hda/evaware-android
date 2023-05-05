@@ -27,7 +27,7 @@ public class BagViewModel extends AndroidViewModel {
         List<BagItemModel> queryBagList = new ArrayList<>();
 
         repo.getBagList().addOnSuccessListener(task -> {
-            for (DocumentSnapshot document: task.getDocuments()) {
+            for (DocumentSnapshot document : task.getDocuments()) {
                 queryBagList.add(document.toObject(BagItemModel.class));
             }
 

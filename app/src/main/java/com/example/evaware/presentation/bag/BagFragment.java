@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,7 +32,6 @@ public class BagFragment extends Fragment {
     private final boolean isEmpty = false;
     private BagListAdapter adapter;
     private FragmentActivity activity;
-    private LoadingDialog dialog;
 
     public BagFragment() {
         // Required empty public constructor
@@ -54,24 +54,24 @@ public class BagFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (!isEmpty) {
-            dialog = new LoadingDialog(activity);
-            dialog.showDialog();
-
             binding.layoutEmptyBag.setVisibility(GONE);
-            binding.btnClearPromo.setOnClickListener(view1 -> {
-                binding.edtPromo.setText("");
-            });
+
+            binding.loadingIndicator.getRoot().setVisibility(View.VISIBLE);
+            binding.scrollView.setVisibility(GONE);
 
             viewModel.getBagList().observe(activity, bagItemModels -> {
+                binding.loadingIndicator.getRoot().setVisibility(GONE);
+                binding.scrollView.setVisibility(View.VISIBLE);
+
                 adapter = new BagListAdapter(activity, bagItemModels);
                 binding.listBagItem.setAdapter(adapter);
                 LinearScrollListView.justifyListViewHeightBasedOnChildren(binding.listBagItem);
-                dialog.dismissDialog();
             });
 
             setUpCheckoutButton();
         } else {
-            binding.layoutBag.setVisibility(GONE);
+            binding.scrollView.setVisibility(GONE);
+            binding.layoutEmptyBag.setVisibility(View.VISIBLE);
         }
     }
 

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.example.evaware.R;
 import com.example.evaware.data.model.BagItemModel;
 
@@ -18,10 +20,17 @@ import java.util.List;
 public class BagListAdapter extends BaseAdapter {
     private Activity context;
     private List<BagItemModel> bagList;
+    Boolean isPlain = false;
 
     public BagListAdapter(Activity context, List<BagItemModel> bagList) {
         this.context = context;
         this.bagList = bagList;
+    }
+
+    public BagListAdapter(Activity context, List<BagItemModel> bagList, Boolean isPlain) {
+        this.context = context;
+        this.bagList = bagList;
+        this.isPlain = isPlain;
     }
 
     @Override
@@ -40,7 +49,7 @@ public class BagListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int i, @Nullable View view, ViewGroup viewGroup) {
         ViewHolder mViewHolder = null;
         if (view == null) {
             mViewHolder = new ViewHolder();
@@ -52,6 +61,7 @@ public class BagListAdapter extends BaseAdapter {
             mViewHolder.textDesc = view.findViewById(R.id.text_desc);
             mViewHolder.btnDelete = view.findViewById(R.id.btn_delete);
             LinearLayout stepper = view.findViewById(R.id.stepper);
+            mViewHolder.stepper = stepper;
             mViewHolder.textQty = stepper.findViewById(R.id.text_qty);
             mViewHolder.btnMinus = stepper.findViewById(R.id.btn_minus);
             mViewHolder.btnPlus = stepper.findViewById(R.id.btn_plus);
@@ -82,6 +92,16 @@ public class BagListAdapter extends BaseAdapter {
             checkQty(finalMViewHolder);
         });
 
+        mViewHolder.btnDelete.setOnClickListener(view1 -> {
+            bagList.remove(i);
+            notifyDataSetChanged();
+        });
+
+        if (isPlain) {
+            mViewHolder.btnDelete.setVisibility(View.GONE);
+            mViewHolder.stepper.setVisibility(View.GONE);
+        }
+
         return view;
     }
 
@@ -102,5 +122,6 @@ public class BagListAdapter extends BaseAdapter {
         ImageView itemImage;
         TextView textPrice, textDesc, textQty;
         ImageButton btnDelete, btnMinus, btnPlus;
+        LinearLayout stepper;
     }
 }

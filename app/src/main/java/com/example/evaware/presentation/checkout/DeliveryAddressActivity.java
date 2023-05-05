@@ -67,17 +67,19 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         }
 
         ViewGroup.LayoutParams par = binding.listAddress.getLayoutParams();
-        int[] location1 = {0, 0};
-        int[] location2 = {0, 0};
-        binding.textContactInfo.getLocationOnScreen(location1);
-        binding.btnAddAddress.getLocationOnScreen(location2);
-        int minHeight = location2[1] - location1[1] - binding.textContactInfo.getHeight() - 24;
+//        int[] location1 = {0, 0};
+//        int[] location2 = {0, 0};
+//        binding.textContactInfo.getLocationOnScreen(location1);
+//        binding.btnAddAddress.getLocationOnScreen(location2);
+//        int minHeight = location2[1] - location1[1] - binding.textContactInfo.getHeight() - 24;
+//
+//        par.height =
+//                totalHeight + (binding.listAddress.getDividerHeight() * (adapter.getCount() - 1));
+//        if (par.height < minHeight) {
+//            par.height = minHeight;
+//        }
 
-        par.height =
-                totalHeight + (binding.listAddress.getDividerHeight() * (adapter.getCount() - 1));
-        if (par.height < minHeight) {
-            par.height = minHeight;
-        }
+        par.height = totalHeight;
 
         binding.listAddress.setLayoutParams(par);
         binding.listAddress.requestLayout();
