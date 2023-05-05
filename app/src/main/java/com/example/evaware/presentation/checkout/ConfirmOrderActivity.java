@@ -1,20 +1,15 @@
 package com.example.evaware.presentation.checkout;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.evaware.databinding.ActivityConfirmOrderBinding;
 import com.example.evaware.presentation.bag.BagListAdapter;
 import com.example.evaware.presentation.bag.BagViewModel;
-import com.example.evaware.utils.LinearScrollListView;
 
 public class ConfirmOrderActivity extends AppCompatActivity {
     ActivityConfirmOrderBinding binding;
@@ -33,6 +28,17 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         setUpBagList();
         setUpDeliveryAddress();
         setUpPaymentMethod();
+        setUpButtons();
+    }
+
+    private void setUpButtons() {
+        binding.btnClearPromo.setOnClickListener(view -> {
+            binding.edtPromo.setText("");
+        });
+        binding.btnPay.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SuccessActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void setUpAppBar() {

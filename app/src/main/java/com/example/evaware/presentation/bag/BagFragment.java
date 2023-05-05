@@ -2,34 +2,27 @@ package com.example.evaware.presentation.bag;
 
 import static android.view.View.GONE;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-
 import com.example.evaware.databinding.FragmentBagBinding;
-import com.example.evaware.presentation.checkout.ContactInfoActivity;
 import com.example.evaware.presentation.checkout.DeliveryAddressActivity;
 import com.example.evaware.utils.LinearScrollListView;
-import com.example.evaware.utils.LoadingDialog;
 
 
 public class BagFragment extends Fragment {
+    private final boolean isEmpty = false;
     private FragmentBagBinding binding;
     private BagViewModel viewModel;
-    private final boolean isEmpty = false;
     private BagListAdapter adapter;
     private FragmentActivity activity;
 
