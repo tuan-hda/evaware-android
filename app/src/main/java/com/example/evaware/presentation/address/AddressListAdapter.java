@@ -56,9 +56,9 @@ public class AddressListAdapter extends BaseAdapter {
         }
 
         AddressModel address = addresses.get(i);
-        String addressStr = address.province +  ", " + address.district + ", " + address.ward + "," +
+        String addressStr = address.city +  ", " + address.district + ", " + address.ward + "," +
                 " " + address.street;
-        String contactStr = address.fullName + ", " + address.phone;
+        String contactStr = address.name + ", " + address.phone;
         viewHolder.textAddress.setText(addressStr);
         viewHolder.textContact.setText(contactStr);
 

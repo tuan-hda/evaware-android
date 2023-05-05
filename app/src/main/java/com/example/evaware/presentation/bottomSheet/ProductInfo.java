@@ -1,4 +1,4 @@
-package com.example.evaware.presentation.home;
+package com.example.evaware.presentation.bottomSheet;
 
 import android.os.Bundle;
 
@@ -9,14 +9,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
-import com.example.evaware.presentation.bottomSheet.Dialog;
 import com.example.evaware.R;
-import com.example.evaware.presentation.bottomSheet.ProductInfo;
-import com.example.evaware.presentation.bottomSheet.Sort;
-import com.google.android.material.button.MaterialButton;
+//Cách dùng:
+//Khai báo hàm này:
+//private void showDialog() {
+//        ProductInfo prodInfoFragment = new ProductInfo();
+//        Dialog dialog = new Dialog(prodInfoFragment);
+//        dialog.show(getChildFragmentManager(), "dialog_prodInfo");
+//        }
+//Và gọi hàm trên khi cần show
 
-public class HomeFragment extends Fragment {
+public class ProductInfo extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,25 +33,19 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_product_info, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        MaterialButton buttonSheet = view.findViewById(R.id.test);
-        buttonSheet.setOnClickListener(new View.OnClickListener() {
+        ImageButton btClose = view.findViewById(R.id.proInfo_ib_close);
+        btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialog();
+                Dialog dialog = (Dialog) getParentFragment();
+                dialog.dismiss();
             }
         });
-    }
-
-    private void showDialog() {
-        ProductInfo prodInfoFragment = new ProductInfo();
-        Dialog dialog = new Dialog(prodInfoFragment);
-        dialog.show(getChildFragmentManager(), "dialog_prodInfo");
     }
 }
