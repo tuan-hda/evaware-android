@@ -23,6 +23,7 @@ public class StartFragment extends Fragment {
     private MaterialButton testBtn;
     private MaterialButton btnSearchCountry;
     private FragmentStartBinding binding;
+    private MaterialButton btnOrderScreen;
 
     public StartFragment() {
     }
@@ -50,6 +51,7 @@ public class StartFragment extends Fragment {
         createAccBtn =binding.btnCreateAccountMethod;
         testBtn = binding.btnTest;
         btnSearchCountry = binding.btnSearchCountry;
+        btnOrderScreen = binding.btnOrder;
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +79,13 @@ public class StartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_deliveryCountryFragment);
+            }
+        });
+        btnOrderScreen.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(StartFragment.this).navigate(R.id.action_start_fragment_to_orderFragment);
             }
         });
     }

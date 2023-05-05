@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_product_img"
+            android:layout_width="94dp"
+            android:layout_height="115dp"
+            android:src="@drawable/bedside_table_img" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:paddingLeft="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_order_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend"
+            android:text="$150"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_order_product_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:text="wooden bedside table featuring a raised design"
+            android:textColor="@color/giratina_500"
+            android:textSize="@dimen/body_3" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/btn_order_again"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_again" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

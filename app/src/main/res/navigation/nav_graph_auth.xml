@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_start_fragment_to_deliveryCountryFragment"
             app:destination="@id/deliveryCountryFragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
     </fragment>
     <fragment
         android:id="@+id/login_fragment"
@@ -55,4 +58,9 @@
         android:name="com.example.evaware.DeliveryCountryFragment"
         android:label="fragment_delivery_country"
         tools:layout="@layout/fragment_delivery_country" />
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="com.example.evaware.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
 </navigation>
