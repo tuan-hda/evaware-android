@@ -22,10 +22,18 @@
         android:src="@drawable/ic_google" />
 
     <ImageButton
-        android:id="@+id/login_apple"
+        android:id="@+id/login_twitter"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:background="@drawable/button_background"
-        android:src="@drawable/ic_apple" />
+        android:src="@drawable/twitter" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_facebook_real"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="@dimen/fab_margin"
+        android:layout_height="50dp"/>
 </LinearLayout>

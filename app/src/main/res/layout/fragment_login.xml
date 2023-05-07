@@ -97,10 +97,10 @@
             <EditText
                 android:id="@+id/edt_password"
                 style="@style/EditText"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="4dp"
+                android:inputType="textPassword"
                 app:layout_constraintTop_toBottomOf="@+id/text_name" />
         </LinearLayout>
 
@@ -108,9 +108,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:clickable="true"
             android:fontFamily="@font/lexend"
             android:gravity="end"
-            android:clickable="true"
             android:text="@string/forgot_pass"
             android:textSize="@dimen/body_1" />
 
@@ -151,25 +151,30 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
-        <include layout="@layout/login_with_other" />
+        <include
+            android:id="@+id/third_parties"
+            layout="@layout/login_with_other" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend"
                 android:gravity="center"
                 android:text="@string/don_t_have_account" />
+
             <TextView
                 android:id="@+id/nav_to_signup"
-                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="true"
                 android:fontFamily="@font/lexend_medium"
-                android:text="@string/sign_up"/>
+                android:text="@string/sign_up" />
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
