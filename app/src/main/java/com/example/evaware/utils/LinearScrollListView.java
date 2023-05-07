@@ -21,7 +21,7 @@ public class LinearScrollListView {
         for (int i = 0; i < adapter.getCount(); i++) {
             View listItem = adapter.getView(i, null, listView);
             listItem.measure(0, 0);
-            Log.d(TAG, "justifyListViewHeightBasedOnChildren: " + listItem.getMeasuredHeight());
+//            Log.d(TAG, "justifyListViewHeightBasedOnChildren: " + listItem.getMeasuredHeight());
             totalHeight += listItem.getMeasuredHeight();
         }
 

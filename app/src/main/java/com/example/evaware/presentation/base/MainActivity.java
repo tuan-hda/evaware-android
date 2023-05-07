@@ -1,6 +1,7 @@
 package com.example.evaware.presentation.base;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +12,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.evaware.R;
 import com.example.evaware.databinding.ActivityMainBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
