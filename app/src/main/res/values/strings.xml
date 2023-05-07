@@ -43,5 +43,7 @@
     <string name="button_s">Create account</string>
     <string name="or_register">Or Register with</string>
     <string name="already_hav">Already have an account? Log in</string>
+    <string name="ulmo">ulmo</string>
+    <string name="unwatched_s">best of 2020</string>
 
 </resources>
