@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".presentation.filter.Filter">
+    <!--Header-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/filter_ib_close"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend_medium"
+            android:paddingVertical="16dp"
+            android:text="Filter"
+            android:textAlignment="center"
+            android:textSize="@dimen/body_1" />
+
+        <TextView
+            android:id="@+id/filter_tv_clear"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="Clear"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1" />
+    </LinearLayout>
+    <!--Slider-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="16dp">
+        <!--Price-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:id="@+id/filter_tv_minPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lexend_medium"
+                android:text="$0"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/body_1" />
+
+            <TextView
+                android:id="@+id/filter_tv_maxPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lexend_medium"
+                android:text="$700"
+                android:textAlignment="textEnd"
+                android:textSize="@dimen/body_1" />
+        </LinearLayout>
+        <!--Slider-->
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/filter_rs_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:valueFrom="0"
+            android:valueTo="700"
+            app:trackHeight='2dp'
+            app:values="@array/rangeSlider" />
+        <!--List categories-->
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/filter_lv_listCategories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:paddingHorizontal="16dp"
+        android:scrollbars="none"
+        tools:listitem="@layout/item_category" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/filter_bt_showMore"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
+        android:text="Show 25 items"
+        app:cornerRadius="8dp" />
+</LinearLayout>

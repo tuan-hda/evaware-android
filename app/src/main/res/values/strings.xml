@@ -16,24 +16,41 @@
     <string name="menu_wishlist">Wishlist</string>
     <string name="menu_bag">Bag</string>
     <string name="log_in">Log in</string>
-    <string name="Login_Email">Email address</string>
+    <string name="login_email">Email address</string>
     <string name="button">Log in</string>
     <string name="forgot_pass">Forgot password?</string>
     <string name="email_title">Email address</string>
     <string name="password_title">Password</string>
+    <string name="don_t_have_account">Don\'t have an account?</string>
     <string name="don_t_have_">Don\'t have an account? </string>
-    <string name="Sign_up"><b>Sign up</b> </string>
+    <string name="Sign_up">
+        <b>Sign up</b>
+    </string>
     <string name="or_login_wi">Or Login with</string>
     <string name="bag">bag</string>
     <string name="start_shopping">Start shopping</string>
+    <string-array name="rangeSlider">
+        <item>0</item>
+        <item>500</item>
+    </string-array>
     <string name="your_bag_is_empty">your bag is empty</string>
-    <string name="items_remain_in_your_bag_for_1_hour_and_then_they_re_moved_to_your_saved_items">items remain in your bag for 1 hour, and then they’re moved to your Saved items</string>
+    <string name="items_remain_in_your_bag_for_1_hour_and_then_they_re_moved_to_your_saved_items">items
+        remain in your bag for 1 hour, and then they’re moved to your Saved items</string>
     <string name="surprised_image">Surprised Image</string>
     <string name="bag_item_image">bag_item_image</string>
     <string name="decrease_quantity">Decrease quantity</string>
     <string name="increase_quantity">Increase quantity</string>
     <string name="promocode">promocode</string>
     <string name="sign_up">Sign up</string>
+    <string name="signup_email">Email</string>
+    <string name="email_example">example@gmail.com</string>
+    <string name="create_password">Create a password</string>
+    <string name="password_validate">must be 8 characters</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="create_account">Create account</string>
+    <string name="or_register_with">Or Register with</string>
+    <string name="already_have_account">Already have account?</string>
     <string name="title">Email</string>
     <string name="text">example@gmail.com</string>
     <string name="title_cre">Create a password</string>
@@ -43,7 +60,15 @@
     <string name="button_s">Create account</string>
     <string name="or_register">Or Register with</string>
     <string name="already_hav">Already have an account? Log in</string>
+<<<<<<< HEAD
     <string name="ulmo">ulmo</string>
     <string name="unwatched_s">best of 2020</string>
 
+=======
+    <string name="title_activity_payment_method">PaymentMethodActivity</string>
+    <string name="facebook_app_id">760772782212581</string>
+    <string name="fb_login_protocol_scheme">fb760772782212581</string>
+    <string name="facebook_client_token">c03f419538b549bcaef69b2e9a5df841</string>
+    <string name="web_client_id">253008480260-prv4774nkdgvs7263o3hmk6ubqaj0ur2.apps.googleusercontent.com</string>
+>>>>>>> 9ca00acef5f23a295aeab67214e79851b953e5f9
 </resources>

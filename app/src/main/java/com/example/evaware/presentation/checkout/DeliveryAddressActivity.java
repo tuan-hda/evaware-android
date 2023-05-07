@@ -1,5 +1,6 @@
 package com.example.evaware.presentation.checkout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         AddressListAdapter adapter = new AddressListAdapter(DeliveryAddressActivity.this,
                 addresses);
         binding.listAddress.setAdapter(adapter);
-        justifyListViewHeightBasedOnChildren(48);
+        justifyListViewHeightBasedOnChildren(-24);
     }
 
     private void justifyListViewHeightBasedOnChildren(int offset) {
@@ -66,17 +67,19 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         }
 
         ViewGroup.LayoutParams par = binding.listAddress.getLayoutParams();
-        int[] location1 = {0, 0};
-        int[] location2 = {0, 0};
-        binding.textContactInfo.getLocationOnScreen(location1);
-        binding.btnAddAddress.getLocationOnScreen(location2);
-        int minHeight = location2[1] - location1[1] - binding.textContactInfo.getHeight() - 24;
+//        int[] location1 = {0, 0};
+//        int[] location2 = {0, 0};
+//        binding.textContactInfo.getLocationOnScreen(location1);
+//        binding.btnAddAddress.getLocationOnScreen(location2);
+//        int minHeight = location2[1] - location1[1] - binding.textContactInfo.getHeight() - 24;
+//
+//        par.height =
+//                totalHeight + (binding.listAddress.getDividerHeight() * (adapter.getCount() - 1));
+//        if (par.height < minHeight) {
+//            par.height = minHeight;
+//        }
 
-        par.height =
-                totalHeight + (binding.listAddress.getDividerHeight() * (adapter.getCount() - 1));
-        if (par.height < minHeight) {
-            par.height = minHeight;
-        }
+        par.height = totalHeight;
 
         binding.listAddress.setLayoutParams(par);
         binding.listAddress.requestLayout();
@@ -90,7 +93,8 @@ public class DeliveryAddressActivity extends AppCompatActivity {
 
     private void setUpContinueButton() {
         binding.btnContinue.setOnClickListener(view -> {
-
+            Intent intent = new Intent(this, PaymentMethodActivity.class);
+            startActivity(intent);
         });
     }
 }

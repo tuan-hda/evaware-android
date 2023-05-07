@@ -21,12 +21,12 @@ public class LinearScrollListView {
         for (int i = 0; i < adapter.getCount(); i++) {
             View listItem = adapter.getView(i, null, listView);
             listItem.measure(0, 0);
-            Log.d(TAG, "justifyListViewHeightBasedOnChildren: " + listItem.getMeasuredHeight());
+//            Log.d(TAG, "justifyListViewHeightBasedOnChildren: " + listItem.getMeasuredHeight());
             totalHeight += listItem.getMeasuredHeight();
         }
 
         ViewGroup.LayoutParams par = listView.getLayoutParams();
-        par.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
+        par.height = totalHeight;
         listView.setLayoutParams(par);
         listView.requestLayout();
     }
@@ -43,7 +43,7 @@ public class LinearScrollListView {
             View listItem = adapter.getView(i, null, listView);
             listItem.measure(0, 0);
             Log.d(TAG, "justifyListViewHeightBasedOnChildren: " + listItem.getMeasuredHeight());
-            totalHeight += listItem.getMeasuredHeight() - offset;
+            totalHeight += listItem.getHeight() - offset;
         }
 
         ViewGroup.LayoutParams par = listView.getLayoutParams();

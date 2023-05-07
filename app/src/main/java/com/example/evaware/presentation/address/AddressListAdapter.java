@@ -47,8 +47,8 @@ public class AddressListAdapter extends BaseAdapter {
             LayoutInflater inflater = context.getLayoutInflater();
             view = inflater.inflate(R.layout.delivery_address_item, viewGroup, false);
 
-            viewHolder.textAddress = view.findViewById(R.id.text_address);
-            viewHolder.textContact = view.findViewById(R.id.text_contact);
+            viewHolder.textAddress = view.findViewById(R.id.text_card);
+            viewHolder.textContact = view.findViewById(R.id.text_exp);
             viewHolder.indicator = view.findViewById(R.id.indicator);
             view.setTag(viewHolder);
         } else {
@@ -56,9 +56,9 @@ public class AddressListAdapter extends BaseAdapter {
         }
 
         AddressModel address = addresses.get(i);
-        String addressStr = address.province +  ", " + address.district + ", " + address.ward + "," +
+        String addressStr = address.city +  ", " + address.district + ", " + address.ward + "," +
                 " " + address.street;
-        String contactStr = address.fullName + ", " + address.phone;
+        String contactStr = address.name + ", " + address.phone;
         viewHolder.textAddress.setText(addressStr);
         viewHolder.textContact.setText(contactStr);
 

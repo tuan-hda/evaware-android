@@ -253,7 +253,7 @@
         android:lineSpacingExtra="1sp"
         android:text="Sign up"
         android:textColor="@color/black"
-        android:background="match_parent"
+        android:background="@color/transparent"
         android:translationY="0.28sp" />
 </RelativeLayout>
 

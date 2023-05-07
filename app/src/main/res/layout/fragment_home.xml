@@ -15,6 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="168dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -310,16 +311,18 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ScrollView
-            android:layout_width="382dp"
-            android:layout_height="767dp"
+            android:layout_width="383dp"
+            android:layout_height="423dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -340,8 +343,8 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginTop="-8dp"
                         android:contentDescription="bedroom"
                         android:src="@drawable/bedroom" />
                 </RelativeLayout>
@@ -360,8 +363,8 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="17dp"
+                        android:layout_marginTop="-29dp"
                         android:contentDescription="living room"
                         android:src="@drawable/living_room" />
                 </RelativeLayout>
@@ -533,6 +536,7 @@
                             android:layout_marginLeft="206dp"
                             android:layout_marginTop="1dp"
                             android:clipToOutline="true">
+
                             <ImageButton
                                 android:id="@+id/pic2"
                                 android:layout_width="match_parent"
@@ -589,6 +593,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="-1dp"
                         android:layout_marginBottom="60dp">
+
                         <RelativeLayout
                             android:id="@+id/product_car3"
                             android:layout_width="170dp"
@@ -654,6 +659,7 @@
                             android:layout_marginLeft="206dp"
                             android:layout_marginTop="1dp"
                             android:clipToOutline="true">
+
                             <ImageButton
                                 android:id="@+id/pic4"
                                 android:layout_width="match_parent"
@@ -710,3 +716,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

@@ -11,4 +11,11 @@
         android:layout_height="match_parent"
         android:text="User Fragment" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="12dp"
+        android:layout_height="wrap_content"
+        android:text="Log out" />
+
 </FrameLayout>
