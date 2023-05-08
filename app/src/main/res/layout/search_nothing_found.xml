@@ -56,10 +56,22 @@
     <!-- placeholder -->
     <View
         android:id="@+id/placeholder"
-        android:layout_width="320dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="170dp"
         android:background="@drawable/nothingfound"
+        />
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="350dp"
+        android:text="nothing found, try something else"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:lineSpacingExtra="-4sp"
+        android:gravity="center_horizontal|top"
         />
 </RelativeLayout>
