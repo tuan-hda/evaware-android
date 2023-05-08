@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.user.PhoneEnter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/phoneEnter_ib_return"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/transparent"
+            android:src="@drawable/arrow_left" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/phoneEnter_tv_help"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="Help"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexend_semibold"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"
+        android:text="enter your phone number"
+        android:textSize="@dimen/heading_1" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/giratina_100"
+        app:cardCornerRadius="8dp"
+        app:strokeColor="@color/giratina_300"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/phoneEnter_ib_flag"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="20dp"
+                android:background="@color/transparent"
+                android:src="@drawable/flag_russia" />
+
+            <EditText
+                android:id="@+id/phoneEnter_et_phoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="9.5dp"
+                android:background="@color/transparent"
+                android:fontFamily="@font/lexend_light"
+                android:hint="Phone number"
+                android:inputType="number"
+                android:text="+7 912 323-32-12|"
+                android:textSize="@dimen/body_1" />
+
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/phoneEnter_bt_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:paddingVertical="20dp"
+        android:text="Continue"
+        app:cornerRadius="8dp" />
+
+
+</LinearLayout>
