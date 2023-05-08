@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_wishlist" />
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.evaware.presentation.user.UserFragment"
+        android:name="com.example.evaware.presentation.user.Account"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_account" />
 </navigation>
