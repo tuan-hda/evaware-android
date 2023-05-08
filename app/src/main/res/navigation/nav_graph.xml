@@ -16,9 +16,9 @@
         tools:layout="@layout/fragment_bag" />
     <fragment
         android:id="@+id/wishlistFragment"
-        android:name="com.example.evaware.presentation.wishlist.WishlistFragment"
+        android:name="com.example.evaware.presentation.wishlist.SavedItem"
         android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_saved_item" />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.example.evaware.presentation.user.Account"
