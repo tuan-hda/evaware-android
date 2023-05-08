@@ -1,0 +1,99 @@
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/empty_account"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToOutline="true"
+    >
+    <!-- shape -->
+    <View
+        android:id="@+id/shape"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="370dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onButtonClick"
+        android:background="@drawable/ic_setting"
+        />
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="343dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
+        android:gravity="clip_vertical|top"
+        android:lineSpacingExtra="-6sp"
+        android:text="my account"
+        android:textAppearance="@style/price"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+    <!-- placeholder -->
+    <RelativeLayout
+        android:id="@+id/placeholder"
+        android:layout_width="343dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="231dp"
+        android:layout_centerHorizontal="true"
+        android:background="#00000000"
+        >
+        <View
+            android:id="@+id/smiley"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/ic_empty_acc" />
+        <TextView
+            android:id="@+id/come_on_in"
+            android:layout_width="343dp"
+            android:layout_height="32dp"
+            android:layout_alignParentTop="true"
+            android:text="come on in"
+            android:textSize="24sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:textAppearance="@style/price"
+            android:lineSpacingExtra="-4sp"
+            android:gravity="center_horizontal|center_vertical"
+            />
+        <TextView
+            android:layout_width="343dp"
+            android:layout_height="32dp"
+            android:layout_alignParentTop="true"
+            android:text="view orders and update your details"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="152dp"
+            android:textAppearance="@style/description"
+            android:lineSpacingExtra="-4sp"
+            android:gravity="center_horizontal|center_vertical"
+            />
+    </RelativeLayout>
+    <Button
+        android:id="@+id/large_prima"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:text="Continue with phone"
+        android:textSize="20sp"
+        android:layout_marginTop="460dp"
+        />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="580dp"
+        android:padding="0dp"
+        app:itemActiveIndicatorStyle="@style/Theme.Evaware.CustomIndicator"
+        app:itemIconSize="32dp"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/app_menu" />
+</RelativeLayout>
