@@ -60,6 +60,8 @@
     <string name="button_s">Create account</string>
     <string name="or_register">Or Register with</string>
     <string name="already_hav">Already have an account? Log in</string>
+    <string name="ulmo">evaware</string>
+    <string name="unwatched_s">best of 2020</string>
     <string name="title_activity_payment_method">PaymentMethodActivity</string>
     <string name="facebook_app_id">760772782212581</string>
     <string name="fb_login_protocol_scheme">fb760772782212581</string>
