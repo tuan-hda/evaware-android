@@ -1,6 +1,7 @@
 package com.example.evaware.presentation.bag;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.evaware.data.model.BagItemModel;
 import com.example.evaware.data.repo.BagRepository;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class BagViewModel extends AndroidViewModel {
             }
 
             bagList.setValue(queryBagList);
+        }).addOnFailureListener(e -> {
+            Log.d(TAG, "getBagList:failure: " + e.getLocalizedMessage());
         });
 
         return bagList;

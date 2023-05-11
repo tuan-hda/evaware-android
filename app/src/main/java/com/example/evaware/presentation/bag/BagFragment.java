@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.evaware.databinding.FragmentBagBinding;
 import com.example.evaware.presentation.checkout.DeliveryAddressActivity;
-import com.example.evaware.utils.LinearScrollListView;
 
 
 public class BagFragment extends Fragment {
@@ -58,10 +57,9 @@ public class BagFragment extends Fragment {
 
                 adapter = new BagListAdapter(activity, bagItemModels);
                 binding.listBagItem.setAdapter(adapter);
-                LinearScrollListView.justifyListViewHeightBasedOnChildren(binding.listBagItem);
             });
 
-            setUpCheckoutButton();
+            setUpButtons();
         } else {
             binding.scrollView.setVisibility(GONE);
             binding.layoutEmptyBag.setVisibility(View.VISIBLE);
@@ -69,7 +67,7 @@ public class BagFragment extends Fragment {
     }
 
 
-    private void setUpCheckoutButton() {
+    private void setUpButtons() {
         binding.btnCheckout.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DeliveryAddressActivity.class);
             startActivity(intent);

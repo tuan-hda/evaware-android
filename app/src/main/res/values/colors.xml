@@ -24,4 +24,11 @@
     <color name="giratina_300">#E0E0E0</color>
     <color name="giratina_200">#E0E0E0</color>
     <color name="giratina_100">#F5F5F5</color>
+
+    <!--  Magikarp  -->
+    <color name="magikarp_500">#F44336</color>
+    <color name="magikarp_400">#EF5350</color>
+    <color name="magikarp_300">#E57373</color>
+    <color name="magikarp_200">#EF9A9A</color>
+    <color name="magikarp_100">#FFCDD2</color>
 </resources>

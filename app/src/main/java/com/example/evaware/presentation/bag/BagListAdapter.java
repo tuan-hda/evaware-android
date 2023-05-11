@@ -1,5 +1,7 @@
 package com.example.evaware.presentation.bag;
 
+import static com.example.evaware.utils.SnackBar.showSnackDisable;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,8 +94,12 @@ public class BagListAdapter extends BaseAdapter {
             checkQty(finalMViewHolder);
         });
 
+        View finalView = view;
         mViewHolder.btnDelete.setOnClickListener(view1 -> {
             bagList.remove(i);
+
+            showSnackDisable(context, finalView, viewGroup);
+
             notifyDataSetChanged();
         });
 
@@ -101,6 +107,7 @@ public class BagListAdapter extends BaseAdapter {
             mViewHolder.btnDelete.setVisibility(View.GONE);
             mViewHolder.stepper.setVisibility(View.GONE);
         }
+
 
         return view;
     }
