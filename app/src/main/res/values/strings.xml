@@ -67,4 +67,16 @@
     <string name="fb_login_protocol_scheme">fb760772782212581</string>
     <string name="facebook_client_token">c03f419538b549bcaef69b2e9a5df841</string>
     <string name="web_client_id">253008480260-prv4774nkdgvs7263o3hmk6ubqaj0ur2.apps.googleusercontent.com</string>
+    <string name="cell">Terms and Conditions</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="my_orders"> My orders </string>
+    <string name="time_1"> Yesterday, 10:00 am </string>
+    <string name="stt_1"> Delivering </string>
+    <string name="price"> $420.00 </string>
+    <string name="product_code"> #1233 </string>
+    <string name="time_2"> December 25 </string>
+    <string name="stt_2"> Delivered </string>
+    <string name="price_"> $450.00 </string>
+    <string name="product_code_"> #1234 </string>
 </resources>

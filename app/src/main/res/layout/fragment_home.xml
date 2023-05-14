@@ -339,7 +339,7 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="17dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="-8dp"
                         android:contentDescription="bedroom"
                         android:src="@drawable/bedroom" />
@@ -359,8 +359,8 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="17dp"
-                        android:layout_marginTop="-29dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="-7dp"
                         android:contentDescription="living room"
                         android:src="@drawable/living_room" />
                 </RelativeLayout>
