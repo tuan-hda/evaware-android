@@ -1,0 +1,206 @@
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_card"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToOutline="true"
+    >
+<!--    clear_button-->
+    <ImageButton
+        android:id="@+id/shape"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_x" />
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_below="@+id/shape"
+        android:layout_marginTop="10dp"
+        android:gravity="clip_vertical|top"
+        android:lineSpacingExtra="-6sp"
+        android:text="new card"
+        android:textAppearance="@style/price"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+    <!-- content -->
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="70dp"
+        >
+        <!-- Card Number -->
+        <RelativeLayout
+            android:id="@+id/card_number"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/main_fr"
+            >
+
+            <ImageButton
+                android:id="@+id/ic_creditcard"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="Card number"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_credit_card"
+                />
+            <TextView
+                android:id="@+id/card_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="Card number"
+                android:layout_marginHorizontal="56dp"
+                android:textSize="14sp"
+                android:layout_marginTop="9.5dp"
+                android:textColor="#9E9E9E"
+                android:gravity="top"
+                />
+            <TextView
+                android:id="@+id/number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="0560 2215 9874 1879"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="56dp"
+                android:layout_below="@+id/card_number_text"
+                android:layout_marginLeft="16dp"
+                android:textColor="#212121"
+                android:gravity="top"
+                />
+
+            <ImageButton
+                android:id="@+id/ic_pay"
+                android:layout_width="25dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_pay"
+                android:text="Card number" />
+        </RelativeLayout>
+
+        <!-- Expiry Date -->
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/expiry_date"
+            android:layout_width="164dp"
+            android:layout_height="64dp"
+            android:layout_below="@+id/card_number"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/main_fr"
+            >
+            <TextView
+                android:id="@+id/expiry_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="Expiry date"
+                android:textSize="14sp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9.5dp"
+                android:textColor="#9E9E9E"
+                android:gravity="top"
+                />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="02/06"
+                android:textSize="16sp"
+                android:layout_below="@+id/expiry_date_text"
+                android:layout_marginLeft="16dp"
+                android:textColor="#212121"
+                android:gravity="top"
+                />
+        </RelativeLayout>
+        <!-- CVC -->
+        <RelativeLayout
+            android:id="@+id/cvc"
+            android:layout_width="164dp"
+            android:layout_height="64dp"
+            android:layout_below="@+id/card_number"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/main_fr" >
+            <TextView
+                android:id="@+id/cvc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="CVC/CVV"
+                android:textSize="14sp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9.5dp"
+                android:textColor="#9E9E9E"
+                android:gravity="top"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="..."
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/cvc_text"
+                android:layout_marginLeft="16dp"
+                android:textColor="#212121"
+                android:gravity="top"
+                />
+        </RelativeLayout>
+        <!-- Name on card -->
+        <RelativeLayout
+            android:id="@+id/name_on_card"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/main_fr" >
+            <TextView
+                android:id="@+id/name_on_card_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="Name on card"
+                android:textSize="14sp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="9.5dp"
+                android:textColor="#9E9E9E"
+                android:gravity="top"
+                />
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:text="Le Anh Tai"
+                android:textSize="16sp"
+                android:layout_below="@+id/name_on_card_text"
+                android:layout_marginLeft="16dp"
+                android:textColor="#212121"
+                android:gravity="top"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_continue"
+        style="@style/Button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_below="@+id/content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="40dp"
+        android:text="Save card"
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteX="16dp" />
+</RelativeLayout>

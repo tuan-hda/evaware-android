@@ -30,7 +30,7 @@
 <!--        </activity>-->
 <!--        main_activity-->
         <activity
-            android:name=".presentation.base.SearchActivity"
+            android:name=".presentation.base.SignOutPopover"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
