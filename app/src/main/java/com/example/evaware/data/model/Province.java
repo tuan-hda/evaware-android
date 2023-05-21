@@ -1,20 +1,12 @@
 package com.example.evaware.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Province {
     private String name;
     private int code;
-    private List<District> districtList;
-
-    public Province() {
-    }
-
-    public Province(String name, int code, List<District> districtList) {
-        this.name = name;
-        this.code = code;
-        this.districtList = districtList;
-    }
 
     public String getName() {
         return name;
@@ -30,6 +22,18 @@ public class Province {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    @SerializedName("districts")
+    private List<District> districtList;
+
+    public Province() {
+    }
+
+    public Province(String name, int code, List<District> districtList) {
+        this.name = name;
+        this.code = code;
+        this.districtList = districtList;
     }
 
     public List<District> getDistrictList() {

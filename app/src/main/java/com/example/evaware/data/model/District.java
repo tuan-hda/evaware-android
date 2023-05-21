@@ -1,10 +1,13 @@
 package com.example.evaware.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class District {
     private String name;
     private int code;
+    @SerializedName("wards")
     private List<Ward> wardList;
 
     public District() {

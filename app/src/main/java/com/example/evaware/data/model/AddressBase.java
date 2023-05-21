@@ -1,15 +1,17 @@
 package com.example.evaware.data.model;
 
-public class Ward   {
-    private String name;
-    private int code;
+import java.io.Serializable;
 
-    public Ward(String name, int code) {
+public class AddressBase implements Serializable {
+    protected String name;
+    protected int code;
+
+    public AddressBase(String name, int code) {
         this.name = name;
         this.code = code;
     }
 
-    public Ward() {
+    public AddressBase() {
     }
 
     public String getName() {

@@ -1,12 +1,17 @@
 package com.example.evaware.presentation.address;
 
 import android.app.Application;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.evaware.data.model.AddressModel;
 import com.example.evaware.data.repo.AddressRepository;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -32,11 +37,38 @@ public class AddressViewModel extends AndroidViewModel {
 
         repo.getData().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
-                list.add(snapshot.toObject(AddressModel.class));
+                AddressModel item = snapshot.toObject(AddressModel.class);
+                item.path = snapshot.getReference().getPath();
+                list.add(item);
             }
             data.setValue(list);
         });
 
         return data;
+    }
+
+    public void add(AddressModel item) {
+        repo.add(item).addOnSuccessListener(documentReference -> {
+            list.add(item);
+            data.setValue(list);
+        }).addOnFailureListener(e -> {
+            Log.e(TAG, "add: " + e.getLocalizedMessage());
+        });
+    }
+
+    public void update(int i, AddressModel item) {
+        repo.update(item).addOnSuccessListener(unused -> {
+            list.set(i, item);
+            data.setValue(list);
+        }).addOnFailureListener(e -> {
+            Log.e(TAG, "update: " + e.getLocalizedMessage());
+        });
+    }
+
+    public void delete(int i) {
+        repo.delete(list.get(i)).addOnSuccessListener(unused -> {
+            list.remove(i);
+            data.setValue(list);
+        });
     }
 }

@@ -1,26 +1,44 @@
 package com.example.evaware.presentation.address;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
+import com.example.evaware.data.model.AddressBase;
+import com.example.evaware.data.model.Province;
 import com.example.evaware.databinding.ProvinceItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class ProvinceAdapter extends RecyclerView.Adapter<ProvinceAdapter.ViewHolder> {
+public class ProvinceAdapter extends RecyclerView.Adapter<ProvinceAdapter.ViewHolder> implements Filterable {
     private Activity context;
-    private List<String> list;
-    private int selected = 0;
+    private List<AddressBase> list;
+    private List<AddressBase> listFiltered;
+    private AddressBase selected;
 
-    public ProvinceAdapter(Activity context, List<String> list) {
+    public ProvinceAdapter(Activity context, List<AddressBase> list) {
         this.context = context;
         this.list = list;
+        listFiltered = list;
+        selected = null;
+    }
+
+    public ProvinceAdapter(Activity context, List<AddressBase> list, AddressBase def) {
+        this.context = context;
+        this.list = list;
+        listFiltered = list;
+        selected = def;
     }
 
     @NonNull
@@ -32,28 +50,60 @@ public class ProvinceAdapter extends RecyclerView.Adapter<ProvinceAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String item = list.get(position);
-        holder.binding.province.setText(item);
+        AddressBase item = listFiltered.get(position);
+        holder.binding.province.setText(item.getName());
 
-        if (selected == position) {
+        if (selected != null && selected.getCode() == item.getCode()) {
             holder.binding.indicator.getRoot().setBackgroundResource(R.drawable.select_indicator);
         } else {
             holder.binding.indicator.getRoot().setBackgroundResource(R.drawable.unselect_indicator);
         }
 
         holder.binding.getRoot().setOnClickListener(v -> {
-            int temp = selected;
-            selected = position;
-            notifyItemChanged(temp);
-            notifyItemChanged(position);
+            selected = item;
+            notifyDataSetChanged();
+            Intent intent = new Intent();
+            intent.putExtra("res", selected);
+            context.setResult(Activity.RESULT_OK, intent);
+            context.finish();
         });
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return listFiltered.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<AddressBase> finRes;
+                String query = constraint.toString();
+                if (query.isEmpty()) {
+                    finRes = list;
+                } else {
+                    List<AddressBase> filtered = new ArrayList<>();
+                    for (AddressBase item : list) {
+                        if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                            filtered.add(item);
+                        }
+                    }
+                    finRes = filtered;
+                }
+                FilterResults results = new FilterResults();
+                results.values = finRes;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                listFiltered = (List<AddressBase>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

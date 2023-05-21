@@ -4,17 +4,21 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.ServerTimestamp;
 
-import java.sql.Time;
+import java.io.Serializable;
 
-public class AddressModel {
+public class AddressModel implements Serializable {
     @DocumentId
     public String id;
     public String name;
+    public String path;
     public String phone;
     public String email;
-    public String city;
+    public String province;
+    public int province_id;
     public String district;
+    public int district_id;
     public String ward;
+    public int ward_id;
     public String street;
     @ServerTimestamp
     public Timestamp created_at;
@@ -24,15 +28,17 @@ public class AddressModel {
     public AddressModel() {
     }
 
-    public AddressModel(String id, String fullName, String phone, String email, String city,
-                        String district, String ward, String street) {
-        this.id = id;
+    public AddressModel(String fullName, String phone, String email, String province, int province_id,
+                        String district, int district_id, String ward, int ward_id, String street) {
         this.name = fullName;
         this.phone = phone;
         this.email = email;
-        this.city = city;
+        this.province = province;
         this.district = district;
         this.ward = ward;
         this.street = street;
+        this.province_id = province_id;
+        this.district_id = district_id;
+        this.ward_id = ward_id;
     }
 }
