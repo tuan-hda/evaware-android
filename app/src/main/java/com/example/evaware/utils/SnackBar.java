@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class SnackBar {
 
     @SuppressLint("RestrictedApi")
-    public static void showSnackDisable(Activity activity, View finalView, ViewGroup viewGroup) {
+    public static Snackbar showSnackDisable(Activity activity, View finalView, ViewGroup viewGroup) {
         Snackbar snackbar = Snackbar.make(finalView, "",
                 Snackbar.LENGTH_INDEFINITE);
         SnackRemoveBinding binding = SnackRemoveBinding.inflate(activity.getLayoutInflater(),
@@ -41,6 +41,8 @@ public class SnackBar {
 
         layout.addView(binding.getRoot(), 0);
         snackbar.show();
+
+        return snackbar;
     }
 
     @SuppressLint("RestrictedApi")

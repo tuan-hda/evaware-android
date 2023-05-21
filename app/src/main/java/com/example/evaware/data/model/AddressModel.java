@@ -1,6 +1,10 @@
 package com.example.evaware.data.model;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.sql.Time;
 
 public class AddressModel {
     @DocumentId
@@ -12,9 +16,12 @@ public class AddressModel {
     public String district;
     public String ward;
     public String street;
+    @ServerTimestamp
+    public Timestamp created_at;
+    @ServerTimestamp
+    public Timestamp updated_at;
 
-    public AddressModel(String id) {
-        this.id = id;
+    public AddressModel() {
     }
 
     public AddressModel(String id, String fullName, String phone, String email, String city,

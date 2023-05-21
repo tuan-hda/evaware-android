@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "253008480260-ctv4cnbk1vplu5393ii1gd4r8lru1c19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.evaware",
+            "certificate_hash": "12b690a485cb4cf2bf0f3620b2af1ea2658c12d8"
+          }
+        },
+        {
           "client_id": "253008480260-kcisc9q8bf1rujqiullup8slo6unevqd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

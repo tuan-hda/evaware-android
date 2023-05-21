@@ -472,7 +472,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentTop="true"
-                                android:background="@drawable/product_1"
                                 android:contentDescription="product" />
 
                             <View
