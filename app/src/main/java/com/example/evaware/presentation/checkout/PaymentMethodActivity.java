@@ -2,19 +2,27 @@ package com.example.evaware.presentation.checkout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.evaware.data.model.PaymentMethodModel;
 import com.example.evaware.databinding.ActivityPaymentMethodBinding;
 import com.example.evaware.presentation.payment.PaymentListAdapter;
+import com.example.evaware.presentation.payment.PaymentViewModel;
 import com.example.evaware.utils.LinearScrollListView;
+import com.example.evaware.utils.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentMethodActivity extends AppCompatActivity {
     private ActivityPaymentMethodBinding binding;
+    private PaymentViewModel viewModel;
+    private LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,8 @@ public class PaymentMethodActivity extends AppCompatActivity {
 
         binding = ActivityPaymentMethodBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        viewModel = new ViewModelProvider(this).get(PaymentViewModel.class);
+        dialog = new LoadingDialog(this);
 
         setUpPaymentMethodList();
         setUpAppBar();
@@ -29,20 +39,20 @@ public class PaymentMethodActivity extends AppCompatActivity {
     }
 
     private void setUpPaymentMethodList() {
-        List<PaymentMethodModel> paymentMethods = new ArrayList<>();
-        paymentMethods.add(new PaymentMethodModel("123", "https://upload.wikimedia" + ".org" +
-                "/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo" + ".svg/800px" +
-                "-Mastercard_2019_logo.svg.png", "9893", "Tuan", "Mastercard", "12/29", true));
-        paymentMethods.add(new PaymentMethodModel("124", "https://upload.wikimedia" +
-                ".org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg" +
-                ".png", "7233", "Tho", "Visa", "12/30", true));
-        paymentMethods.add(new PaymentMethodModel("125", "https://upload.wikimedia" +
-                ".org/wikipedia/commons/thumb/1/15/Apple_logo_hollow.svg/640px-Apple_logo_hollow" +
-                ".svg.png", "", "Tuan", "Apple pay", "", false));
+        dialog.showDialog();
 
-        PaymentListAdapter adapter = new PaymentListAdapter(this, paymentMethods);
-        binding.listPaymentMethod.setAdapter(adapter);
-        LinearScrollListView.justifyListViewHeightBasedOnChildren(binding.listPaymentMethod);
+        viewModel.getData().observe(this, paymentMethodModels -> {
+            if (paymentMethodModels.size() == 0) {
+                binding.btnContinue.setVisibility(View.GONE);
+            } else {
+                binding.btnContinue.setVisibility(View.VISIBLE);
+            }
+            PaymentListAdapter adapter = new PaymentListAdapter(this, paymentMethodModels);
+            binding.listPaymentMethod.setAdapter(adapter);
+            binding.listPaymentMethod.setLayoutManager(new LinearLayoutManager(this));
+
+            dialog.dismissDialog();
+        });
     }
 
     private void setUpAppBar() {

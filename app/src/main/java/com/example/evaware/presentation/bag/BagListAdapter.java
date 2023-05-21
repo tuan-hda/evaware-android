@@ -1,8 +1,10 @@
 package com.example.evaware.presentation.bag;
 
+import static com.example.evaware.utils.CurrencyFormat.getFormattedPrice;
 import static com.example.evaware.utils.SnackBar.showSnackDisable;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import androidx.annotation.Nullable;
 
 import com.example.evaware.R;
 import com.example.evaware.data.model.BagItemModel;
+import com.example.evaware.data.repo.BagRepository;
+import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,10 +28,12 @@ public class BagListAdapter extends BaseAdapter {
     private Activity context;
     private List<BagItemModel> bagList;
     Boolean isPlain = false;
+    private BagViewModel vm;
 
-    public BagListAdapter(Activity context, List<BagItemModel> bagList) {
+    public BagListAdapter(Activity context, List<BagItemModel> bagList, BagViewModel vm) {
         this.context = context;
         this.bagList = bagList;
+        this.vm = vm;
     }
 
     public BagListAdapter(Activity context, List<BagItemModel> bagList, Boolean isPlain) {
@@ -73,34 +80,33 @@ public class BagListAdapter extends BaseAdapter {
             mViewHolder = (ViewHolder) view.getTag();
         }
 
+//        Set value
         BagItemModel item = bagList.get(i);
-        mViewHolder.itemImage.setImageResource(R.drawable.evaware_icon);
-        mViewHolder.textDesc.setText("Wooden product using one and ninety objects from Sing");
+        Picasso.with(context).load("https://www.universalfurniture.com/images/pages/home/2022/U030501_RM.jpg?v=fcYu7oTsSUAyVfxWs5MbR2L0Jpeg0JzIiZ4Eaa_BqPw").into(mViewHolder.itemImage);
+//        mViewHolder.itemImage.setImageResource(R.drawable.evaware_icon);
+        mViewHolder.textDesc.setText(item.product.desc);
+        mViewHolder.textPrice.setText(getFormattedPrice(item.product.price));
+        mViewHolder.textQty.setText(item.qty + "");
+//        End set value
 
         checkQty(mViewHolder);
 
+//        Set events
         ViewHolder finalMViewHolder = mViewHolder;
         mViewHolder.btnMinus.setOnClickListener(view1 -> {
-            int qty = checkQty(finalMViewHolder);
-            if (qty == 1) {
-                return;
-            }
-            finalMViewHolder.textQty.setText(qty - 1 + "");
+            if (checkQty(finalMViewHolder) == 1) return;
+            vm.changeQty(i, -1);
             checkQty(finalMViewHolder);
         });
         mViewHolder.btnPlus.setOnClickListener(view1 -> {
-            int qty = checkQty(finalMViewHolder);
-            finalMViewHolder.textQty.setText(qty + 1 + "");
+            vm.changeQty(i, 1);
             checkQty(finalMViewHolder);
         });
 
         View finalView = view;
         mViewHolder.btnDelete.setOnClickListener(view1 -> {
-            bagList.remove(i);
-
-            showSnackDisable(context, finalView, viewGroup);
-
-            notifyDataSetChanged();
+            Snackbar snackbar = showSnackDisable(context, finalView, viewGroup);
+            vm.removeItem(i, snackbar);
         });
 
         if (isPlain) {
@@ -116,8 +122,7 @@ public class BagListAdapter extends BaseAdapter {
         int qty = Integer.parseInt(holder.textQty.getText().toString());
 
         if (qty == 1) {
-            holder.btnMinus.setColorFilter(context.getResources().getColor(R.color.giratina_200,
-                    context.getTheme()));
+            holder.btnMinus.setColorFilter(context.getResources().getColor(R.color.giratina_200, context.getTheme()));
         } else {
             holder.btnMinus.setColorFilter(0x000);
         }
