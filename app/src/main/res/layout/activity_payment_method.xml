@@ -52,7 +52,7 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -75,7 +75,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_payment_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,6 +113,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:layout_editor_absoluteX="16dp" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
 

@@ -15,12 +15,15 @@ import android.view.ViewGroup;
 import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentAccountBinding;
 import com.example.evaware.databinding.FragmentUserBinding;
+import com.example.evaware.presentation.address.AddressBookActivity;
 import com.example.evaware.presentation.auth.TestLoginActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,6 +102,11 @@ public class Account extends Fragment {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             ((Activity)getContext()).startActivity(intent);
             ((Activity)getContext()).finish();
+        });
+
+        binding.accountLlAddress.setOnClickListener(v -> {
+            Intent intent = new Intent(requireActivity(), AddressBookActivity.class);
+            requireActivity().startActivity(intent);
         });
     }
 }

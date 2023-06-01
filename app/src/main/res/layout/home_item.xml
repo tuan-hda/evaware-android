@@ -34,7 +34,6 @@
 
             <ImageView
                 android:id="@+id/img_item"
-                android:background="@drawable/product_1"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
         </androidx.cardview.widget.CardView>

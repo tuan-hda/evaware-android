@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="64dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:layout_marginRight="12dp"
+    android:layout_height="64dp">
+    <ImageView
+        android:id="@+id/iv_img_from_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/summer"
+        android:scaleType="center"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_close"
+        android:layout_width="16dp"
+        android:layout_gravity="end"
+        android:layout_margin="6dp"
+        android:layout_height="16dp"
+        app:cardBackgroundColor="@color/giratina_400">
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_close"
+            android:layout_gravity="center"/>
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

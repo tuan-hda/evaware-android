@@ -1,161 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ProductActivity">
-    <LinearLayout
+    android:layout_width="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="@drawable/product_2">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_margin="@dimen/fab_margin"
-            android:background="@drawable/rounded_bg"
-            android:src="@drawable/arrow_left" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_margin="@dimen/fab_margin"
-            android:background="@drawable/rounded_bg"
-            android:src="@drawable/heart" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/fab_margin"
-        android:background="@color/giratina_100"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lexend_medium"
-            android:textSize="@dimen/heading_2"
-            android:text="$150"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            android:textColor="@color/giratina_500"
-            android:fontFamily="@font/lexend"
-            android:textSize="@dimen/body_1"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/fab_margin"
-
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="@dimen/body_2"
-                android:layout_marginRight="@dimen/fab_margin"
-                android:background="@drawable/round_button_black"
-                android:textColor="@color/white"
-                android:text="brown" />
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:textSize="@dimen/body_2"
-                android:background="@drawable/round_button_white"
-                android:text="black" />
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.product.ProductActivity">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="500dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/myButton"
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_product_slide"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round_button"
-                android:drawableEnd="@drawable/ic_bag"
-                android:fontFamily="@font/lexend_medium"
-                android:text="@string/add_to_bag"
-                android:textSize="@dimen/body_1"
-                app:iconGravity="textEnd"
+                android:layout_height="500dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/myIcon"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="274dp"
-                android:layout_marginBottom="14dp"
-                android:src="@drawable/ic_bag"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:background="@drawable/rounded_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/arrow_left" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/fab_margin"
+                    android:background="@drawable/rounded_bg"
+                    android:padding="4dp"
+                    android:src="@drawable/heart" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/giratina_100"
-        app:cardCornerRadius="8dp"
-        android:layout_height="wrap_content">
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-
+            android:layout_height="wrap_content"
             android:padding="@dimen/fab_margin"
+            android:background="@color/giratina_100"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_medium"
+                android:textSize="@dimen/heading_2" />
+            <TextView
+                android:id="@+id/tv_product_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/giratina_500"
+                android:fontFamily="@font/lexend"
+                android:textSize="@dimen/body_1"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_variations"
+                android:layout_marginVertical="@dimen/fab_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/myButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_button"
+                    android:drawableEnd="@drawable/ic_bag"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="@string/add_to_bag"
+                    android:textSize="@dimen/body_1"
+                    app:iconGravity="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/myIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="274dp"
+                    android:layout_marginBottom="14dp"
+                    android:src="@drawable/ic_bag"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/fab_margin"
+            android:backgroundTint="@color/giratina_100"
+            app:cardCornerRadius="8dp"
             android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/fab_margin"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_sale"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/fab_margin"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text="Discount for you"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/body_1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text="Use promocode ULMO"
+                        android:textColor="@color/giratina_500"
+                        android:textSize="@dimen/body_2"/>
+                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:textSize="@dimen/body_2"
+                    android:fontFamily="@font/lexend_semibold"
+                    android:text="Copy" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/fab_margin"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Product information"
+                android:textSize="@dimen/body_1"
+                android:fontFamily="@font/lexend"
+                />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_sale"/>
-            <LinearLayout
+                android:src="@drawable/chevron_right"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/fab_margin"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="horizontal"
+            >
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/fab_margin"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lexend"
-                    android:text="Discount for you"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/body_1"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lexend"
-                    android:text="Use promocode ULMO"
-                    android:textColor="@color/giratina_500"
-                    android:textSize="@dimen/body_2"/>
-            </LinearLayout>
-            <com.google.android.material.button.MaterialButton
-                style="@style/Button"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                android:textSize="@dimen/body_1"
+                android:fontFamily="@font/lexend"
+                />
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:textSize="@dimen/body_2"
-                android:fontFamily="@font/lexend_semibold"
-                android:text="Copy" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/giratina_500"
+                android:textSize="@dimen/body_1"
+                android:text="12"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/body_1"
-            android:fontFamily="@font/lexend_medium"
-            android:text="@string/review"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</LinearLayout>
+            android:padding="@dimen/fab_margin"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Questions and answers"
+                android:textSize="@dimen/body_1"
+                android:fontFamily="@font/lexend"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/giratina_500"
+                android:textSize="@dimen/body_1"
+                android:text="5"/>
+        </LinearLayout>
+        <TextView
+            android:padding="@dimen/fab_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexend_semibold"
+            android:textSize="@dimen/heading_2"
+            android:text="you might also like"/>
+        <GridView
+            android:layout_width="match_parent"
+            android:numColumns="2"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

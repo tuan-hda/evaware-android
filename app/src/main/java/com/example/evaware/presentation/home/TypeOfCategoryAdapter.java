@@ -1,7 +1,5 @@
 package com.example.evaware.presentation.home;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,9 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
-import com.example.evaware.SearchCategoryActivity;
+import com.example.evaware.presentation.category.SearchCategoryActivity;
 import com.example.evaware.data.model.TypeofCategory;
-import com.example.evaware.presentation.checkout.PaymentMethodActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

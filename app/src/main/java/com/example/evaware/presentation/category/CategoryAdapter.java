@@ -1,7 +1,8 @@
-package com.example.evaware.presentation.home;
+package com.example.evaware.presentation.category;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
-import com.example.evaware.SearchCategoryActivity;
 import com.example.evaware.data.model.CategoryModel;
-import com.example.evaware.data.model.TypeofCategory;
+import com.example.evaware.presentation.catalog.CatalogActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,15 +47,20 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvName;
         private ImageView imgItem;
+        private String id;
+        private String name;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_category_name);
             imgItem = itemView.findViewById(R.id.img_category_item);
+
             itemView.setOnClickListener(this);
 
         }
         public void bindData(CategoryModel data) {
             tvName.setText(data.getName());
+            id = data.getId();
+            name = data.getName();
             Picasso.with(context)
                     .load(data.getImgUrl())
                     .into(imgItem);
@@ -63,10 +68,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
         @Override
         public void onClick(View view) {
-            System.out.println("hi");
             Intent intent = new Intent(context, CatalogActivity.class);
-            // Pass any necessary data to the new activity
-//            intent.putExtra("itemId", item.getId());
+            intent.putExtra("categoryId", id);
+            intent.putExtra("categoryName", name);
             context.startActivity(intent);
         }
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +16,31 @@
         android:theme="@style/Theme.Evaware"
         tools:targetApi="31">
         <activity
-            android:name=".ProductActivity"
+            android:name=".FullScreenImageActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.home.CatalogActivity"
+            android:name=".presentation.new_review.NewReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchCategoryActivity"
+            android:name=".ReviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.product.ProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.catalog.CatalogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.category.SearchCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.address.ChooseProvinceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.address.AddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.address.AddressBookActivity"
             android:exported="false" />
 
         <meta-data
@@ -54,34 +73,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!--
-        &lt;!&ndash;
-        login&ndash;&gt;
-        -->
-        <!-- <activity -->
-        <!-- android:name=".presentation.base.LoginActivity" -->
-        <!-- android:exported="false"> -->
-        <!-- <meta-data -->
-        <!-- android:name="android.app.lib_name" -->
-        <!-- android:value="" /> -->
-        <!-- </activity> -->
-        <!-- <activity -->
-        <!-- android:name=".presentation.checkout.ContactInfoActivity" -->
-        <!-- android:exported="false"> -->
-        <!-- <meta-data -->
-        <!-- android:name="android.app.lib_name" -->
-        <!-- android:value="" /> -->
-        <!-- </activity> -->
-        <!-- main_activity -->
         <activity
             android:name=".presentation.base.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.checkout.DeliveryAddressActivity"
             android:exported="false">
@@ -102,13 +96,11 @@
         <activity
             android:name=".presentation.auth.TestLoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

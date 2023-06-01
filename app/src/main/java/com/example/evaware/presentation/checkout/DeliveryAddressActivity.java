@@ -7,22 +7,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.evaware.data.model.AddressModel;
 import com.example.evaware.databinding.ActivityDeliveryAddressBinding;
 import com.example.evaware.presentation.address.AddressListAdapter;
+import com.example.evaware.presentation.address.AddressViewModel;
+import com.example.evaware.utils.LoadingDialog;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DeliveryAddressActivity extends AppCompatActivity {
     private ActivityDeliveryAddressBinding binding;
+    private AddressViewModel viewModel;
+    private LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityDeliveryAddressBinding.inflate(getLayoutInflater());
+        viewModel = new ViewModelProvider(this).get(AddressViewModel.class);
         setContentView(binding.getRoot());
+        dialog = new LoadingDialog(this);
 
         setUpAppBar();
         setUpContinueButton();
@@ -30,59 +42,19 @@ public class DeliveryAddressActivity extends AppCompatActivity {
     }
 
     private void setUpAddresses() {
-        ArrayList<AddressModel> addresses = new ArrayList<>();
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
-        addresses.add(new AddressModel("123", "Hoàng Đình Anh Tuấn", "0123456789", "hdatdragon2" +
-                "@gmail.com", "Quảng Trị", "Triệu Phong", "Triệu Tài", "An Trú"));
+        dialog.showDialog();
+        viewModel.getData().observe(this, addressModels -> {
+            AddressListAdapter adapter = new AddressListAdapter(this, addressModels);
+            binding.listAddress.setAdapter(adapter);
+            binding.listAddress.setLayoutManager(new LinearLayoutManager(this));
 
-        AddressListAdapter adapter = new AddressListAdapter(DeliveryAddressActivity.this,
-                addresses);
-        binding.listAddress.setAdapter(adapter);
-        justifyListViewHeightBasedOnChildren(-24);
-    }
-
-    private void justifyListViewHeightBasedOnChildren(int offset) {
-        BaseAdapter adapter = (BaseAdapter) binding.listAddress.getAdapter();
-
-        if (adapter == null) {
-            return;
-        }
-
-        int totalHeight = 0;
-        for (int i = 0; i < adapter.getCount(); i++) {
-            View listItem = adapter.getView(i, null, binding.listAddress);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight() - offset;
-        }
-
-        ViewGroup.LayoutParams par = binding.listAddress.getLayoutParams();
-//        int[] location1 = {0, 0};
-//        int[] location2 = {0, 0};
-//        binding.textContactInfo.getLocationOnScreen(location1);
-//        binding.btnAddAddress.getLocationOnScreen(location2);
-//        int minHeight = location2[1] - location1[1] - binding.textContactInfo.getHeight() - 24;
-//
-//        par.height =
-//                totalHeight + (binding.listAddress.getDividerHeight() * (adapter.getCount() - 1));
-//        if (par.height < minHeight) {
-//            par.height = minHeight;
-//        }
-
-        par.height = totalHeight;
-
-        binding.listAddress.setLayoutParams(par);
-        binding.listAddress.requestLayout();
+            if (addressModels.size() == 0) {
+                binding.btnContinue.setVisibility(View.GONE);
+            } else {
+                binding.btnContinue.setVisibility(View.VISIBLE);
+            }
+            dialog.dismissDialog();
+        });
     }
 
     private void setUpAppBar() {
