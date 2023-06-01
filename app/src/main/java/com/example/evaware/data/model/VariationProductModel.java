@@ -3,11 +3,10 @@ package com.example.evaware.data.model;
 import com.google.firebase.firestore.DocumentId;
 
 public class VariationProductModel {
-    public VariationProductModel(String id, int inventory, String name, String img_url) {
+    public VariationProductModel(String id, int inventory, String name) {
         this.id = id;
         this.inventory = inventory;
         this.name = name;
-        this.img_url = img_url;
     }
 
     public String getId() {
@@ -22,6 +21,15 @@ public class VariationProductModel {
         return inventory;
     }
 
+    @Override
+    public String toString() {
+        return "VariationProductModel{" +
+                "id='" + id + '\'' +
+                ", inventory=" + inventory +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void setInventory(int inventory) {
         this.inventory = inventory;
     }
@@ -34,14 +42,6 @@ public class VariationProductModel {
         this.name = name;
     }
 
-    public String getImg_url() {
-        return img_url;
-    }
-
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
-    }
-
     public VariationProductModel() {
 
     }
@@ -50,5 +50,4 @@ public class VariationProductModel {
     private String id;
     private int inventory;
     private String name;
-    private String img_url;
 }

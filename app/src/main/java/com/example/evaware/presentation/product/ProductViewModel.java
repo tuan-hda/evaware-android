@@ -37,20 +37,22 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     public LiveData<ProductModel> getProductModelById(String id) {
-        try {
-            DocumentReference productReference = productRepository.getProductById(id);
-            productReference.get().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document != null && document.exists()) {
+
+        DocumentReference productReference = productRepository.getProductById(id);
+        productReference.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document != null && document.exists()) {
+                    try {
                         ProductModel productModel = document.toObject(ProductModel.class);
                         productModelLiveData.setValue(productModel);
                     }
+                    catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
                 }
-            });
-        } catch (Exception e) {
-            Log.d("debug product viewmodel", e.getMessage());
-        }
+            }
+        });
         return productModelLiveData;
     }
 
@@ -60,8 +62,13 @@ public class ProductViewModel extends AndroidViewModel {
             List<DocumentSnapshot> documents = task.getDocuments();
             List<VariationProductModel> variationModels = new ArrayList<>();
             for (DocumentSnapshot doc : documents) {
-                VariationProductModel variant = doc.toObject(VariationProductModel.class);
-                variationModels.add(variant);
+                try {
+                    VariationProductModel variant = doc.toObject(VariationProductModel.class);
+                    Log.d(TAG, variant.toString());
+                    variationModels.add(variant);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
             }
             variantsLiveData.setValue(variationModels);
         }).addOnFailureListener(e -> {
@@ -75,13 +82,18 @@ public class ProductViewModel extends AndroidViewModel {
         productRepository.getImgOfVariation(productId, variationProductId).addOnSuccessListener(task -> {
             List<String> imgUrls = new ArrayList<>();
             for (DocumentSnapshot doc : task.getDocuments()) {
-                ImgProduct productImg = doc.toObject(ImgProduct.class);
-                imgUrls.add(productImg.getImg_url());
+                try {
+                    ImgProduct productImg = doc.toObject(ImgProduct.class);
+                    imgUrls.add(productImg.getImg_url());
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
             }
             listImgLiveData.setValue(imgUrls);
         }).addOnFailureListener(e -> {
             Log.d(TAG, e.getMessage());
         });
+
         return listImgLiveData;
     }
 }

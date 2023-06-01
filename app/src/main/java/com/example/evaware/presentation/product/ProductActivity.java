@@ -7,17 +7,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+
 
 import com.example.evaware.ReviewsActivity;
 import com.example.evaware.data.model.ProductDetail;
 import com.example.evaware.data.model.ProductModel;
+import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.model.VariationModelsDetail;
 import com.example.evaware.data.model.VariationProductModel;
 import com.example.evaware.databinding.ActivityProductBinding;
 import com.example.evaware.presentation.catalog.CatalogActivity;
 import com.example.evaware.utils.LoadingDialog;
+import com.facebook.FacebookActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,8 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         init();
         dialog.showDialog();
         loadData();
+
+
     }
 
     private void loadData() {
@@ -102,3 +105,4 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         viewPager.setAdapter(slideAdapter);
     }
 }
+
