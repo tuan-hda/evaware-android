@@ -2,12 +2,12 @@ package com.example.evaware.data.repo;
 
 import android.util.Log;
 
-import com.example.evaware.data.model.UserModel;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
 
 public class UserRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -16,12 +16,12 @@ public class UserRepository {
     public UserRepository(){
         userRef = db.collection("users");
     }
-    public Task<DocumentReference> createUser(UserModel user){
-        return userRef.add(user).addOnFailureListener(e->{
+    public Task<Void> createUser(HashMap<String, Object> user, String userId){
+        return userRef.document(userId).set(user).addOnFailureListener(e->{
             Log.e(TAG, "update: " + e.getLocalizedMessage());
         });
     }
-    public Task<QuerySnapshot> getUserById(String id){
-        return userRef.whereEqualTo("id", id).get();
+    public Task<DocumentSnapshot> getUserById(String id){
+        return userRef.document(id).get();
     }
 }

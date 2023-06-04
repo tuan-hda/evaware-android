@@ -34,7 +34,6 @@ public class ReviewViewModel extends AndroidViewModel {
     private ReviewRepository repository;
     private static final String TAG = "ReviewViewModel";
     private MutableLiveData<List<ReviewModel>> reviewModelLiveData = new MutableLiveData<>();
-    private MutableLiveData<String> documentReferenceLiveData = new MutableLiveData<String>();
 
     public ReviewViewModel(@NonNull Application application) {
         super(application);

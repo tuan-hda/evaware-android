@@ -11,13 +11,17 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.UserModel;
 import com.example.evaware.data.repo.UserRepository;
+import com.example.evaware.utils.ConvertString;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserViewModel extends AndroidViewModel {
     private static final String TAG = "UserViewModel";
@@ -33,40 +37,28 @@ public class UserViewModel extends AndroidViewModel {
 
     public void createUser(String userId, String email) {
         String username = email.substring(0, email.indexOf("@"));
-        userRep.createUser(new UserModel(userId, email, username, "https://i.pinimg.com/originals/01/17/65/01176528b26e5b24da0aa0d85b8c41ef.jpg"));
+        UserModel user = new UserModel(userId, email, username, "https://i.pinimg.com/originals/01/17/65/01176528b26e5b24da0aa0d85b8c41ef.jpg");
+        HashMap<String, Object> userMap = new HashMap<>();
+        userMap.put("email", user.getEmail());
+        userMap.put("name", user.getName());
+        userMap.put("img_url", user.getImg_url());
+
+        userRep.createUser(userMap, userId);
     }
 
-
-    public LiveData<UserModel> getUserById() {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        userRep.getUserById(userId).addOnSuccessListener(task -> {
-                List<DocumentSnapshot> documents = task.getDocuments();
-                for(DocumentSnapshot document  : documents) {
-                    try {
-                        UserModel userModel = document.toObject(UserModel.class);
-                        userLiveData.setValue(userModel);
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-            }
-        });
-        return userLiveData;
-    }
 
     public LiveData<DocumentReference> getUserRefById() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        userRep.getUserById(userId).addOnSuccessListener(task -> {
-           userRep.getUserById(userId).addOnSuccessListener(querySnapshot ->{
-               if (!querySnapshot.isEmpty()) {
-                   DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                   DocumentReference userRef = documentSnapshot.getReference();
-                    docLiveData.setValue(userRef);
-               } else {
 
-               }
-           });
+        userRep.getUserById(userId).addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                DocumentReference userRef = documentSnapshot.getReference();
+                docLiveData.setValue(userRef);
+            } else {
+                // Document doesn't exist
+            }
         });
-       return docLiveData;
+        return docLiveData;
     }
 
 }

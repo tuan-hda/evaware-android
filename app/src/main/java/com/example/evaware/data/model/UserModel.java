@@ -1,5 +1,7 @@
 package com.example.evaware.data.model;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class UserModel {
     public UserModel(){
 
@@ -42,7 +44,7 @@ public class UserModel {
         this.img_url = img_url;
         this.name = name;
     }
-
+    @DocumentId
     private String id;
     private String email;
     private String img_url;

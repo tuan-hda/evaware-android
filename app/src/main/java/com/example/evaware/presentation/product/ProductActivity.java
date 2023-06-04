@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 
 
 import com.example.evaware.databinding.ActivityProductBinding;
@@ -21,6 +22,7 @@ import com.example.evaware.data.model.VariationModelsDetail;
 import com.example.evaware.data.model.VariationProductModel;
 import com.example.evaware.utils.CurrencyFormat;
 import com.example.evaware.utils.LoadingDialog;
+import com.example.evaware.utils.SnackBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +57,9 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
     private void setUpBtn() {
         binding.btnBack.setOnClickListener(view -> {
             finish();
+        });
+        binding.imgBtnSavedItem.setOnClickListener(view -> {
+            SnackBar.showSnackSuccessful(ProductActivity.this, binding.getRoot(), (ViewGroup) findViewById(android.R.id.content));
         });
     }
 

@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:id="@+id/root_layout"
             tools:context=".presentation.product.ProductActivity">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -48,6 +49,7 @@
                         android:layout_weight="1" />
 
                     <ImageButton
+                        android:id="@+id/img_btn_saved_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/fab_margin"

@@ -83,34 +83,35 @@ public class ReviewsActivity extends AppCompatActivity {
 
     private void loadData(Boolean withoutDialogLoading) {
         reviewViewModel.getAllReviewByProductId(productId).observe(this, reviewModels -> {
-            if (!withoutDialogLoading) {
-                loadingDialog.showDialog();
-            }
+            if (reviewModels.size() > 0) {
+                List<ReviewDetail> newReviewDetails = new ArrayList<>(); // Create a new list
+                int totalReviewModels = reviewModels.size();
+                reviewQty = totalReviewModels;
+                AtomicInteger processedReviewModels = new AtomicInteger(0);
+                if (!withoutDialogLoading) {
+                    loadingDialog.showDialog();
+                }
+                for (ReviewModel reviewModel : reviewModels) {
+                    reviewViewModel.getImagesByReview(reviewModel.getId()).observe(this, imageModels -> {
+                        ReviewDetail reviewDetail = new ReviewDetail(imageModels, reviewModel);
+                        reviewDetail.setDayCreate(ConvertTimestamp.convertToRelativeTimeSpanString(reviewDetail.getReview().getUpdated_at()));
+                        newReviewDetails.add(reviewDetail); // Add to the new list
 
-            List<ReviewDetail> newReviewDetails = new ArrayList<>(); // Create a new list
+                        int processedCount = processedReviewModels.incrementAndGet();
+                        if (processedCount == totalReviewModels) {
+                            reviewDetails = newReviewDetails; // Update the reference to the new list
 
-            int totalReviewModels = reviewModels.size();
-            reviewQty = totalReviewModels;
-            AtomicInteger processedReviewModels = new AtomicInteger(0);
+                            ReviewAdapter reviewAdapter = new ReviewAdapter(this, reviewDetails);
+                            binding.rvReviews.setLayoutManager(new LinearLayoutManager(this));
+                            binding.rvReviews.setAdapter(reviewAdapter);
 
-            for (ReviewModel reviewModel : reviewModels) {
-                reviewViewModel.getImagesByReview(reviewModel.getId()).observe(this, imageModels -> {
-                    ReviewDetail reviewDetail = new ReviewDetail(imageModels, reviewModel);
-                    reviewDetail.setDayCreate(ConvertTimestamp.convertToRelativeTimeSpanString(reviewDetail.getReview().getUpdated_at()));
-                    newReviewDetails.add(reviewDetail); // Add to the new list
+                            if (!withoutDialogLoading)
+                                loadingDialog.dismissDialog();
+                        }
+                        loadingDialog.dismissDialog();
+                    });
 
-                    int processedCount = processedReviewModels.incrementAndGet();
-                    if (processedCount == totalReviewModels) {
-                        reviewDetails = newReviewDetails; // Update the reference to the new list
-
-                        ReviewAdapter reviewAdapter = new ReviewAdapter(this, reviewDetails);
-                        binding.rvReviews.setLayoutManager(new LinearLayoutManager(this));
-                        binding.rvReviews.setAdapter(reviewAdapter);
-
-                        if (!withoutDialogLoading)
-                            loadingDialog.dismissDialog();
-                    }
-                });
+                }
             }
         });
     }
