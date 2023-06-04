@@ -71,17 +71,15 @@ public class CatalogActivity extends AppCompatActivity {
 
         List<ProductModel> originalProducts = viewModel.getAllProductsByCategory(categoryId).getValue();
         if (originalProducts != null) {
-            // Create a new list to hold the filtered products
+
             List<ProductModel> filteredProducts = new ArrayList<>();
 
-            // Iterate through the original list and add matching products to the filtered list
             for (ProductModel product : originalProducts) {
                 if (product.getName().toLowerCase().contains(query.toLowerCase())) {
                     filteredProducts.add(product);
                 }
             }
 
-            // Update the adapter with the filtered list
             adapter = new CatalogAdapter(this, filteredProducts.size(), filteredProducts);
             gridView.setAdapter(adapter);
         }

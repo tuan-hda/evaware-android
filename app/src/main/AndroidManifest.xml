@@ -16,13 +16,13 @@
         android:theme="@style/Theme.Evaware"
         tools:targetApi="31">
         <activity
-            android:name=".FullScreenImageActivity"
+            android:name=".presentation.new_review.FullScreenImageActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.new_review.NewReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".ReviewsActivity"
+            android:name=".presentation.review.ReviewsActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.product.ProductActivity"

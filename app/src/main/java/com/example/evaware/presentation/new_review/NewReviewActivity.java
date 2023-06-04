@@ -2,8 +2,8 @@ package com.example.evaware.presentation.new_review;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,14 +11,21 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.evaware.data.model.ReviewModel;
 import com.example.evaware.databinding.ActivityNewReviewBinding;
+import com.example.evaware.presentation.auth.UserViewModel;
+import com.example.evaware.presentation.product.ProductViewModel;
+import com.example.evaware.utils.LoadingDialog;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
@@ -31,23 +38,53 @@ public class NewReviewActivity extends AppCompatActivity {
     private ImageAdapter imageAdapter;
     private MaterialRatingBar ratingBar;
     private TextView tvLevelRate;
+    private ReviewViewModel reviewViewModel;
+    private UserViewModel userViewModel;
+    private String productId;
+    private String productName;
+    private LoadingDialog loadingDialog;
+    private DocumentReference userRef;
+    private int reviewQty;
+    private ProductViewModel productViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        loadingUserRef();
         setUpButtons();
         setUpRatingBar();
     }
 
-    private void init(){
+    private void loadingUserRef() {
+        userViewModel.getUserRefById().observe(this, docRef -> {
+            userRef = docRef;
+        });
+    }
+
+    private void init() {
 
         binding = ActivityNewReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        loadingDialog = new LoadingDialog(this);
+
+        Intent intent = getIntent();
+        productId = intent.getStringExtra("productId");
+        productName = intent.getStringExtra("productName");
+        String reviewQtyString = intent.getStringExtra("reviewQty");
+        reviewQty = Integer.parseInt(reviewQtyString);
+
+        reviewViewModel = new ViewModelProvider(this).get(ReviewViewModel.class);
+        reviewViewModel.setReviewRef(productId);
+
+        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         imgFromGallery = binding.rvImgList;
         ratingBar = binding.ratingbar;
         tvLevelRate = binding.tvLevelRate;
+        selectedImagesList = new ArrayList<>();
 
         galleryLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
@@ -73,7 +110,8 @@ public class NewReviewActivity extends AppCompatActivity {
                     }
                 });
     }
-    private void setUpButtons(){
+
+    private void setUpButtons() {
         binding.btnClose.setOnClickListener(view -> finish());
         binding.cvOpenGallery.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -81,12 +119,31 @@ public class NewReviewActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             galleryLauncher.launch(intent);
         });
-        binding.btnSendReview.setOnClickListener(view ->{
-            if(binding.edtNewReview.getText().toString().equals("")){
+        binding.btnSendReview.setOnClickListener(view -> {
+            loadingDialog.showDialog();
+
+            if (binding.edtNewReview.getText().toString().equals("")) {
                 binding.edtNewReview.setError("Please enter your review");
             }
+            try {
+                AtomicReference<Integer> count = new AtomicReference<>(0);
+                ReviewModel review = new ReviewModel();
+                review.setUser_ref(userRef);
+                review.setContent(binding.edtNewReview.getText().toString());
+                review.setUpdated_at(new Timestamp(new Date()));
+                review.setCreate_at(new Timestamp(new Date()));
+                review.setRating_star(binding.ratingbar.getRating());
+                reviewViewModel.postReview(review, selectedImagesList, productName);
+            } catch (Exception e) {
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                loadingDialog.dismissDialog();
+            }
+            productViewModel.updateReviewQty(productId, reviewQty + 1);
+            finish();
         });
     }
+
+
     private void setUpRatingBar() {
         ratingBar.setOnRatingChangeListener((ratingBar, rating) -> {
             // Update the text based on the rating

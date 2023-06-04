@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ReviewsActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include
-            android:id="@+id/appbar"
-            layout="@layout/app_appbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="19dp" />
+    android:id="@+id/swipe_refresh"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/tv_new_reviews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/lexend_medium"
-            android:text="New reviews"
-            android:textSize="@dimen/body_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:padding="@dimen/fab_margin"
-        android:id="@+id/rv_reviews"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.review.ReviewsActivity">
 
-</LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/appbar"
+                layout="@layout/app_appbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="19dp" />
+
+            <TextView
+                android:id="@+id/tv_new_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:fontFamily="@font/lexend_medium"
+                android:text="New reviews"
+                android:textSize="@dimen/body_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/fab_margin" />
+    </LinearLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

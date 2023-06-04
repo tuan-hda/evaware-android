@@ -1,7 +1,5 @@
 package com.example.evaware.data.model;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,6 +33,15 @@ public class ProductModel implements Serializable {
     public String name;
     public int price;
     public DocumentReference room_ref;
+    private int review_qty = 0;
+
+    public int getReview_qty() {
+        return review_qty;
+    }
+
+    public void setReview_qty(int review_qty) {
+        this.review_qty = review_qty;
+    }
 
     public String getId() {
         return id;

@@ -16,12 +16,7 @@ import java.util.List;
 
 public class CategoryRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String typeRefValue;
     private CollectionReference categoryRef;
-    public CategoryRepository(String id){
-        typeRefValue = String.format("type_of_category/%s", id);
-        categoryRef = db.collection("category");
-    }
     public CategoryRepository(){
         categoryRef = db.collection("category");
     }

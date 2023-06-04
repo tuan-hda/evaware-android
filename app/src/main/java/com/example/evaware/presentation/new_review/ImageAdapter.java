@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.evaware.FullScreenImageActivity;
 import com.example.evaware.R;
 
 import java.util.ArrayList;

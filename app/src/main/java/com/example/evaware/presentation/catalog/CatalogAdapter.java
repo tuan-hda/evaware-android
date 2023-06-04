@@ -42,6 +42,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             viewHolder.tvName = convertView.findViewById(R.id.tv_product_name);
             viewHolder.tvDescription = convertView.findViewById(R.id.tv_product_description);
             viewHolder.imvProduct = convertView.findViewById(R.id.imv_product_img);
+            viewHolder.imvLoveLike = convertView.findViewById(R.id.iv_love_like);
 
             convertView.setTag(viewHolder);
         } else {
@@ -60,6 +61,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             intent.putExtra("productModelId", item.getId());
             context.startActivity(intent);
         });
+        viewHolder.imvLoveLike.setOnClickListener(view->{
+            Log.d("dcm", "love imgv");
+        });
 
         return convertView;
     }
@@ -68,6 +72,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
         TextView tvName;
         TextView tvDescription;
         ImageView imvProduct;
+        ImageView imvLoveLike;
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.evaware;
+package com.example.evaware.presentation.new_review;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.evaware.R;
 
 public class FullScreenImageActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -19,7 +20,6 @@ public class FullScreenImageActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Hide the status bar and make the activity full screen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -27,21 +27,33 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.iv_full_screen_image);
 
-        // Retrieve the image URI from the intent extras
-        Uri imageUri = Uri.parse(getIntent().getStringExtra("imageUri"));
+        if (getIntent().hasExtra("imageUri")) {
+            Uri imageUri = Uri.parse(getIntent().getStringExtra("imageUri"));
+            loadImageUri(imageUri);
+        } else if (getIntent().hasExtra("imageUrl")) {
+            String imageUrl = getIntent().getStringExtra("imageUrl");
+            loadImageUrl(imageUrl);
+        }
 
-        // Load the image into the full-screen ImageView using Glide
-        Glide.with(this)
-                .load(imageUri)
-                .fitCenter()
-                .into(imageView);
-
-        // Set click listener to close the activity when the image is clicked
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+    }
+
+    private void loadImageUri(Uri imageUri) {
+        Glide.with(this)
+                .load(imageUri)
+                .fitCenter()
+                .into(imageView);
+    }
+
+    private void loadImageUrl(String imageUrl) {
+        Glide.with(this)
+                .load(imageUrl)
+                .fitCenter()
+                .into(imageView);
     }
 }

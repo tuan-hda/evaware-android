@@ -52,6 +52,7 @@ public class SignUpFragment extends Fragment {
     private EditText etConfirmPassword;
     private MaterialButton btnSignup;
     private ImageView mEmailIconImageView;
+    private UserViewModel userViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,8 @@ public class SignUpFragment extends Fragment {
         mEmailIconImageView = binding.emailIconImageview;
         PasswordUtils.setupPasswordVisibilityToggle(etPassword);
         PasswordUtils.setupPasswordVisibilityToggle(etConfirmPassword);
+
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         Drawable checkmark = getResources().getDrawable(R.drawable.ic_checked);
         checkmark.setBounds(0, 0, checkmark.getIntrinsicWidth(), checkmark.getIntrinsicHeight());
@@ -198,6 +201,9 @@ public class SignUpFragment extends Fragment {
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(emailTask -> {
                                             if (emailTask.isSuccessful()) {
+                                                String userId = user.getUid();
+                                                // Call the createUserData function with the userId
+                                                userViewModel.createUser(userId, email);
                                                 // show toast message and navigate to login fragment
                                                 Toast.makeText(getActivity(), "Verification email" +
                                                         " sent to " + email, Toast.LENGTH_LONG).show();

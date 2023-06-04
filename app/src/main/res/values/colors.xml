@@ -32,4 +32,11 @@
     <color name="magikarp_300">#E57373</color>
     <color name="magikarp_200">#EF9A9A</color>
     <color name="magikarp_100">#FFCDD2</color>
+
+    <!--  Venusaur  -->
+    <color name="venusaur_500">#4CAF50</color>
+    <color name="venusaur_400">#66BB6A</color>
+    <color name="venusaur_300">#81C784</color>
+    <color name="venusaur_200">#A5D6A7</color>
+    <color name="venusaur_100">#C8E6C9</color>
 </resources>

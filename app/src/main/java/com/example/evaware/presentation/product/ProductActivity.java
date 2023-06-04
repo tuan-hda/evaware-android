@@ -3,25 +3,29 @@ package com.example.evaware.presentation.product;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 
-import com.example.evaware.ReviewsActivity;
+import com.example.evaware.databinding.ActivityProductBinding;
+import com.example.evaware.presentation.bottomSheet.ProductInfoDialog;
+import com.example.evaware.presentation.catalog.CatalogAdapter;
+import com.example.evaware.presentation.review.ReviewsActivity;
 import com.example.evaware.data.model.ProductDetail;
 import com.example.evaware.data.model.ProductModel;
-import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.model.VariationModelsDetail;
 import com.example.evaware.data.model.VariationProductModel;
-import com.example.evaware.databinding.ActivityProductBinding;
-import com.example.evaware.presentation.catalog.CatalogActivity;
+import com.example.evaware.utils.CurrencyFormat;
 import com.example.evaware.utils.LoadingDialog;
-import com.facebook.FacebookActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ProductActivity extends AppCompatActivity implements VariationProductAdapter.OnVariationProductListener {
@@ -31,8 +35,8 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
     private SlideProductAdapter slideAdapter;
     private String productModelId;
     private ProductViewModel productViewModel;
-    private ProductModel product = new ProductModel();
     private LoadingDialog dialog;
+    private String productName;
     List<VariationModelsDetail> variantsDetail = new ArrayList<>();
 
 
@@ -43,19 +47,29 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         setContentView(binding.getRoot());
 
         init();
-        dialog.showDialog();
-        loadData();
-
+        loadData(false);
+        setUpBtn();
 
     }
 
-    private void loadData() {
+    private void setUpBtn() {
+        binding.btnBack.setOnClickListener(view -> {
+            finish();
+        });
+    }
+
+    private void loadData(Boolean withoutDialogLoading) {
+        if (!withoutDialogLoading) {
+            dialog.showDialog();
+        }
         AtomicReference<Integer> count = new AtomicReference<>(0);
         ProductDetail productDetail = new ProductDetail();
 
         productViewModel.getProductModelById(productModelId).observe(this, productModel -> {
-            binding.tvProductPrice.setText(String.format("$%S", productModel.getPrice()));
+            productName = productModel.getName();
+            binding.tvProductPrice.setText(CurrencyFormat.getFormattedPrice(productModel.getPrice()));
             binding.tvProductDes.setText(productModel.getDesc());
+            binding.tvProductQty.setText(String.valueOf(productModel.getReview_qty()));
         });
 
         productViewModel.getVariations(productModelId).observe(this, variants -> {
@@ -80,7 +94,17 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
             adapter.setOnVariationProductListener(this);
             binding.rvVariations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
             binding.rvVariations.setAdapter(adapter);
-            dialog.dismissDialog();
+            if (!withoutDialogLoading) {
+                dialog.dismissDialog();
+            }
+            loadRecommendProduct();
+        });
+    }
+
+    private void loadRecommendProduct() {
+        productViewModel.getProductRecommendations(productModelId).observe(this, productModels -> {
+            CatalogAdapter adapter = new CatalogAdapter(this,productModels.size(), productModels);
+            binding.gvOtherProductList.setAdapter(adapter);
         });
     }
 
@@ -94,7 +118,30 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
 
         binding.llReviews.setOnClickListener(view -> {
             Intent intent1 = new Intent(this, ReviewsActivity.class);
+            intent1.putExtra("productId", productModelId);
+            intent1.putExtra("productName", productName);
             this.startActivity(intent1);
+        });
+
+        binding.llOpenProductIndfo.setOnClickListener(view -> {
+            productViewModel.getComposition(productModelId).observe(this, compositionList -> {
+                productViewModel.getMeasurements(productModelId).observe(this, measurementList -> {
+                    ProductInfoDialog bottomSheetProductInfo = new ProductInfoDialog();
+                    bottomSheetProductInfo.setComposition(compositionList);
+                    bottomSheetProductInfo.setMeasurements(measurementList);
+
+                    bottomSheetProductInfo.show(getSupportFragmentManager(), "ModalBottomSheetDialog");
+                });
+            });
+        });
+        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Boolean withoutDialogLoading = true;
+                variantsDetail.clear();
+                loadData(withoutDialogLoading);
+                binding.swipeRefreshLayout.setRefreshing(false);
+            }
         });
     }
 

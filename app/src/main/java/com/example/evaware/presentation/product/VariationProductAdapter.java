@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -58,11 +59,13 @@ public class VariationProductAdapter extends RecyclerView.Adapter<VariationProdu
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textView;
         private LinearLayout llContainer;
+        private ImageView imIconVariation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.tv_variation_name);
             llContainer = itemView.findViewById(R.id.ll_container);
+            imIconVariation = itemView.findViewById(R.id.im_icon_variation);
 
             itemView.setOnClickListener(v -> {
                 int previousSelectedItem = selectedItem;
@@ -73,11 +76,21 @@ public class VariationProductAdapter extends RecyclerView.Adapter<VariationProdu
                 if (onVariationProductListener != null) {
                     onVariationProductListener.onVariationProductClick(selectedItem);
                 }
+                if(textView.getText().toString().toLowerCase().equals("black")){
+                    imIconVariation.setImageResource(R.drawable.ic_black_variation);
+                }else {
+                    imIconVariation.setImageResource(R.drawable.ic_brown_vatiation);
+                }
             });
         }
 
         public void bind(String data) {
             textView.setText(data);
+            if(textView.getText().toString().toLowerCase().equals("black")){
+                imIconVariation.setImageResource(R.drawable.ic_black_variation);
+            }else {
+                imIconVariation.setImageResource(R.drawable.ic_brown_vatiation);
+            }
         }
     }
 

@@ -1,11 +1,16 @@
 package com.example.evaware.data.repo;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductRepository {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -32,6 +37,30 @@ public class ProductRepository {
         return productRef
                 .document(productId).collection("variations")
                 .document(variationId).collection("images").get();
+    }
+
+    public Task<Void> updateReviewQty(String productId, int reviewQty) {
+        DocumentReference productDocRef = productRef.document(productId);
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("review_qty", reviewQty);
+
+        return productDocRef.update(updates).addOnFailureListener(e -> {
+                    Log.e(TAG, "add:failure " + e.getLocalizedMessage());
+                }
+        );
+    }
+
+    public Task<DocumentSnapshot> getMeasurements(String productId) {
+        return productRef.document(productId).collection("product_info")
+                .document("measurements").get();
+    }
+    public Task<DocumentSnapshot> getComposition(String productId) {
+        return productRef.document(productId).collection("product_info")
+                .document("composition").get();
+    }
+    public Task<QuerySnapshot> getRecommendations(String productId){
+        return productRef.document(productId).collection("recommendations").get();
     }
 
 }
