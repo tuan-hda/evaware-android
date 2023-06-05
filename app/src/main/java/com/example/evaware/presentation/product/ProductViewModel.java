@@ -194,4 +194,12 @@ public class ProductViewModel extends AndroidViewModel {
 
         return productModelLiveData;
     }
+
+    public LiveData<DocumentReference> getProductRefBbyId(String id){
+        MutableLiveData<DocumentReference> liveData = new MutableLiveData<>();
+        productRepository.getProductById(id).get().addOnSuccessListener(task->{
+            liveData.setValue(task.getReference());
+        });
+        return liveData;
+    }
 }

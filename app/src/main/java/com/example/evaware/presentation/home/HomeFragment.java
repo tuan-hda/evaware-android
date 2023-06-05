@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.example.evaware.data.model.Suggestion;
 import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.databinding.FragmentHomeBinding;
+import com.example.evaware.presentation.wishlist.WishViewModel;
+import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView homeItemList;
     private List<TypeofCategory> types = new ArrayList<>();
     private LoadingDialog dialog;
+    private WishViewModel wishViewModel;
 
 
     @Override
@@ -50,15 +53,7 @@ public class HomeFragment extends Fragment {
         homeItemList = binding.verticalList;
         suggestList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         homeItemList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        List<Suggestion> dataList = new ArrayList<Suggestion>();
-        dataList.add(new Suggestion("hot news", "https://assets-amberstudent.imgix.net/inventories/211754/cb3c651f.jpg?w=480&h=360&fit=crop&auto=format&trim=auto"));
-        dataList.add(new Suggestion("hot news", "https://assets-amberstudent.imgix.net/inventories/211754/cb3c651f.jpg?w=480&h=360&fit=crop&auto=format&trim=auto"));
-        dataList.add(new Suggestion("hot news", "https://assets-amberstudent.imgix.net/inventories/211754/cb3c651f.jpg?w=480&h=360&fit=crop&auto=format&trim=auto"));
-        dataList.add(new Suggestion("hot news 2023", "https://assets-amberstudent.imgix.net/inventories/211754/cb3c651f.jpg?w=480&h=360&fit=crop&auto=format&trim=auto"));
-        dataList.add(new Suggestion("hot news 2023", "https://assets-amberstudent.imgix.net/inventories/211754/cb3c651f.jpg?w=480&h=360&fit=crop&auto=format&trim=auto"));
-        SuggestAdapter adapter = new SuggestAdapter(dataList, getActivity());
-//
-        suggestList.setAdapter(adapter);
+        wishViewModel = new ViewModelProvider(this).get(WishViewModel.class);
         loadData();
     }
 
@@ -67,7 +62,6 @@ public class HomeFragment extends Fragment {
         HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
         viewModel.getListTypeOfCategories().observe(requireActivity(), typeofCategories -> {
-            Log.d("aaaa", String.valueOf(typeofCategories.size()));
             if (typeofCategories.size() == 0) {
 //                binding.verticalList.setVisibility(View.INVISIBLE);
                 Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show();
@@ -77,6 +71,11 @@ public class HomeFragment extends Fragment {
                 dialog.dismissDialog();
             }
         });
+
+            wishViewModel.getWishList().observe(getActivity(), wishItemModels -> {
+                GlobalStore.getInstance().setData("wishList", wishItemModels);
+            });
+
     }
 
     @Override

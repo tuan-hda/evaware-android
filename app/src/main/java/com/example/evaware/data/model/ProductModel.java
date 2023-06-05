@@ -3,6 +3,7 @@ package com.example.evaware.data.model;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
@@ -22,6 +23,8 @@ public class ProductModel implements Serializable {
 
     public DocumentReference category_ref;
     private String img_url;
+    @Exclude
+    public Boolean saved = false;
     @ServerTimestamp
 
     public Timestamp created_at;

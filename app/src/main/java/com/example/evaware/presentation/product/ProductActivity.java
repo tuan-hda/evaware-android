@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 
+import com.example.evaware.R;
+import com.example.evaware.data.model.BagItemModel;
+import com.example.evaware.data.model.WishItemModel;
 import com.example.evaware.databinding.ActivityProductBinding;
+import com.example.evaware.presentation.bag.BagViewModel;
 import com.example.evaware.presentation.bottomSheet.ProductInfoDialog;
 import com.example.evaware.presentation.catalog.CatalogAdapter;
 import com.example.evaware.presentation.review.ReviewsActivity;
@@ -20,11 +24,16 @@ import com.example.evaware.data.model.ProductDetail;
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.VariationModelsDetail;
 import com.example.evaware.data.model.VariationProductModel;
+import com.example.evaware.presentation.wishlist.WishViewModel;
 import com.example.evaware.utils.CurrencyFormat;
+import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
 import com.example.evaware.utils.SnackBar;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,10 +46,13 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
     private SlideProductAdapter slideAdapter;
     private String productModelId;
     private ProductViewModel productViewModel;
+    private BagViewModel bagViewModel;
+    private WishViewModel wishViewModel;
     private LoadingDialog dialog;
     private String productName;
     List<VariationModelsDetail> variantsDetail = new ArrayList<>();
-
+    private boolean saved = false;
+    private DocumentReference productRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +63,35 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         init();
         loadData(false);
         setUpBtn();
+        setUpRefresh();
 
     }
 
-    private void setUpBtn() {
-        binding.btnBack.setOnClickListener(view -> {
-            finish();
+    void init() {
+        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
+        viewPager = binding.vpProductSlide;
+        dialog = new LoadingDialog(this);
+        Intent intent = getIntent();
+        productModelId = intent.getStringExtra("productModelId");
+        bagViewModel = new ViewModelProvider(this).get(BagViewModel.class);
+        wishViewModel = new ViewModelProvider(this).get(WishViewModel.class);
+        binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart);
+        productViewModel.getProductRefBbyId(productModelId).observe(this, productRefData -> {
+            productRef = productRefData;
         });
-        binding.imgBtnSavedItem.setOnClickListener(view -> {
-            SnackBar.showSnackSuccessful(ProductActivity.this, binding.getRoot(), (ViewGroup) findViewById(android.R.id.content));
-        });
+
+        checkProductInSaved();
+    }
+
+    private void checkProductInSaved() {
+        List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+        for (WishItemModel item : list) {
+            if (item.getProduct_ref().getId().equals(productModelId)) {
+                binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart_filled);
+                saved = true;
+                return;
+            }
+        }
     }
 
     private void loadData(Boolean withoutDialogLoading) {
@@ -108,24 +139,27 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
 
     private void loadRecommendProduct() {
         productViewModel.getProductRecommendations(productModelId).observe(this, productModels -> {
-            CatalogAdapter adapter = new CatalogAdapter(this,productModels.size(), productModels);
+            CatalogAdapter adapter = new CatalogAdapter(this, productModels.size(), productModels);
             binding.gvOtherProductList.setAdapter(adapter);
         });
     }
 
 
-    void init() {
-        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-        viewPager = binding.vpProductSlide;
-        dialog = new LoadingDialog(this);
-        Intent intent = getIntent();
-        productModelId = intent.getStringExtra("productModelId");
-
-        binding.llReviews.setOnClickListener(view -> {
-            Intent intent1 = new Intent(this, ReviewsActivity.class);
-            intent1.putExtra("productId", productModelId);
-            intent1.putExtra("productName", productName);
-            this.startActivity(intent1);
+    private void setUpBtn() {
+        binding.btnBack.setOnClickListener(view -> {
+            finish();
+        });
+        binding.imgBtnSavedItem.setOnClickListener(view -> {
+            SnackBar.showSnackSuccessful(ProductActivity.this, binding.getRoot(), (ViewGroup) findViewById(android.R.id.content));
+        });
+        binding.btnAddToBag.setOnClickListener(view -> {
+            productViewModel.getProductRefBbyId(productModelId).observe(this, documentReference -> {
+                BagItemModel bagItemModel = new BagItemModel();
+                bagItemModel.product_ref = documentReference;
+                bagItemModel.created_at = (new Timestamp(new Date()));
+                bagItemModel.updated_at = (new Timestamp(new Date()));
+                bagViewModel.addItem(bagItemModel);
+            });
         });
 
         binding.llOpenProductIndfo.setOnClickListener(view -> {
@@ -139,15 +173,46 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
                 });
             });
         });
-        binding.swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Boolean withoutDialogLoading = true;
-                variantsDetail.clear();
-                loadData(withoutDialogLoading);
-                binding.swipeRefreshLayout.setRefreshing(false);
-            }
+
+        binding.llReviews.setOnClickListener(view -> {
+            Intent intent1 = new Intent(this, ReviewsActivity.class);
+            intent1.putExtra("productId", productModelId);
+            intent1.putExtra("productName", productName);
+            this.startActivity(intent1);
         });
+
+        binding.imgBtnSavedItem.setOnClickListener(view -> {
+            List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+            if (saved) {
+                    dialog.showDialog();
+                    for (WishItemModel item : list) {
+                        if (item.getProduct_ref().getId().equals(productModelId)) {
+                            wishViewModel.remove(item.getId()).observe(this, message->{
+                                list.remove(item);
+                                binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart);
+                                dialog.dismissDialog();
+                            });
+
+                        }
+                    }
+                saved = false;
+            } else {
+                dialog.showDialog();
+                WishItemModel wishItemModel = new WishItemModel();
+                wishItemModel.setProduct_ref(productRef);
+                wishItemModel.setCreate_at(new Timestamp(new Date()));
+                wishItemModel.setUpdate_at((new Timestamp(new Date())));
+                wishViewModel.addWishList(wishItemModel).observe(this, wishId -> {
+                    wishItemModel.setId(wishId);
+                    list.add(wishItemModel);
+                    binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart_filled);
+                    dialog.dismissDialog();
+                });
+                saved = true;
+            }
+            GlobalStore.getInstance().setData("wishList", list);
+        });
+
     }
 
     @Override
@@ -155,6 +220,15 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         List<String> slideList = variantsDetail.get(position).getListImgUrls();
         slideAdapter = new SlideProductAdapter(this, slideList);
         viewPager.setAdapter(slideAdapter);
+    }
+
+    private void setUpRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            Boolean withoutDialogLoading = true;
+            variantsDetail.clear();
+            loadData(withoutDialogLoading);
+            binding.swipeRefreshLayout.setRefreshing(false);
+        });
     }
 }
 

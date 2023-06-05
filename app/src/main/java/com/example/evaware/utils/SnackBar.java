@@ -13,16 +13,22 @@ import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.evaware.R;
 import com.example.evaware.databinding.SnackNoInternetBinding;
 import com.example.evaware.databinding.SnackRemoveBinding;
 import com.example.evaware.databinding.SnackSuccessfulBinding;
+import com.example.evaware.presentation.base.MainActivity;
 import com.example.evaware.presentation.wishlist.SavedItem;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Objects;
 
 public class SnackBar {
 
@@ -77,7 +83,7 @@ public class SnackBar {
     }
 
     @SuppressLint("RestrictedApi")
-    public static void showSnackSuccessful(Activity activity, View finalView, ViewGroup viewGroup) {
+    public static void showSnackSuccessful(FragmentActivity activity, View finalView, ViewGroup viewGroup) {
         Snackbar snackbar = Snackbar.make(finalView, "", Snackbar.LENGTH_INDEFINITE);
         SnackSuccessfulBinding binding = SnackSuccessfulBinding.inflate(activity.getLayoutInflater(),
                 viewGroup, false);
@@ -96,8 +102,9 @@ public class SnackBar {
             public void onClick(View view) {
                 try {
                     snackbar.dismiss();
-//                    Navigation.findNavController(activity, R.id.nav_host_fragment)
-//                            .navigate(R.id.wishlistFragment);
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    intent.putExtra("fragment", "bag");
+                    activity.startActivity(intent);
                 } catch (Exception e) {
                     Log.e("Exception", e.getMessage());
                 }

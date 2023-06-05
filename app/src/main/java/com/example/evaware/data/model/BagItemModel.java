@@ -37,6 +37,7 @@ public class BagItemModel {
     }
 
     public DocumentReference variation_ref;
+    @Exclude
     public VariationModel variation;
 
     public BagItemModel() {
