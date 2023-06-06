@@ -67,6 +67,17 @@ public class Account extends Fragment {
     }
 
     private void setUpButtons() {
+        binding.accountLlMyDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new MyDetail())
+                        .commit();
+            }
+        });
+
         binding.accountLlSignOut.setOnClickListener(view -> {
             auth.signOut();
             LoginManager.getInstance().logOut();
