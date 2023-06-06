@@ -35,6 +35,9 @@ public class ProductRepository {
     public Task<QuerySnapshot> getVariationOfProduct(String id) {
         return productRef.document(id).collection("variations").get();
     }
+    public Task<DocumentSnapshot> getVariationRefById(String productId, String variationId){
+        return productRef.document(productId).collection("variations").document(variationId).get();
+    }
 
     public Task<QuerySnapshot> getImgOfVariation(String productId, String variationId) {
         return productRef

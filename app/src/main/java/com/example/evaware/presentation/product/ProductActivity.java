@@ -53,6 +53,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
     List<VariationModelsDetail> variantsDetail = new ArrayList<>();
     private boolean saved = false;
     private DocumentReference productRef;
+    private ProductDetail productDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
             dialog.showDialog();
         }
         AtomicReference<Integer> count = new AtomicReference<>(0);
-        ProductDetail productDetail = new ProductDetail();
+        productDetail = new ProductDetail();
 
         productViewModel.getProductModelById(productModelId).observe(this, productModel -> {
             productName = productModel.getName();
@@ -156,9 +157,13 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
             productViewModel.getProductRefBbyId(productModelId).observe(this, documentReference -> {
                 BagItemModel bagItemModel = new BagItemModel();
                 bagItemModel.product_ref = documentReference;
+                bagItemModel.qty = 1;
                 bagItemModel.created_at = (new Timestamp(new Date()));
                 bagItemModel.updated_at = (new Timestamp(new Date()));
-                bagViewModel.addItem(bagItemModel);
+                productViewModel.getVariationRef(productModelId, productDetail.getVariationModelDetails().get(0).getModel().getId()).observe(this, variationRef -> {
+                    bagItemModel.variation_ref = variationRef;
+                    bagViewModel.addItem(bagItemModel);
+                });
             });
         });
 
@@ -184,17 +189,17 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         binding.imgBtnSavedItem.setOnClickListener(view -> {
             List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
             if (saved) {
-                    dialog.showDialog();
-                    for (WishItemModel item : list) {
-                        if (item.getProduct_ref().getId().equals(productModelId)) {
-                            wishViewModel.remove(item.getId()).observe(this, message->{
-                                list.remove(item);
-                                binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart);
-                                dialog.dismissDialog();
-                            });
+                dialog.showDialog();
+                for (WishItemModel item : list) {
+                    if (item.getProduct_ref().getId().equals(productModelId)) {
+                        wishViewModel.remove(item.getId()).observe(this, message -> {
+                            list.remove(item);
+                            binding.imgBtnSavedItem.setBackgroundResource(R.drawable.heart);
+                            dialog.dismissDialog();
+                        });
 
-                        }
                     }
+                }
                 saved = false;
             } else {
                 dialog.showDialog();

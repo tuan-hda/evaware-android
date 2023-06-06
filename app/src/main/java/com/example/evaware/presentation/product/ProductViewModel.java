@@ -15,6 +15,7 @@ import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.ProductRecommendation;
 import com.example.evaware.data.model.VariationProductModel;
 import com.example.evaware.data.repo.ProductRepository;
+import com.facebook.internal.Mutable;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
@@ -213,6 +214,14 @@ public class ProductViewModel extends AndroidViewModel {
                 products.add(product);
             }
             liveData.setValue(products);
+        });
+        return liveData;
+    }
+
+    public LiveData<DocumentReference> getVariationRef(String productId, String variationId){
+        MutableLiveData<DocumentReference> liveData = new MutableLiveData<>();
+        productRepository.getVariationRefById(productId, variationId).addOnSuccessListener(task ->{
+            liveData.setValue(task.getReference());
         });
         return liveData;
     }
