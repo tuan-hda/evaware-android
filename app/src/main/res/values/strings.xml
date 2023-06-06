@@ -95,4 +95,7 @@
     <string name="product_code_"> #1234 </string>
     <string name="your_review">your_review</string>
     <string name="sent_review">Send review</string>
+    <string name="expired_date">Expiration date</string>
+    <string name="new_card">new card</string>
+    <string name="save_card">save card</string>
 </resources>

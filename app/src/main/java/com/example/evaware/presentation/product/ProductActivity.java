@@ -236,4 +236,3 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         });
     }
 }
-
