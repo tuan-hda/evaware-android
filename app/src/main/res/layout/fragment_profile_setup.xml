@@ -56,7 +56,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:src="@drawable/camera" />
+            android:src="@drawable/ic_camera" />
     </FrameLayout>
     <!--button upload-->
     <com.google.android.material.button.MaterialButton

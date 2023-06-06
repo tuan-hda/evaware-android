@@ -64,6 +64,7 @@ public class BagFragment extends Fragment {
         dialog.showDialog();
 
         viewModel.getBagList().observe(activity, bagItemModels -> {
+
             if (bagItemModels.size() == 0) {
                 binding.scrollView.setVisibility(GONE);
                 binding.layoutEmptyBag.setVisibility(View.VISIBLE);

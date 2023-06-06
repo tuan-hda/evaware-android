@@ -5,4 +5,5 @@
     <dimen name="heading_2">24sp</dimen>
     <dimen name="body_3">12sp</dimen>
     <dimen name="body_2">14sp</dimen>
+    <dimen name="margin_vertical">32dp</dimen>
 </resources>

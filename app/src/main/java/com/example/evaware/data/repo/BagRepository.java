@@ -41,4 +41,10 @@ public class BagRepository {
             Log.e(TAG, "add:failure " + e.getLocalizedMessage());
         });
     }
+
+    public Task<QuerySnapshot> findByProductRef(DocumentReference doc) {
+        return barRef.whereEqualTo("product_ref", doc).get().addOnFailureListener(e -> {
+            Log.e(TAG, "findByProductRef: ", e);
+        });
+    }
 }

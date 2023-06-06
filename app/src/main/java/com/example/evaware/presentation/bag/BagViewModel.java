@@ -91,8 +91,13 @@ public class BagViewModel extends AndroidViewModel {
     }
 
     public void addItem(BagItemModel item) {
-        repo.add(item).addOnSuccessListener(documentReference -> {
-            queryBagList.add(item);
+        repo.findByProductRef(item.product_ref).addOnSuccessListener(task->{
+            List<DocumentSnapshot> docs = task.getDocuments();
+            if(docs.size() == 0){
+                repo.add(item).addOnSuccessListener(documentReference -> {
+                    queryBagList.add(item);
+                });
+            }
         });
     }
 }

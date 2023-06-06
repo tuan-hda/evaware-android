@@ -42,7 +42,6 @@ public class AddAddressActivity extends AppCompatActivity {
             finish();
         });
 
-
         handleIntent();
         setUpButtons();
     }

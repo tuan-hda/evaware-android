@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/swipeRefreshLayout"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/root_layout"
+            tools:context=".presentation.product.ProductActivity">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp_product_slide"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:background="@drawable/rounded_bg"
+                        android:padding="4dp"
+                        android:src="@drawable/arrow_left" />
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/img_btn_saved_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:background="@drawable/rounded_bg"
+                        android:padding="4dp" />
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/fab_margin"
+                android:background="@color/giratina_100"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_medium"
+                    android:textSize="@dimen/heading_2" />
+                <TextView
+                    android:id="@+id/tv_product_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/giratina_500"
+                    android:fontFamily="@font/lexend"
+                    android:textSize="@dimen/body_1"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_variations"
+                    android:layout_marginVertical="@dimen/fab_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_to_bag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_button"
+                        android:drawableEnd="@drawable/ic_bag"
+                        android:fontFamily="@font/lexend_medium"
+                        android:text="@string/add_to_bag"
+                        android:textSize="@dimen/body_1"
+                        app:iconGravity="textEnd"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/myIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="274dp"
+                        android:layout_marginBottom="14dp"
+                        android:src="@drawable/ic_bag"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="@color/giratina_100"
+                app:cardCornerRadius="8dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/fab_margin"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_sale"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginHorizontal="@dimen/fab_margin"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lexend"
+                            android:text="Discount for you"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/body_1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lexend"
+                            android:text="Use promocode ULMO"
+                            android:textColor="@color/giratina_500"
+                            android:textSize="@dimen/body_2"/>
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="@dimen/body_2"
+                        android:fontFamily="@font/lexend_semibold"
+                        android:text="Copy" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/ll_open_product_indfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/fab_margin"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Product information"
+                    android:textSize="@dimen/body_1"
+                    android:fontFamily="@font/lexend"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/chevron_right"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/fab_margin"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Reviews"
+                    android:textSize="@dimen/body_1"
+                    android:fontFamily="@font/lexend"
+                    />
+                <TextView
+                    android:id="@+id/tv_product_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/giratina_500"
+                    android:text="1"
+                    android:textSize="@dimen/body_1" />
+            </LinearLayout>
+            <TextView
+                android:padding="@dimen/fab_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_semibold"
+                android:textSize="@dimen/heading_2"
+                android:text="you might also like"/>
+            <GridView
+                android:padding="@dimen/fab_margin"
+                android:id="@+id/gv_other_product_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2"
+                android:columnWidth="100dp"
+                android:scrollbarThumbHorizontal="@null"
+                android:horizontalSpacing="10dp"
+                android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+

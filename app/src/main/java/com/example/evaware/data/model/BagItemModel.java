@@ -15,12 +15,29 @@ public class BagItemModel {
     public DocumentReference product_ref;
     @Exclude
     public ProductModel product;
+
+    private Integer price;
     @ServerTimestamp
     public Timestamp created_at;
     public Integer qty;
     @ServerTimestamp
     public Timestamp updated_at;
+
+    public BagItemModel(String id, String path, DocumentReference product_ref, ProductModel product, Integer price, Timestamp created_at, Integer qty, Timestamp updated_at, DocumentReference variation_ref, VariationModel variation) {
+        this.id = id;
+        this.path = path;
+        this.product_ref = product_ref;
+        this.product = product;
+        this.price = price;
+        this.created_at = created_at;
+        this.qty = qty;
+        this.updated_at = updated_at;
+        this.variation_ref = variation_ref;
+        this.variation = variation;
+    }
+
     public DocumentReference variation_ref;
+    @Exclude
     public VariationModel variation;
 
     public BagItemModel() {

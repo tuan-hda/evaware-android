@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentation.home.CategoriesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/Theme.Evaware.PopupOverlay">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/transparent"
+                android:contentDescription="Go back"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow_left" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Checkout"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body_1" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/fab_margin"
+            android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edt_new_password"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="4dp"
+            android:hint="@string/search"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="8dp"
+            android:inputType="text"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>

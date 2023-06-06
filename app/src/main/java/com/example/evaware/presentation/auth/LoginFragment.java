@@ -60,6 +60,7 @@ public class LoginFragment extends Fragment {
     private EditText edtPassword;
     private MaterialButton btnLogin;
     private ImageButton btnBackToPrevious;
+    private TextView navToForgetPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,6 +126,7 @@ public class LoginFragment extends Fragment {
         edtEmail = binding.edtEmail;
         edtPassword = binding.edtPassword;
         btnLogin = binding.btnLogin;
+        navToForgetPassword = binding.navToForgetPassword;
         PasswordUtils.setupPasswordVisibilityToggle(edtPassword);
 
         // Set the icon to the right of the EditText
@@ -139,6 +141,12 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_login_fragment_to_sign_up_fragment);
+            }
+        });
+        navToForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_login_fragment_to_forgot_password_fragment);
             }
         });
 

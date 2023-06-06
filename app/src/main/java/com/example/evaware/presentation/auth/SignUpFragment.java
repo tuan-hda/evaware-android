@@ -52,6 +52,7 @@ public class SignUpFragment extends Fragment {
     private EditText etConfirmPassword;
     private MaterialButton btnSignup;
     private ImageView mEmailIconImageView;
+    private UserViewModel userViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,8 @@ public class SignUpFragment extends Fragment {
         mEmailIconImageView = binding.emailIconImageview;
         PasswordUtils.setupPasswordVisibilityToggle(etPassword);
         PasswordUtils.setupPasswordVisibilityToggle(etConfirmPassword);
+
+        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
 
         Drawable checkmark = getResources().getDrawable(R.drawable.ic_checked);
         checkmark.setBounds(0, 0, checkmark.getIntrinsicWidth(), checkmark.getIntrinsicHeight());
@@ -188,28 +191,26 @@ public class SignUpFragment extends Fragment {
                     return;
                 }
 
-                // create user account with email and password
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
-                                // send verification email
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(emailTask -> {
                                             if (emailTask.isSuccessful()) {
-                                                // show toast message and navigate to login fragment
+                                                String userId = user.getUid();
+                                                userViewModel.createUser(userId, email);
+
                                                 Toast.makeText(getActivity(), "Verification email" +
                                                         " sent to " + email, Toast.LENGTH_LONG).show();
                                                 NavHostFragment.findNavController(SignUpFragment.this).navigate(R.id.action_sign_up_fragment_to_login_fragment);
                                             } else {
-                                                // show error message
                                                 Toast.makeText(getActivity(), "Failed to send " +
                                                         "verification email", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             } else {
-                                // show error message
                                 Toast.makeText(getActivity(),
                                         "Failed to create account: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
