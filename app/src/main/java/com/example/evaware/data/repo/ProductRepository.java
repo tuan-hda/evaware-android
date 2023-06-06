@@ -20,6 +20,9 @@ public class ProductRepository {
     public ProductRepository() {
         productRef = db.collection("products");
     }
+    public Task<QuerySnapshot> getAllProduct(){
+        return productRef.get().addOnFailureListener(e -> Log.e(TAG, "getAllProduct: ", e ));
+    }
 
     public DocumentReference getProductById(String id) {
         return productRef.document(id);

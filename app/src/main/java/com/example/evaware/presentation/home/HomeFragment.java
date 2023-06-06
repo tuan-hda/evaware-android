@@ -1,5 +1,6 @@
 package com.example.evaware.presentation.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,15 +10,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.evaware.data.model.Suggestion;
-import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.databinding.FragmentHomeBinding;
+import com.example.evaware.presentation.search_product.SearchProductActivity;
+import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.presentation.wishlist.WishViewModel;
 import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
@@ -54,7 +54,6 @@ public class HomeFragment extends Fragment {
         suggestList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         homeItemList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         wishViewModel = new ViewModelProvider(this).get(WishViewModel.class);
-        loadData();
     }
 
 
@@ -83,6 +82,15 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dialog.showDialog();
         init();
+        loadData();
+        setUpBtn();
+
     }
 
+    private void setUpBtn() {
+        binding.cvSearchProduct.setOnClickListener(view->{
+            Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
+            requireActivity().startActivity(intent1);
+        });
+    }
 }

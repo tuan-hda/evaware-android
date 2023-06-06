@@ -195,10 +195,24 @@ public class ProductViewModel extends AndroidViewModel {
         return productModelLiveData;
     }
 
-    public LiveData<DocumentReference> getProductRefBbyId(String id){
+    public LiveData<DocumentReference> getProductRefBbyId(String id) {
         MutableLiveData<DocumentReference> liveData = new MutableLiveData<>();
-        productRepository.getProductById(id).get().addOnSuccessListener(task->{
+        productRepository.getProductById(id).get().addOnSuccessListener(task -> {
             liveData.setValue(task.getReference());
+        });
+        return liveData;
+    }
+
+    public LiveData<List<ProductModel>> getAllProduct() {
+        MutableLiveData<List<ProductModel>> liveData = new MutableLiveData<>();
+        List<ProductModel> products = new ArrayList<>();
+        productRepository.getAllProduct().addOnSuccessListener(task -> {
+            List<DocumentSnapshot> docs = task.getDocuments();
+            for (DocumentSnapshot doc : docs) {
+                ProductModel product = doc.toObject(ProductModel.class);
+                products.add(product);
+            }
+            liveData.setValue(products);
         });
         return liveData;
     }
