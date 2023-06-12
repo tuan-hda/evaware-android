@@ -9,50 +9,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentId;
 
-//public class UserModel {
-//    private final FirebaseAuth auth = FirebaseAuth.getInstance();
-//    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//    public String Uid;
-//    public DocumentReference userRef;
-//    public String email;
-//    public String rank;
-//    public Timestamp birthday;
-//    public String first_name;
-//    public String last_name;
-//    public boolean male;
-//    public String username;
-//    public String password;
-//    public String phone;
-//    public String role;
-//
-//    public UserModel() {
-//        this.Uid = auth.getCurrentUser().getUid();
-//        this.userRef = db.collection("users").document(this.Uid);
-//    }
-//
-//    @NonNull
-//    @Override
-//    public String toString() {
-//        return "UserModel: {" +
-//                "UID: " + this.Uid + '\'' +
-//                "userRef: " + this.userRef + '\'' +
-//                "email: " + this.email + '\'' +
-//                "rank: " + this.rank + '\'' +
-//                "birthday " + this.birthday + '\'' +
-//                "first_name: " + this.first_name + '\'' +
-//                "last_name: " + this.last_name + '\'' +
-//                "male: " + this.male + '\'' +
-//                "username: " + this.username + '\'' +
-//                "password: " + this.password + '\'' +
-//                "phone: " + this.phone + '\'' +
-//                "role: " + this.role + '\'' +
-//                "}";
-//    }
+import java.util.Date;
 
 public class UserModel {
     public UserModel(){
-
     }
     public String getId() {
         return id;
@@ -92,9 +52,34 @@ public class UserModel {
         this.img_url = img_url;
         this.name = name;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "UserModel: {" +
+                "UID: " + this.id + '\'' +
+                "email: " + this.email + '\'' +
+                "name: " + this.name + '\'' +
+                "rank: " + this.rank + '\'' +
+                "birthday " + this.dob + '\'' +
+                "male: " + this.male + '\'' +
+                "username: " + this.username + '\'' +
+                "password: " + this.password + '\'' +
+                "phone: " + this.phone + '\'' +
+                "role: " + this.role + '\'' +
+                "}";
+    }
+
     @DocumentId
-    private String id;
-    private String email;
-    private String img_url;
-    private String name;
+    public String id;
+    public String email;
+    public String img_url;
+    public String name;
+    public String rank;
+    public Date dob;
+    public boolean male;
+    public String username;
+    public String password;
+    public String phone;
+    public String role;
 }

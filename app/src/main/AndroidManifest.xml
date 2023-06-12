@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Evaware"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.other.Setting"
+            android:exported="false" />
+        <activity
             android:name=".presentation.search_product.SearchProductActivity"
             android:exported="false" />
         <activity

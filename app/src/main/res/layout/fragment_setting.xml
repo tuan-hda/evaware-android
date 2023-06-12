@@ -1,89 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".presentation.other.Setting">
+    <!--    Header-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.user.UserFragment">
-    <RelativeLayout
-        android:id="@+id/main_frame"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/main_frame">
         <ImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:paddingHorizontal="10dp"
-
+            android:id="@+id/setting_ib_return"
+            android:layout_width="24dp"
+            android:layout_height="56dp"
+            android:background="@color/transparent"
             android:src="@drawable/arrow_left" />
 
-        <TextView
-            android:id="@+id/settings"
+        <View
             android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="154.5dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="154.5dp"
-            android:gravity="center_horizontal|top"
-            android:lineSpacingExtra="0sp"
-            android:text="@string/settings"
-            android:fontFamily="@font/lexend_semibold"
-            android:textAppearance="@style/settings"
-            android:textStyle="bold" />
-    </RelativeLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <RelativeLayout
-        android:id="@+id/main_frame2"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/cell">
         <TextView
-            android:id="@+id/text_1"
-            android:text="@string/cell"
-            android:textAppearance="@style/cell"
-            android:layout_width="176dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/cell"
-            android:contentDescription="..."
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/cell"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="164dp"
-        android:background="@drawable/cell">
-        <TextView
-            android:id="@+id/text_2"
-            android:text="@string/about"
-            android:textAppearance="@style/about"
-            android:layout_width="176dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"/>
-    </RelativeLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexend_medium"
+            android:text="Setting"
+            android:textSize="@dimen/body_1" />
 
-</FrameLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <View
+            android:layout_width="24dp"
+            android:layout_height="0dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/lexend"
+            android:text="Deliver to"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/lexend"
+            android:textColor="@color/giratina_500"
+            android:text="Great Britain"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/lexend"
+            android:text="Currency"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/lexend"
+            android:textColor="@color/giratina_500"
+            android:text="VND"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/body_1"
+            android:fontFamily="@font/lexend"
+            android:text="Terms and Conditions"/>
+    </LinearLayout>
+
+</LinearLayout>
