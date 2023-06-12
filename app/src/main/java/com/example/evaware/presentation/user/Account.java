@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,71 +16,39 @@ import android.view.ViewGroup;
 
 import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentAccountBinding;
-import com.example.evaware.databinding.FragmentUserBinding;
 import com.example.evaware.presentation.address.AddressBookActivity;
 import com.example.evaware.presentation.auth.TestLoginActivity;
+import com.example.evaware.presentation.checkout.PaymentMethodActivity;
+import com.example.evaware.presentation.order.MyOrders;
+import com.example.evaware.presentation.other.Setting;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Account#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Account extends Fragment {
+    private final FirebaseAuth auth = FirebaseAuth.getInstance();
     FragmentAccountBinding binding;
-    FirebaseAuth auth;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentActivity activity;
+    UserViewModel viewModel;
 
     public Account() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Account.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Account newInstance(String param1, String param2) {
-        Account fragment = new Account();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        auth = FirebaseAuth.getInstance();
+        activity = requireActivity();
+        viewModel = new ViewModelProvider(activity).get(UserViewModel.class);
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -87,9 +57,80 @@ public class Account extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpButtons();
+        setUpUserInfo();
+    }
+
+    private void setUpUserInfo(){
+       viewModel.getUserInfo().observe(getActivity(), userModel -> {
+            String phoneNum = userModel.phone;
+
+           Picasso.with(getContext())
+                   .load(userModel.img_url)
+                   .placeholder(R.drawable.button_round)
+                   .into(binding.accountIbAvt);
+
+            binding.accountTvName.setText(userModel.name);
+            binding.accountTvPhoneNum.setText(phoneNum == null ? "Add your phone number" : phoneNum);
+        });
     }
 
     private void setUpButtons() {
+        binding.accountIbSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new Setting())
+                        .addToBackStack("Setting")
+                        .commit();
+            }
+        });
+
+        binding.accountLlUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new MyDetail())
+                        .addToBackStack("myDetail")
+                        .commit();
+            }
+        });
+
+        binding.accountLlOder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new MyOrders())
+                        .addToBackStack("myOrders")
+                        .commit();
+            }
+        });
+
+        binding.accountLlMyDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new MyDetail())
+                        .addToBackStack("myDetail")
+                        .commit();
+            }
+        });
+
+        binding.accountLlPaymentMethod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(requireActivity(), PaymentMethodActivity.class);
+                requireActivity().startActivity(intent);
+            }
+        });
+
         binding.accountLlSignOut.setOnClickListener(view -> {
             auth.signOut();
             LoginManager.getInstance().logOut();

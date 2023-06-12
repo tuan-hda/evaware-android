@@ -1,10 +1,18 @@
 package com.example.evaware.data.model;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentId;
+
+import java.util.Date;
 
 public class UserModel {
     public UserModel(){
-
     }
     public String getId() {
         return id;
@@ -44,9 +52,34 @@ public class UserModel {
         this.img_url = img_url;
         this.name = name;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "UserModel: {" +
+                "UID: " + this.id + '\'' +
+                "email: " + this.email + '\'' +
+                "name: " + this.name + '\'' +
+                "rank: " + this.rank + '\'' +
+                "birthday " + this.dob + '\'' +
+                "male: " + this.male + '\'' +
+                "username: " + this.username + '\'' +
+                "password: " + this.password + '\'' +
+                "phone: " + this.phone + '\'' +
+                "role: " + this.role + '\'' +
+                "}";
+    }
+
     @DocumentId
-    private String id;
-    private String email;
-    private String img_url;
-    private String name;
+    public String id;
+    public String email;
+    public String img_url;
+    public String name;
+    public String rank;
+    public Date dob;
+    public boolean male;
+    public String username;
+    public String password;
+    public String phone;
+    public String role;
 }
