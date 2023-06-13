@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:id="@+id/itemSmallCard_ll_item"
     android:paddingBottom="24dp">
 
     <androidx.cardview.widget.CardView
@@ -17,7 +18,7 @@
             android:id="@+id/itemSmallCard_iv_product"
             android:layout_width="94dp"
             android:layout_height="115dp"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             android:src="@drawable/product_2" />
     </androidx.cardview.widget.CardView>
 
@@ -52,12 +53,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lexend_light"
+                    android:maxLines="2"
                     android:text="Wooden bedside table featuring a raised design"
                     android:textColor="@color/giratina_500"
                     android:textSize="@dimen/body_3" />
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/itemSmallCard_iv_remove"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="top|right"

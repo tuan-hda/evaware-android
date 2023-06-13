@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso;
 public class Account extends Fragment {
     private final FirebaseAuth auth = FirebaseAuth.getInstance();
     FragmentAccountBinding binding;
-    private FragmentActivity activity;
+    FragmentActivity activity;
     UserViewModel viewModel;
 
     public Account() {

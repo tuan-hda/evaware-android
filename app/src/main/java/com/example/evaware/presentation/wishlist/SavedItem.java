@@ -5,22 +5,32 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.evaware.R;
-import com.example.evaware.presentation.filter.Category;
-import com.example.evaware.presentation.filter.CategoryAdapter;
+import com.example.evaware.data.model.SavedModel;
+import com.example.evaware.databinding.FragmentSavedItemBinding;
+import com.example.evaware.presentation.other.Setting;
+import com.example.evaware.utils.GlobalStore;
+import com.example.evaware.utils.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedItem extends Fragment {
-    List<FavorItem> itemList = new ArrayList<>();
+public class SavedItem extends Fragment implements FavorItemAdapter.ChooseVariationDialogListener {
+    FragmentSavedItemBinding binding;
+    FragmentActivity activity;
+    WishViewModel viewModel;
 
+    FavorItemAdapter adapter;
+    private LoadingDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,22 +42,42 @@ public class SavedItem extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saved_item, container, false);
+        activity = requireActivity();
+        viewModel = new ViewModelProvider(activity).get(WishViewModel.class);
+        binding = FragmentSavedItemBinding.inflate(inflater, container, false);
+
+        dialog = new LoadingDialog(getActivity());
+
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        itemList.add(new FavorItem());
-        itemList.add(new FavorItem());
-        itemList.add(new FavorItem());
-        itemList.add(new FavorItem());
-        itemList.add(new FavorItem());
-        itemList.add(new FavorItem());
 
+        dialog.showDialog();
+        viewModel.getSavedList().observe(activity, saveModels->{
+            if(saveModels.size() == 0){
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, new SavedItemEmpty())
+                        .addToBackStack("savedEmpty")
+                        .commit();
+            }else{
+                adapter = new FavorItemAdapter(activity, saveModels, viewModel);
+                adapter.setChooseVariationDialogListener((FavorItemAdapter.ChooseVariationDialogListener) this);
+                binding.savedItemLvListProduct.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
 
-        ListView listView = (ListView) view.findViewById(R.id.savedItem_lv_listProduct);
-        FavorItemAdapter adapter = new FavorItemAdapter(getContext(), itemList);
-        listView.setAdapter(adapter);
+            dialog.dismissDialog();
+        });
+    }
+
+    @Override
+    public void onMoveToBagClicked(SavedModel item) {
+        ChooseVariationDialog dialog = new ChooseVariationDialog(item, adapter);
+        dialog.show(getParentFragmentManager(), "ChooseVariationDialog");
     }
 }
