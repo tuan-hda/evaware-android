@@ -43,7 +43,11 @@ public class VariationProductModel {
     }
 
     public VariationProductModel() {
+    }
 
+    public VariationProductModel(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @DocumentId

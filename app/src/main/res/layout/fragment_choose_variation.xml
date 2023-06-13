@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    tools:context=".presentation.wishlist.ChooseVariationDialog">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/lexend_semibold"
+        android:paddingBottom="16dp"
+        android:text="Choose variation"
+        android:textSize="@dimen/heading_1" />
+
+    <GridView
+        android:id="@+id/chooseVariation_gv_variation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginVertical="20dp"
+        android:numColumns="2"
+        android:verticalSpacing="20dp"
+        android:horizontalSpacing="20dp"
+        tools:listitem="@layout/item_product_variation"
+        android:scrollbars="none" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/chooseVariation_bt_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="20dp"
+        android:background="@color/charizard_400"
+        android:text="Select"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>
