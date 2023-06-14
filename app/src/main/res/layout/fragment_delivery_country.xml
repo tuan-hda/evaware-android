@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lexend_medium"
-                    android:text="@string/delivery_country"
+                    android:text="Delivery Country"
                     android:textColor="@color/black"
                     android:textSize="@dimen/body_1" />
             </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".OrderFragment">
+    tools:context=".presentation.order.OrderFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:textColor="@color/giratina_500"
-            android:text="@string/waiting_for_payment"/>
+            android:text="waiting_for_payment"/>
 
         <!-- Replace the ListView with a RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -78,7 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/delivery_info"
+            android:text="Delivery info"
             android:fontFamily="@font/lexend_semibold"
             android:textSize="@dimen/heading_2"/>
 

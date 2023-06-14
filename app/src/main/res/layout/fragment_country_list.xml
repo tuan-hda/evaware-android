@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lexend_medium"
         android:textSize="@dimen/heading_1"
-        android:text="@string/choose_your_country"/>
+        android:text="choose_your_country"/>
     <ListView
         android:id="@+id/country_list_view"
         android:layout_width="match_parent"

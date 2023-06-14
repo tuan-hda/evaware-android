@@ -98,4 +98,5 @@
     <string name="expired_date">Expiration date</string>
     <string name="new_card">new card</string>
     <string name="save_card">save card</string>
+    <string name="country_image_description">Country name</string>
 </resources>
