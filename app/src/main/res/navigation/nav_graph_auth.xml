@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_start_fragment_to_sign_up_fragment"
             app:destination="@id/sign_up_fragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_countryListFragment"
+            app:destination="@id/countryListFragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_deliveryCountryFragment"
+            app:destination="@id/deliveryCountryFragment" />
+        <action
+            android:id="@+id/action_start_fragment_to_orderFragment"
+            app:destination="@id/orderFragment" />
     </fragment>
     <fragment
         android:id="@+id/login_fragment"

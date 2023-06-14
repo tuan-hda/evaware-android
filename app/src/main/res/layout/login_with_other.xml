@@ -9,7 +9,9 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
+        style="@style/button"
         android:background="@drawable/button_background"
+        android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/ic_facebook" />
 
     <ImageButton
@@ -19,6 +21,7 @@
         android:layout_marginHorizontal="@dimen/fab_margin"
         android:layout_weight="1"
         android:background="@drawable/button_background"
+        android:foreground="?android:attr/selectableItemBackground"
         android:src="@drawable/ic_google" />
 
     <ImageButton
