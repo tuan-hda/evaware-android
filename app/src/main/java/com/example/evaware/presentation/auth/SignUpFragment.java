@@ -52,7 +52,7 @@ public class SignUpFragment extends Fragment {
     private EditText etConfirmPassword;
     private MaterialButton btnSignup;
     private ImageView mEmailIconImageView;
-    private UserViewModel userViewModel;
+    private AuthUserViewModel authUserViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class SignUpFragment extends Fragment {
         PasswordUtils.setupPasswordVisibilityToggle(etPassword);
         PasswordUtils.setupPasswordVisibilityToggle(etConfirmPassword);
 
-        userViewModel = new ViewModelProvider(requireActivity()).get(UserViewModel.class);
+//        userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
         Drawable checkmark = getResources().getDrawable(R.drawable.ic_checked);
         checkmark.setBounds(0, 0, checkmark.getIntrinsicWidth(), checkmark.getIntrinsicHeight());
@@ -156,6 +156,68 @@ public class SignUpFragment extends Fragment {
 
 
         // set click listener for sign-up button
+//        btnSignup.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // get email and password from text fields
+//                String email = etEmail.getText().toString();
+//                String password = etPassword.getText().toString();
+//                String confirmPassword = etConfirmPassword.getText().toString();
+//
+//                // validate email and password
+//                if (TextUtils.isEmpty(email)) {
+//                    etEmail.setError("Email is required");
+//                    etEmail.requestFocus();
+//                    return;
+//                }
+//                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//                    etEmail.setError("Invalid email address");
+//                    etEmail.requestFocus();
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(password)) {
+//                    etPassword.setError("Password is required");
+//                    etPassword.requestFocus();
+//                    return;
+//                }
+//                if (password.length() < 6) {
+//                    etPassword.setError("Password must be at least 6 characters long");
+//                    etPassword.requestFocus();
+//                    return;
+//                }
+//                if (!confirmPassword.equals(password)) {
+//                    etConfirmPassword.setError("Passwords do not match");
+//                    etConfirmPassword.requestFocus();
+//                    return;
+//                }
+//
+//                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+//                mAuth.createUserWithEmailAndPassword(email, password)
+//                        .addOnCompleteListener(task -> {
+//                            if (task.isSuccessful()) {
+//                                FirebaseUser user = mAuth.getCurrentUser();
+//                                user.sendEmailVerification()
+//                                        .addOnCompleteListener(emailTask -> {
+//                                            if (emailTask.isSuccessful()) {
+//                                                String userId = user.getUid();
+//                                                userViewModel.createUser(userId, email);
+//
+//                                                Toast.makeText(getActivity(), "Verification email" +
+//                                                        " sent to " + email, Toast.LENGTH_LONG).show();
+//                                                NavHostFragment.findNavController(SignUpFragment.this).navigate(R.id.action_sign_up_fragment_to_login_fragment);
+//                                            } else {
+//                                                Toast.makeText(getActivity(), "Failed to send " +
+//                                                        "verification email", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        });
+//                            } else {
+//                                Toast.makeText(getActivity(),
+//                                        "Failed to create account: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//            }
+//        });
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,30 +253,40 @@ public class SignUpFragment extends Fragment {
                     return;
                 }
 
+                // create user account with email and password
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
+                                // send verification email
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(emailTask -> {
                                             if (emailTask.isSuccessful()) {
-                                                String userId = user.getUid();
-                                                userViewModel.createUser(userId, email);
-
+                                                // show toast message and navigate to login fragment
                                                 Toast.makeText(getActivity(), "Verification email" +
                                                         " sent to " + email, Toast.LENGTH_LONG).show();
                                                 NavHostFragment.findNavController(SignUpFragment.this).navigate(R.id.action_sign_up_fragment_to_login_fragment);
                                             } else {
+                                                // show error message
                                                 Toast.makeText(getActivity(), "Failed to send " +
                                                         "verification email", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             } else {
+                                // show error message
                                 Toast.makeText(getActivity(),
                                         "Failed to create account: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+            }
+        });
+
+        // set click listener for navigate to login button
+        tvNavToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SignUpFragment.this).navigate(R.id.action_sign_up_fragment_to_login_fragment);
             }
         });
 
