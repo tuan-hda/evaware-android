@@ -1,13 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
     tools:context=".presentation.order.MyOrders">
 
-    <TextView
+    <!--    Header-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/myOrders_ib_return"
+            android:layout_width="24dp"
+            android:layout_height="56dp"
+            android:background="@color/transparent"
+            android:src="@drawable/arrow_left" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexend_medium"
+            android:text="My orders"
+            android:textSize="@dimen/body_1" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <View
+            android:layout_width="24dp"
+            android:layout_height="0dp"/>
+
+    </LinearLayout>
+    <!--    search-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:backgroundTint="@color/giratina_100"
+        app:cardCornerRadius="8dp"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:src="@drawable/ic_search" />
+
+            <EditText
+                android:id="@+id/myOrders_et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fontFamily="@font/lexend"
+                android:hint="Search"
+                android:textColor="@color/giratina_500"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!--Sort & filter-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/giratina_100"
+            app:cardCornerRadius="4dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:id="@+id/myOrders_ll_sort"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginRight="4dp"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Sort"
+                    android:textSize="@dimen/body_2" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/direction_vertical" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/giratina_100"
+            app:cardCornerRadius="4dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:id="@+id/myOrders_ll_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_marginRight="4dp"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Filter"
+                    android:textSize="@dimen/body_2" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/filter" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <!--List item-->
+    <ListView
+        android:id="@+id/myOrders_lv_listProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:scrollbars="none"
+        tools:listitem="@layout/item_order" />
+</LinearLayout>

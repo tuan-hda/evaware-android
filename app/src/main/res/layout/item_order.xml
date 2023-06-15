@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemOrder_ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingVertical="16dp">
+
+    <!--    time and price-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/itemOrder_tv_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend"
+            android:text="Yesterday, 10:00 am"
+            android:textSize="@dimen/body_1" />
+
+        <TextView
+            android:id="@+id/itemOrder_tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend"
+            android:text="$420.50"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1" />
+    </LinearLayout>
+    <!--    status and order ID-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/itemOrder_tv_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend"
+            android:text="Waiting for payment"
+            android:textColor="@color/giratina_500"
+            android:textSize="@dimen/body_2" />
+
+        <TextView
+            android:id="@+id/itemOrder_tv_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend"
+            android:text="#23124"
+            android:textAlignment="textEnd"
+            android:textColor="@color/giratina_500"
+            android:textSize="@dimen/body_2" />
+    </LinearLayout>
+    <!--    List images-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemOrder_rv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/order_image"
+        android:orientation="horizontal" />
+</LinearLayout>
