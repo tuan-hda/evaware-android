@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,13 @@ import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.presentation.wishlist.WishViewModel;
 import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
+    private static final String TAG = "HomeFragment";
     private RecyclerView suggestList;
     private FragmentHomeBinding binding;
     private RecyclerView homeItemList;
@@ -53,7 +55,8 @@ public class HomeFragment extends Fragment {
         homeItemList = binding.verticalList;
         suggestList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         homeItemList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        wishViewModel = new ViewModelProvider(this).get(WishViewModel.class);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            wishViewModel = new ViewModelProvider(this).get(WishViewModel.class);
     }
 
 
@@ -71,6 +74,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        if (wishViewModel != null)
             wishViewModel.getWishList().observe(getActivity(), wishItemModels -> {
                 GlobalStore.getInstance().setData("wishList", wishItemModels);
             });
@@ -88,7 +92,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpBtn() {
-        binding.cvSearchProduct.setOnClickListener(view->{
+        binding.cvSearchProduct.setOnClickListener(view -> {
             Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
             requireActivity().startActivity(intent1);
         });

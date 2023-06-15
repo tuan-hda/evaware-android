@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -73,7 +74,7 @@ public class ThirdPartiesLogin {
 
             @Override
             public void onError(@NonNull FacebookException e) {
-                Log.d(TAG, "facebook:onError: " + e);
+                Log.e(TAG, "facebook:onError: " + e);
             }
         });
     }
@@ -90,8 +91,10 @@ public class ThirdPartiesLogin {
                 FirebaseUser user = mAuth.getCurrentUser();
                 startMainActivity(activity);
             } else {
-                // If sign in fails, display a message to the user.
                 Log.w(TAG, "signInWithCredential:failure", task.getException());
+                if (task.getException().getLocalizedMessage().contains("An account already exists with the same email")) {
+                    Toast.makeText(activity, "Account already exists. Please try other methods.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -153,6 +156,9 @@ public class ThirdPartiesLogin {
                     })
                     .addOnFailureListener(e -> {
                         Log.e(TWIT_TAG, "loginWithTwitter:buttonClick: " + e.getLocalizedMessage());
+                        if (e.getLocalizedMessage().contains("An account already exists with the same email")) {
+                            Toast.makeText(activity, "Account already exists. Please try other methods.", Toast.LENGTH_SHORT).show();
+                        }
                     });
         });
     }
