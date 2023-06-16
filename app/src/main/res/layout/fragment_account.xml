@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend_medium"
-                android:text="Tanya Morenko"
+                android:text="Tuan"
                 android:textSize="@dimen/body_1" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend_light"
-                android:text="+7 912 323-32-12"
+                android:text="0123456789"
                 android:textColor="@color/giratina_500"
                 android:textSize="@dimen/body_2" />
         </LinearLayout>

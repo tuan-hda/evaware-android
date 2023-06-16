@@ -18,6 +18,7 @@ import com.example.evaware.data.model.BagItemModel;
 import com.example.evaware.data.model.UserModel;
 import com.example.evaware.data.repo.BagRepository;
 import com.example.evaware.data.repo.UserRepository;
+import com.example.evaware.presentation.auth.AuthViewModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,6 +55,8 @@ public class UserViewModel extends AndroidViewModel {
         });
         return user;
     }
+
+
 
     public void updateUser(UserModel user){
         HashMap<String, Object> userMap = new HashMap<>();

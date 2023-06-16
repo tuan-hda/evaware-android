@@ -41,7 +41,7 @@ public class MyDetail extends Fragment {
     UserViewModel viewModel;
     UserModel user;
 
-    final Calendar myCalendar= Calendar.getInstance();
+    final Calendar myCalendar = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener date;
     String myFormat;
     SimpleDateFormat dateFormat;
@@ -60,7 +60,7 @@ public class MyDetail extends Fragment {
         activity = requireActivity();
         viewModel = new ViewModelProvider(activity).get(UserViewModel.class);
         binding = FragmentMyDetailBinding.inflate(inflater, container, false);
-        user  = new UserModel();
+        user = new UserModel();
 
         myFormat = "dd/MM/yyyy";
         dateFormat = new SimpleDateFormat(myFormat, Locale.getDefault());
@@ -86,7 +86,7 @@ public class MyDetail extends Fragment {
         getUserInfo();
     }
 
-    private void getUserInfo(){
+    private void getUserInfo() {
         viewModel.getUserInfo().observe(getActivity(), userModel -> {
             user.email = userModel.email;
             user.img_url = userModel.img_url;
@@ -99,17 +99,18 @@ public class MyDetail extends Fragment {
             binding.myDetailEtFullName.setText(userModel.name);
             binding.myDetailEtEmail.setText(userModel.email);
 
-            if(userModel.dob != null){
+            if (userModel.dob != null) {
                 binding.myDetailEtDob.setText(dateFormat.format(userModel.dob));
             }
 
             String phone = userModel.phone;
-            if(phone != null){
+            if (phone != null) {
                 binding.myDetailEtPhone.setText(phone);
             }
         });
     }
-    private void setUpButton(){
+
+    private void setUpButton() {
         binding.myDetailIbReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +132,7 @@ public class MyDetail extends Fragment {
         binding.myDetailTvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isValidPhoneNumber(binding.myDetailEtPhone.getText().toString())){
+                if (!isValidPhoneNumber(binding.myDetailEtPhone.getText().toString())) {
                     Toast.makeText(getContext(), "Phone number is not valid", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -143,9 +144,9 @@ public class MyDetail extends Fragment {
                 viewModel.uploadAndGetUri(user.img_url).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Uri downloadUrl = task.getResult();
-                            if(downloadUrl != null){
+                            if (downloadUrl != null) {
                                 user.img_url = downloadUrl.toString();
                                 viewModel.updateUser(user);
 
@@ -165,6 +166,7 @@ public class MyDetail extends Fragment {
             }
         });
     }
+
     private boolean isValidPhoneNumber(String phoneNumber) {
         String pattern = "^(0[1-9][0-9]{8})$";
         return phoneNumber.matches(pattern);

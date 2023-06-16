@@ -11,13 +11,12 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.evaware.data.model.ReviewModel;
 import com.example.evaware.databinding.ActivityNewReviewBinding;
-import com.example.evaware.presentation.auth.UserViewModel;
+import com.example.evaware.presentation.auth.AuthUserViewModel;
 import com.example.evaware.presentation.product.ProductViewModel;
 import com.example.evaware.utils.LoadingDialog;
 import com.google.firebase.Timestamp;
@@ -39,7 +38,7 @@ public class NewReviewActivity extends AppCompatActivity {
     private MaterialRatingBar ratingBar;
     private TextView tvLevelRate;
     private ReviewViewModel reviewViewModel;
-    private UserViewModel userViewModel;
+    private AuthUserViewModel authUserViewModel;
     private String productId;
     private String productName;
     private LoadingDialog loadingDialog;
@@ -57,7 +56,7 @@ public class NewReviewActivity extends AppCompatActivity {
     }
 
     private void loadingUserRef() {
-        userViewModel.getUserRefById().observe(this, docRef -> {
+        authUserViewModel.getUserRefById().observe(this, docRef -> {
             userRef = docRef;
         });
     }
@@ -79,7 +78,7 @@ public class NewReviewActivity extends AppCompatActivity {
 
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
 
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        authUserViewModel = new ViewModelProvider(this).get(AuthUserViewModel.class);
 
         imgFromGallery = binding.rvImgList;
         ratingBar = binding.ratingbar;
