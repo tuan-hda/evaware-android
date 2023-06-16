@@ -17,7 +17,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.evaware.R;
 import com.example.evaware.data.model.BagItemModel;
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.databinding.FragmentBagBinding;
@@ -68,7 +71,6 @@ public class BagFragment extends Fragment {
             if (bagItemModels.size() == 0) {
                 binding.scrollView.setVisibility(GONE);
                 binding.layoutEmptyBag.setVisibility(View.VISIBLE);
-                Toast.makeText(activity, "Empty", Toast.LENGTH_SHORT).show();
             } else {
                 binding.layoutEmptyBag.setVisibility(GONE);
                 binding.scrollView.setVisibility(View.VISIBLE);
@@ -82,7 +84,7 @@ public class BagFragment extends Fragment {
     }
 
     private void updateTotal(List<BagItemModel> list) {
-        int total = 0;
+        Double total = 0.0;
         for (BagItemModel item : list) {
             Log.d(TAG, "updateTotal: " + item.product);
             total += item.product.price * item.qty;
@@ -94,6 +96,13 @@ public class BagFragment extends Fragment {
         binding.btnCheckout.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DeliveryAddressActivity.class);
             startActivity(intent);
+        });
+
+        binding.btnStartShopping.setOnClickListener(view -> {
+            NavController navController = Navigation.findNavController(requireView());
+
+            // Navigate to the desired destination fragment
+            navController.navigate(R.id.action_bagFragment_to_homeFragment);
         });
     }
 }

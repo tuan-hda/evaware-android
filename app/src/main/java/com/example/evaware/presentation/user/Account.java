@@ -28,6 +28,7 @@ import com.example.evaware.presentation.auth.TestLoginActivity;
 import com.example.evaware.presentation.checkout.PaymentMethodActivity;
 import com.example.evaware.presentation.order.MyOrders;
 import com.example.evaware.presentation.other.Setting;
+import com.example.evaware.presentation.payment.PaymentListActivity;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -126,6 +127,11 @@ public class Account extends Fragment {
             }
         });
 
+        binding.accountLlPaymentMethod.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, PaymentListActivity.class);
+            startActivity(intent);
+        });
+
         binding.accountLlOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,13 +156,7 @@ public class Account extends Fragment {
             }
         });
 
-        binding.accountLlPaymentMethod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(requireActivity(), PaymentMethodActivity.class);
-                requireActivity().startActivity(intent);
-            }
-        });
+
 
         binding.accountLlSignOut.setOnClickListener(view -> {
             auth.signOut();

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.evaware.data.model.AddressModel;
 import com.example.evaware.databinding.ActivityDeliveryAddressBinding;
+import com.example.evaware.presentation.address.AddressBookActivity;
 import com.example.evaware.presentation.address.AddressListAdapter;
 import com.example.evaware.presentation.address.AddressViewModel;
 import com.example.evaware.utils.LoadingDialog;
@@ -26,6 +27,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
     private ActivityDeliveryAddressBinding binding;
     private AddressViewModel viewModel;
     private LoadingDialog dialog;
+    private AddressListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class DeliveryAddressActivity extends AppCompatActivity {
     private void setUpAddresses() {
         dialog.showDialog();
         viewModel.getData().observe(this, addressModels -> {
-            AddressListAdapter adapter = new AddressListAdapter(this, addressModels);
+            adapter = new AddressListAdapter(this, addressModels);
             binding.listAddress.setAdapter(adapter);
             binding.listAddress.setLayoutManager(new LinearLayoutManager(this));
 
@@ -61,11 +63,17 @@ public class DeliveryAddressActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(view -> {
             finish();
         });
+
     }
 
     private void setUpContinueButton() {
         binding.btnContinue.setOnClickListener(view -> {
             Intent intent = new Intent(this, PaymentMethodActivity.class);
+            intent.putExtra("address", adapter.getCurrentSelect());
+            startActivity(intent);
+        });
+        binding.btnAddAddress.setOnClickListener(view -> {
+            Intent intent = new Intent(DeliveryAddressActivity.this, AddressBookActivity.class);
             startActivity(intent);
         });
     }

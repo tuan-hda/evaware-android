@@ -4,7 +4,9 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.ServerTimestamp;
 
-public class PaymentMethodModel {
+import java.io.Serializable;
+
+public class PaymentMethodModel implements Serializable {
     @DocumentId
     public String id;
     public String logo;
@@ -12,24 +14,23 @@ public class PaymentMethodModel {
     public String name;
     public String provider;
     public String exp;
-    public Boolean isCard;
-    public String img;
+    public Boolean is_card;
+//    public String img;
     @ServerTimestamp
-    public Timestamp created_at;
+    public transient Timestamp created_at;
     @ServerTimestamp
-    public Timestamp updated_at;
+    public transient Timestamp updated_at;
 
     public PaymentMethodModel() {
     }
 
-    public PaymentMethodModel(String id, String logo, String accountNo, String name,
+    public PaymentMethodModel(String logo, String accountNo, String name,
                               String provider, String exp, Boolean isCard) {
-        this.id = id;
         this.logo = logo;
         this.account_no = accountNo;
         this.name = name;
         this.provider = provider;
         this.exp = exp;
-        this.isCard = isCard;
+        this.is_card = isCard;
     }
 }

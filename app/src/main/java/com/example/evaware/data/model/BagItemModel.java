@@ -49,6 +49,15 @@ public class BagItemModel {
         this.qty = qty;
     }
 
+    public Double getDiscountPrice() {
+        Integer discount = product.discount;
+        if (discount == null) {
+            discount = 0;
+        }
+        Double discountPrice = (Double) (product.price * (1 - discount / 100.0) * qty);
+        return discountPrice;
+    }
+
     @NonNull
     @Override
     public String toString() {

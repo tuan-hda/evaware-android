@@ -4,6 +4,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.PropertyName;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
@@ -32,9 +33,12 @@ public class ProductModel implements Serializable {
     public Timestamp updated_at;
     public String desc;
     public DocumentReference discount_ref;
+    public int discount;
+
+    @PropertyName("img_url")
     public String image_thumbnail;
     public String name;
-    public int price;
+    public Double price;
     public DocumentReference room_ref;
     private int review_qty = 0;
 
@@ -82,7 +86,7 @@ public class ProductModel implements Serializable {
         return image_thumbnail;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -93,7 +97,7 @@ public class ProductModel implements Serializable {
     public ProductModel() {
     }
 
-    public ProductModel(String id, String path, DocumentReference category_ref, String img_url, Timestamp created_at, Timestamp updated_at, String desc, DocumentReference discount_ref, String image_thumbnail, String name, int price, DocumentReference room_ref) {
+    public ProductModel(String id, String path, DocumentReference category_ref, String img_url, Timestamp created_at, Timestamp updated_at, String desc, DocumentReference discount_ref, String image_thumbnail, String name, Double price, DocumentReference room_ref) {
         this.id = id;
         this.path = path;
         this.category_ref = category_ref;
