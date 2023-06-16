@@ -54,6 +54,10 @@ public class BagListAdapter extends BaseAdapter {
         return bagList.get(i);
     }
 
+    public List<BagItemModel> getBagList() {
+        return bagList;
+    }
+
     @Override
     public long getItemId(int i) {
         return 0;

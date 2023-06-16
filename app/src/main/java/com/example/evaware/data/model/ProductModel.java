@@ -32,7 +32,6 @@ public class ProductModel implements Serializable {
     @ServerTimestamp
     public Timestamp updated_at;
     public String desc;
-    public DocumentReference discount_ref;
     public int discount;
 
     @PropertyName("img_url")
@@ -78,15 +77,16 @@ public class ProductModel implements Serializable {
         return desc;
     }
 
-    public DocumentReference getDiscount_ref() {
-        return discount_ref;
-    }
 
     public String getImage_thumbnail() {
         return image_thumbnail;
     }
 
     public Double getPrice() {
+        return (1 - discount / 100.0) * price;
+    }
+
+    public Double getOriginalPrice() {
         return price;
     }
 
@@ -97,7 +97,7 @@ public class ProductModel implements Serializable {
     public ProductModel() {
     }
 
-    public ProductModel(String id, String path, DocumentReference category_ref, String img_url, Timestamp created_at, Timestamp updated_at, String desc, DocumentReference discount_ref, String image_thumbnail, String name, Double price, DocumentReference room_ref) {
+    public ProductModel(String id, String path, DocumentReference category_ref, String img_url, Timestamp created_at, Timestamp updated_at, String desc, String image_thumbnail, String name, Double price, DocumentReference room_ref) {
         this.id = id;
         this.path = path;
         this.category_ref = category_ref;
@@ -105,7 +105,6 @@ public class ProductModel implements Serializable {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.desc = desc;
-        this.discount_ref = discount_ref;
         this.image_thumbnail = image_thumbnail;
         this.name = name;
         this.price = price;
@@ -122,7 +121,6 @@ public class ProductModel implements Serializable {
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 ", desc='" + desc + '\'' +
-                ", discount_ref=" + discount_ref +
                 ", image_thumbnail='" + image_thumbnail + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +

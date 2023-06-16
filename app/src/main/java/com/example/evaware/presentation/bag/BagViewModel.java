@@ -2,6 +2,7 @@ package com.example.evaware.presentation.bag;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -31,27 +32,38 @@ public class BagViewModel extends AndroidViewModel {
     private static final String TAG = "BagViewModel";
     private BagRepository repo = new BagRepository();
     private MutableLiveData<List<BagItemModel>> bagList = new MutableLiveData<>();
-    private final List<BagItemModel> queryBagList = new ArrayList<>();
+    private List<BagItemModel> queryBagList = new ArrayList<>();
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public BagViewModel(@NonNull Application application) {
         super(application);
     }
 
     public LiveData<List<BagItemModel>> getBagList() {
-        List<Task> tasks = new ArrayList<>();
-
         if (queryBagList.size() != 0) {
             return bagList;
         }
+
+        forceGet();
+
+        return bagList;
+    }
+
+    public void clearBag() {
+        repo.deleteAllDocuments();
+    }
+
+
+    public void forceGet() {
+        List<Task> tasks = new ArrayList<>();
+        List<BagItemModel> tempQueryBagList = new ArrayList<>();
 
         repo.getBagList().addOnSuccessListener(task -> {
             List<Task<QuerySnapshot>> imageTasks = new ArrayList<>();
 
             for (DocumentSnapshot document : task.getDocuments()) {
                 BagItemModel item = document.toObject(BagItemModel.class);
-                queryBagList.add(item);
+                tempQueryBagList.add(item);
                 item.path = document.getReference().getPath();
                 Task<DocumentSnapshot> t1 = item.product_ref.get();
                 Task<DocumentSnapshot> t2 = item.variation_ref.get();
@@ -62,9 +74,9 @@ public class BagViewModel extends AndroidViewModel {
                 for (int i = 0; i < objects.size(); i++) {
                     int idx = i / 2;
                     if (i % 2 == 0) {
-                        queryBagList.get(idx).product = ((DocumentSnapshot) objects.get(i)).toObject(ProductModel.class);
+                        tempQueryBagList.get(idx).product = ((DocumentSnapshot) objects.get(i)).toObject(ProductModel.class);
                     } else {
-                        queryBagList.get(idx).variation = ((DocumentSnapshot) objects.get(i)).toObject(VariationModel.class);
+                        tempQueryBagList.get(idx).variation = ((DocumentSnapshot) objects.get(i)).toObject(VariationModel.class);
                         Task<QuerySnapshot> imageTask = ((DocumentSnapshot) objects.get(i)).getReference().collection("images").get();
                         imageTasks.add(imageTask);
                         final int finalIdx = idx;
@@ -74,12 +86,13 @@ public class BagViewModel extends AndroidViewModel {
                                 ImageModel image = snapshot.toObject(ImageModel.class);
                                 imageModels.add(image);
                             }
-                            queryBagList.get(finalIdx).variation.images = imageModels;
+                            tempQueryBagList.get(finalIdx).variation.images = imageModels;
                         });
                     }
                 }
                 Tasks.whenAllSuccess(imageTasks).addOnSuccessListener(tas -> {
-                    bagList.setValue(queryBagList);
+                    bagList.setValue(tempQueryBagList);
+                    queryBagList = tempQueryBagList;
                 });
             });
 
@@ -88,16 +101,20 @@ public class BagViewModel extends AndroidViewModel {
         }).addOnFailureListener(e -> {
             Log.d(TAG, "getBagList:failure: " + e.getLocalizedMessage());
         });
-
-
-        return bagList;
     }
-
 
     public void changeQty(int i, int value) {
         BagItemModel item = queryBagList.get(i);
         int newVal = item.qty + value;
         if (newVal >= 1) {
+            if (newVal > item.variation.inventory) {
+                item.qty = item.variation.inventory;
+                repo.updateBagItem(db.document(item.path), item).addOnSuccessListener(unused -> {
+                    bagList.setValue(queryBagList);
+                });
+                Toast.makeText(getApplication(), "Not enough inventory. Reset quantity.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             item.qty = newVal;
             repo.updateBagItem(db.document(item.path), item).addOnSuccessListener(unused -> {
                 bagList.setValue(queryBagList);
@@ -125,7 +142,4 @@ public class BagViewModel extends AndroidViewModel {
         });
     }
 
-    public void makeOrder() {
-
-    }
 }

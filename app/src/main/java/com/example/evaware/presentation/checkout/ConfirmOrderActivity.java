@@ -4,17 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.evaware.data.model.AddressModel;
 import com.example.evaware.data.model.PaymentMethodModel;
 import com.example.evaware.data.model.VoucherModel;
+import com.example.evaware.data.repo.UserRepository;
 import com.example.evaware.databinding.ActivityConfirmOrderBinding;
 import com.example.evaware.presentation.bag.BagListAdapter;
 import com.example.evaware.presentation.bag.BagViewModel;
+import com.example.evaware.presentation.order.MyOrderViewModel;
 import com.example.evaware.utils.CurrencyFormat;
+import com.example.evaware.utils.LoadingDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -26,12 +33,15 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     ActivityConfirmOrderBinding binding;
     BagListAdapter adapter;
     private BagViewModel viewModel;
+    private MyOrderViewModel myOrderViewModel;
     private VoucherModel voucher;
     private FirebaseFirestore firestore;
     private Double subtotal;
     private Boolean applied = false;
     private AddressModel address;
     private PaymentMethodModel payment;
+    private LoadingDialog dialog;
+    private UserRepository user_repo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +50,11 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         binding = ActivityConfirmOrderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(BagViewModel.class);
+        myOrderViewModel = new ViewModelProvider(this).get(MyOrderViewModel.class);
         firestore = FirebaseFirestore.getInstance();
+        user_repo = new UserRepository();
 
+        dialog = new LoadingDialog(this);
         address = (AddressModel) getIntent().getSerializableExtra("address");
         payment = (PaymentMethodModel) getIntent().getSerializableExtra("payment");
 
@@ -56,8 +69,10 @@ public class ConfirmOrderActivity extends AppCompatActivity {
     private void setUpButtons() {
 
         binding.btnPay.setOnClickListener(view -> {
-            Intent intent = new Intent(this, SuccessActivity.class);
-            startActivity(intent);
+            dialog.showDialog();
+
+            Double total = Double.parseDouble(binding.textTotalPrice.getText().toString().substring(1));
+            myOrderViewModel.makeOrder(adapter.getBagList(), address, payment, voucher, total, viewModel, dialog);
         });
 
         updateClickApply();
@@ -140,8 +155,25 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                 } else {
                     applied = false;
                 }
-                updateTextDiscount();
-                applyVoucher();
+
+                user_repo.userDocRef.collection("used_vouchers").get().addOnSuccessListener(queryDocumentSnapshots1 -> {
+                    Boolean flag1 = false;
+                    for (QueryDocumentSnapshot snapshot: queryDocumentSnapshots1) {
+                        VoucherModel tempVoucher = snapshot.toObject(VoucherModel.class);
+                        if (Objects.equals(tempVoucher.code, voucher.code)) {
+                            flag1 = true;
+                            binding.edtPromo.setError("Already used this voucher");
+                            voucher = null;
+                            break;
+                        }
+                    }
+                    if (!flag1) {
+                        binding.edtPromo.setError(null);
+                        updateTextDiscount();
+                        applyVoucher();
+                    }
+                });
+
             }
         });
     }
@@ -173,4 +205,6 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         }
         updateClickApply();
     }
+
+
 }

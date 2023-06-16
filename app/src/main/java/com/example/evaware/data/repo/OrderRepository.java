@@ -2,6 +2,7 @@ package com.example.evaware.data.repo;
 
 import android.util.Log;
 
+import com.example.evaware.data.model.BagItemModel;
 import com.example.evaware.data.model.OrderModel;
 import com.example.evaware.data.model.WishItemModel;
 import com.google.android.gms.tasks.Task;
@@ -23,5 +24,13 @@ public class OrderRepository {
         return orderRef.add(orderModel).addOnFailureListener(e -> {
             Log.e(TAG, "addOrder:failed", e);
         });
+    }
+
+    public Task<DocumentReference> addOrderItem(String orderId, BagItemModel orderItemModel) {
+        return orderRef.document(orderId).collection("order_items").add(orderItemModel).addOnFailureListener(e ->
+                {
+                    Log.e(TAG, "addOrder:failed" + e.getLocalizedMessage());
+                }
+        );
     }
 }

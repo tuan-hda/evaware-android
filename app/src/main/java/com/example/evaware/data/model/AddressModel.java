@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class AddressModel implements Serializable {
     @DocumentId
     public String id;
-    public String name;
     public String path;
+    public String name;
     public String phone;
     public String email;
     public String province;

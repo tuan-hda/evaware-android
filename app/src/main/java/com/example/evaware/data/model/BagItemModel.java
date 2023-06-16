@@ -15,15 +15,16 @@ public class BagItemModel {
     public DocumentReference product_ref;
     @Exclude
     public ProductModel product;
+    public Double price;
 
-    private Integer price;
     @ServerTimestamp
     public Timestamp created_at;
     public Integer qty;
+
     @ServerTimestamp
     public Timestamp updated_at;
 
-    public BagItemModel(String id, String path, DocumentReference product_ref, ProductModel product, Integer price, Timestamp created_at, Integer qty, Timestamp updated_at, DocumentReference variation_ref, VariationModel variation) {
+    public BagItemModel(String id, String path, DocumentReference product_ref, ProductModel product, Double price, Timestamp created_at, Integer qty, Timestamp updated_at, DocumentReference variation_ref, VariationModel variation) {
         this.id = id;
         this.path = path;
         this.product_ref = product_ref;
@@ -49,6 +50,7 @@ public class BagItemModel {
         this.qty = qty;
     }
 
+    @Exclude
     public Double getDiscountPrice() {
         Integer discount = product.discount;
         if (discount == null) {

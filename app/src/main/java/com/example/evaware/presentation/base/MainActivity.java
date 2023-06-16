@@ -42,10 +42,14 @@ public class MainActivity extends FragmentActivity {
         Log.e(TAG, "handleIntent: " + fragment);
         if (fragment != null && fragment == "bag") {
             NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.nav_graph);
+            navGraph.setStartDestination(R.id.bagFragment);
+            navController.setGraph(navGraph);
+        }
+        if (fragment != null && fragment == "orders") {
+            NavGraph navGraph = navController.getNavInflater().inflate(R.navigation.nav_graph);
             navGraph.setStartDestination(R.id.userFragment);
             navController.setGraph(navGraph);
         }
-
     }
 
     private void setupBottomNavigation() {
