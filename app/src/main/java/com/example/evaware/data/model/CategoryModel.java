@@ -8,7 +8,6 @@ public class CategoryModel {
         this.id = id;
         this.img_url = img_url;
         this.name = name;
-        this.type_ref = type_ref;
     }
 
     @Override
@@ -17,7 +16,6 @@ public class CategoryModel {
                 "id='" + id + '\'' +
                 ", img_url='" + img_url + '\'' +
                 ", name='" + name + '\'' +
-                ", type_ref=" + type_ref +
                 '}';
     }
     public CategoryModel(){
@@ -32,15 +30,10 @@ public class CategoryModel {
         return img_url;
     }
 
-    public DocumentReference getType_ref() {
-        return type_ref;
-    }
-
     @DocumentId
     private String id;
     private String img_url;
     private String name;
-    private DocumentReference type_ref;
     public String getImgUrl() {
         return img_url;
     }

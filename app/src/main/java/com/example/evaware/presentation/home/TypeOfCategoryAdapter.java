@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
+import com.example.evaware.data.model.CategoryModel;
+import com.example.evaware.presentation.catalog.CatalogActivity;
+import com.example.evaware.presentation.category.CategoryAdapter;
 import com.example.evaware.presentation.category.SearchCategoryActivity;
 import com.example.evaware.data.model.TypeofCategory;
 import com.squareup.picasso.Picasso;
@@ -19,11 +22,11 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class TypeOfCategoryAdapter extends RecyclerView.Adapter<TypeOfCategoryAdapter.MyViewHolder> {
-    private List<TypeofCategory> dataList;
+    private List<CategoryModel> dataList;
     private static Activity context;
     private static HomeFragment fragment;
 
-    public TypeOfCategoryAdapter(List<TypeofCategory> dataList, Activity context, HomeFragment fragment ) {
+    public TypeOfCategoryAdapter(List<CategoryModel> dataList, Activity context, HomeFragment fragment ) {
         this.dataList = dataList;
         this.context = context;
         this.fragment = fragment;
@@ -38,7 +41,7 @@ public class TypeOfCategoryAdapter extends RecyclerView.Adapter<TypeOfCategoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        TypeofCategory item = dataList.get(position);
+        CategoryModel item = dataList.get(position);
         holder.bindData(item);
     }
 
@@ -57,7 +60,7 @@ public class TypeOfCategoryAdapter extends RecyclerView.Adapter<TypeOfCategoryAd
             imgItem = itemView.findViewById(R.id.img_item);
             itemView.setOnClickListener(this);
         }
-        public void bindData(TypeofCategory data) {
+        public void bindData(CategoryModel data) {
             tvName.setText(data.getName());
             Picasso.with(context)
                     .load(data.getImg_url())
@@ -67,9 +70,9 @@ public class TypeOfCategoryAdapter extends RecyclerView.Adapter<TypeOfCategoryAd
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(context, SearchCategoryActivity.class);
-            intent.putExtra("itemId", id);
-            intent.putExtra("itemName", tvName.getText().toString());
+            Intent intent = new Intent(context, CatalogActivity.class);
+            intent.putExtra("categoryId", id);
+            intent.putExtra("categoryName", tvName.getText().toString());
             context.startActivity(intent);
         }
     }

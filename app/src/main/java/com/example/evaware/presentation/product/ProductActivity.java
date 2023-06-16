@@ -54,6 +54,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
     private boolean saved = false;
     private DocumentReference productRef;
     private ProductDetail productDetail;
+    private VariationProductAdapter variationAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
 
         productViewModel.getProductModelById(productModelId).observe(this, productModel -> {
             productName = productModel.getName();
+            binding.tvProductName.setText(productName);
             binding.tvProductPrice.setText(CurrencyFormat.getFormattedPrice(productModel.getPrice()));
             binding.tvProductDes.setText(productModel.getDesc());
             binding.tvProductQty.setText(String.valueOf(productModel.getReview_qty()));
@@ -126,11 +128,11 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
                 variantsDetail.add(variantDetail);
             }
 
-            VariationProductAdapter adapter = new VariationProductAdapter(variantsDetail);
+            variationAdapter = new VariationProductAdapter(variantsDetail);
             productDetail.setVariationModelDetails(variantsDetail);
-            adapter.setOnVariationProductListener(this);
+            variationAdapter.setOnVariationProductListener(this);
             binding.rvVariations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            binding.rvVariations.setAdapter(adapter);
+            binding.rvVariations.setAdapter(variationAdapter);
             if (!withoutDialogLoading) {
                 dialog.dismissDialog();
             }
@@ -155,15 +157,20 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         });
         binding.btnAddToBag.setOnClickListener(view -> {
             productViewModel.getProductRefBbyId(productModelId).observe(this, documentReference -> {
-                BagItemModel bagItemModel = new BagItemModel();
-                bagItemModel.product_ref = documentReference;
-                bagItemModel.qty = 1;
-                bagItemModel.created_at = (new Timestamp(new Date()));
-                bagItemModel.updated_at = (new Timestamp(new Date()));
-                productViewModel.getVariationRef(productModelId, productDetail.getVariationModelDetails().get(0).getModel().getId()).observe(this, variationRef -> {
-                    bagItemModel.variation_ref = variationRef;
-                    bagViewModel.addItem(bagItemModel);
-                });
+                try{
+                    BagItemModel bagItemModel = new BagItemModel();
+                    bagItemModel.product_ref = documentReference;
+                    bagItemModel.qty = 1;
+                    bagItemModel.created_at = (new Timestamp(new Date()));
+                    bagItemModel.updated_at = (new Timestamp(new Date()));
+                    productViewModel.getVariationRef(productModelId, productDetail.getVariationModelDetails().get(variationAdapter.getSelectedItem()).getModel().getId()).observe(this, variationRef -> {
+                        bagItemModel.variation_ref = variationRef;
+                        bagViewModel.addItem(bagItemModel);
+                    });
+                }catch (Exception e){
+                    Log.d("dcm", "setUpBtn: " + e.getMessage());
+                }
+
             });
         });
 

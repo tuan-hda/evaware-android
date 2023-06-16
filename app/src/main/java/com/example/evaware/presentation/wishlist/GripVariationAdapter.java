@@ -53,7 +53,6 @@ public class GripVariationAdapter extends BaseAdapter {
 
             mViewHolder.textView = view.findViewById(R.id.tv_variation_name);
             mViewHolder.llContainer = view.findViewById(R.id.ll_container);
-            mViewHolder.imIconVariation = view.findViewById(R.id.im_icon_variation);
 
 
             view.setTag(mViewHolder);

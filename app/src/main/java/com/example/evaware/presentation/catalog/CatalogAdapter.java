@@ -67,7 +67,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvDescription.setText(item.getDesc());
         Picasso.with(context)
-                .load(item.getImg_url())
+                .load(item.image_thumbnail)
                 .into(viewHolder.imvProduct);
         if(item.saved){
             viewHolder.imvLoveLike.setBackgroundResource(R.drawable.heart_filled);

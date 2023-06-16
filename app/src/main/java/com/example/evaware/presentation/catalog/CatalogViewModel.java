@@ -46,11 +46,16 @@ public class CatalogViewModel extends AndroidViewModel {
             productRepository.getAllProductsByCategory(categoryReference).addOnSuccessListener(task -> {
                 List<DocumentSnapshot> documents = task.getDocuments();
                 for (DocumentSnapshot document : documents) {
+                    try{
                         ProductModel product = document.toObject(ProductModel.class);
                         if(product.getDesc().length() > 55){
                             product.setDesc(product.getDesc().substring(0, 55-3) + "...");
                         }
                         products.add(product);
+                    }catch (Exception e){
+                        Log.d(TAG, "getAllProductsByCategory: " + e.getMessage());
+                    }
+
                 }
                 productsLiveData.setValue(products);
             }).addOnFailureListener(e -> {

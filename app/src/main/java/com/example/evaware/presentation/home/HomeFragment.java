@@ -16,7 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.evaware.data.model.CategoryModel;
 import com.example.evaware.databinding.FragmentHomeBinding;
+import com.example.evaware.presentation.catalog.CatalogActivity;
+import com.example.evaware.presentation.category.SearchCategoryActivity;
 import com.example.evaware.presentation.search_product.SearchProductActivity;
 import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.presentation.wishlist.WishViewModel;
@@ -62,17 +65,23 @@ public class HomeFragment extends Fragment {
 
     public void loadData() {
         HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        try {
+            viewModel.getAllCategory().observe(requireActivity(), categoryModels -> {
+                if (categoryModels.size() == 0) {
+                    Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    List<CategoryModel> firstFourItems = categoryModels.subList(0, Math.min(categoryModels.size(), 4));
+                    TypeOfCategoryAdapter adapter2 = new TypeOfCategoryAdapter(firstFourItems, getActivity(), HomeFragment.this);
+                    homeItemList.setAdapter(adapter2);
+                    dialog.dismissDialog();
+                }
+            });
 
-        viewModel.getListTypeOfCategories().observe(requireActivity(), typeofCategories -> {
-            if (typeofCategories.size() == 0) {
-//                binding.verticalList.setVisibility(View.INVISIBLE);
-                Toast.makeText(requireActivity(), "Empty", Toast.LENGTH_SHORT).show();
-            } else {
-                TypeOfCategoryAdapter adapter2 = new TypeOfCategoryAdapter(typeofCategories, getActivity(), HomeFragment.this);
-                homeItemList.setAdapter(adapter2);
-                dialog.dismissDialog();
-            }
-        });
+        }catch (Exception e) {
+            Log.d(TAG, "loadData: " + e.getMessage());
+        }
+
+
 
         if (wishViewModel != null)
             wishViewModel.getWishList().observe(getActivity(), wishItemModels -> {
@@ -95,6 +104,10 @@ public class HomeFragment extends Fragment {
         binding.cvSearchProduct.setOnClickListener(view -> {
             Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
             requireActivity().startActivity(intent1);
+        });
+        binding.llSeeAll.setOnClickListener(view ->{
+            Intent intent = new Intent(requireActivity(), SearchCategoryActivity.class);
+            requireActivity().startActivity(intent);
         });
     }
 }

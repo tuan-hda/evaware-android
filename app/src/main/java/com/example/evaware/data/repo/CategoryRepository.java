@@ -27,5 +27,8 @@ public class CategoryRepository {
     public DocumentReference getCategoriesById(String id){
         return categoryRef.document(id);
     }
+    public Task<QuerySnapshot> getAllCategories(){
+        return categoryRef.get();
+    }
 
 }

@@ -23,21 +23,24 @@ public class CategoryViewModel extends AndroidViewModel {
     private CategoryRepository repo = new CategoryRepository();
     private static final String TAG = "CategoryViewModel";
     private TypeOfCategoryRepo typeOfCategoryRepo = new TypeOfCategoryRepo();
+    private List<CategoryModel> queryCategoryList = new ArrayList<CategoryModel>();
     private MutableLiveData<List<CategoryModel>> categoriesLiveData = new MutableLiveData<List<CategoryModel>>();
 
     private List<CategoryModel> categories = new ArrayList<>();
+
     public CategoryViewModel(@NonNull Application application) {
         super(application);
     }
+
     public LiveData<List<CategoryModel>> getCategoryByType(String typeOfCategoryPath) {
         DocumentReference typeOfCategory = getTypeOfCategory(typeOfCategoryPath);
 
         if (categories.size() != 0) {
             return categoriesLiveData;
         }
-        repo.getCategoriesByType(typeOfCategory).addOnSuccessListener(task->{
+        repo.getCategoriesByType(typeOfCategory).addOnSuccessListener(task -> {
             List<DocumentSnapshot> snapshots = task.getDocuments();
-            for(DocumentSnapshot snapshot : snapshots) {
+            for (DocumentSnapshot snapshot : snapshots) {
                 CategoryModel categoryModel = snapshot.toObject(CategoryModel.class);
                 categories.add(categoryModel);
             }
@@ -52,5 +55,24 @@ public class CategoryViewModel extends AndroidViewModel {
         return typeOfCategoryRepo.getById(id);
     }
 
+    public LiveData<List<CategoryModel>> getAllCategory() {
+        if (queryCategoryList.size() != 0) {
+            return categoriesLiveData;
+        }
+        repo.getAllCategories().addOnSuccessListener(task -> {
+            List<DocumentSnapshot> snapshots = task.getDocuments();
+            for (DocumentSnapshot document : snapshots) {
+                try {
+                    CategoryModel categoryModel = document.toObject(CategoryModel.class);
+                    queryCategoryList.add(categoryModel);
+                } catch (Exception e) {
+                }
+
+
+            }
+            categoriesLiveData.setValue(queryCategoryList);
+        });
+        return categoriesLiveData;
+    }
 
 }
