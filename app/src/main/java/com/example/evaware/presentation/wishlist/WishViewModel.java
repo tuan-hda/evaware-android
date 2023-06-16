@@ -68,9 +68,9 @@ public class WishViewModel extends AndroidViewModel {
 
             Task<List<SavedModel>> allTasks = Tasks.whenAllSuccess(tasks);
 
-            allTasks.addOnSuccessListener(savedModels -> {
-                savedListLiveData.setValue(savedModels);
-            }).addOnFailureListener(e->{
+            allTasks.addOnSuccessListener(savedModelsResult -> {
+                savedListLiveData.setValue(savedModelsResult);
+            }).addOnFailureListener(e -> {
                 Log.e(TAG, "getAllWishList: failure" + e.getLocalizedMessage());
             });
         }).addOnFailureListener(e -> {
@@ -96,8 +96,19 @@ public class WishViewModel extends AndroidViewModel {
         MutableLiveData<String> message = new MutableLiveData<>();
 
         repository.removeWish(wishItemId).addOnSuccessListener(task -> {
-            // You need to provide a value to setValue() method
             message.setValue("Wish item removed successfully");
+
+            List<SavedModel> currentList = savedListLiveData.getValue();
+            if (currentList != null) {
+                for (int i = 0; i < currentList.size(); i++) {
+                    SavedModel savedModel = currentList.get(i);
+                    if (savedModel.wishListRef.getId().equals(wishItemId)) {
+                        currentList.remove(i);
+                        break;
+                    }
+                }
+                savedListLiveData.setValue(currentList);
+            }
 
             if(snackbar != null){
                 snackbar.dismiss();

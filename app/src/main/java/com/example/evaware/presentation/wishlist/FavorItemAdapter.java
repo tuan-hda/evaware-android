@@ -125,15 +125,27 @@ public class FavorItemAdapter extends BaseAdapter {
         this.dialogListener = listener;
     }
 
-    public void removeSavedItem(SavedModel item){
+    public void removeSavedItem(SavedModel item) {
         removeSavedItem(item, null);
     }
-    public void removeSavedItem(SavedModel item, Snackbar snackbar){
-        vm.remove(item.wishListRef.getId(), snackbar).observe((LifecycleOwner) activity, message -> {
-            itemList.remove(item);
-            notifyDataSetChanged();
-            Log.e(TAG, message);
-        });
+
+    public void removeSavedItem(SavedModel item, Snackbar snackbar) {
+        if (activity instanceof ViewModelStoreOwner) {
+            ViewModelProvider viewModelProvider = new ViewModelProvider((ViewModelStoreOwner) activity);
+            WishViewModel viewModel = viewModelProvider.get(WishViewModel.class);
+            viewModel.remove(item.wishListRef.getId(), snackbar).observe((LifecycleOwner) activity, message -> {
+                itemList.remove(item);
+                notifyDataSetChanged();
+                Log.e(TAG, message);
+            });
+        } else {
+            Log.e(TAG, "Activity does not implement ViewModelStoreOwner");
+        }
+    }
+
+    public void updateItemList(List<SavedModel> itemList) {
+        this.itemList = itemList;
+        notifyDataSetChanged();
     }
 
     static class ViewHolder {

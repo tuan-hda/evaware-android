@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
     tools:context=".presentation.wishlist.SavedItem">
@@ -26,7 +27,9 @@
         app:strokeWidth="0dp">
 
         <LinearLayout
+            android:id="@+id/savedItem_searchBar"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -51,6 +54,8 @@
     </com.google.android.material.card.MaterialCardView>
     <!--Sort & filter-->
     <LinearLayout
+        android:id="@+id/savedItem_Sort_Filter"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -122,10 +127,66 @@
     <ListView
         android:id="@+id/savedItem_lv_listProduct"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:divider="@null"
         android:scrollbars="none"
         tools:listitem="@layout/item_small_card" />
+
+    <!--    Saved item empty-->
+    <View
+        android:id="@+id/savedItem_empty_view1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/savedItem_empty_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:src="@drawable/surprised" />
+
+    <TextView
+        android:id="@+id/savedItem_empty_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/lexend_semibold"
+        android:visibility="gone"
+        android:text="nothing saved..."
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/savedItem_empty_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lexend_light"
+        android:visibility="gone"
+        android:text="... no worries. Start saving as you shop by clicking the little heart"
+        android:textAlignment="center"
+        android:textColor="@color/giratina_500"
+        android:textSize="16dp" />
+
+
+    <View
+        android:id="@+id/savedItem_empty_view2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/savedItem_empty_button"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingVertical="20dp"
+        android:text="Start shopping"
+        app:cornerRadius="8dp" />
 </LinearLayout>
