@@ -21,9 +21,9 @@ public class AddressModel implements Serializable {
     public int ward_id;
     public String street;
     @ServerTimestamp
-    public Timestamp created_at;
+    public transient Timestamp created_at;
     @ServerTimestamp
-    public Timestamp updated_at;
+    public transient Timestamp updated_at;
 
     public AddressModel() {
     }

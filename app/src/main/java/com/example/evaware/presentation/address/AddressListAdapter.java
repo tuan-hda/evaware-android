@@ -39,6 +39,10 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         this.launcher = launcher;
     }
 
+    public AddressModel getCurrentSelect() {
+        return addresses.get(selectedIndex);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

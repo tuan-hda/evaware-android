@@ -4,8 +4,8 @@ import com.google.firebase.firestore.DocumentId;
 
 public class ImageModel {
     @DocumentId
-    private String id;
-    private String img_url;
+    public String id;
+    public String img_url;
 
     public String getImg_url() {
         return img_url;

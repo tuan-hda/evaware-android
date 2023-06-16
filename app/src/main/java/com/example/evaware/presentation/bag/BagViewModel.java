@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.evaware.data.model.BagItemModel;
+import com.example.evaware.data.model.ImageModel;
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.repo.BagRepository;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,8 @@ public class BagViewModel extends AndroidViewModel {
         }
 
         repo.getBagList().addOnSuccessListener(task -> {
+            List<Task<QuerySnapshot>> imageTasks = new ArrayList<>();
+
             for (DocumentSnapshot document : task.getDocuments()) {
                 BagItemModel item = document.toObject(BagItemModel.class);
                 queryBagList.add(item);
@@ -60,13 +65,30 @@ public class BagViewModel extends AndroidViewModel {
                         queryBagList.get(idx).product = ((DocumentSnapshot) objects.get(i)).toObject(ProductModel.class);
                     } else {
                         queryBagList.get(idx).variation = ((DocumentSnapshot) objects.get(i)).toObject(VariationModel.class);
+                        Task<QuerySnapshot> imageTask = ((DocumentSnapshot) objects.get(i)).getReference().collection("images").get();
+                        imageTasks.add(imageTask);
+                        final int finalIdx = idx;
+                        imageTask.addOnSuccessListener(queryDocumentSnapshots -> {
+                            List<ImageModel> imageModels = new ArrayList<>();
+                            for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots) {
+                                ImageModel image = snapshot.toObject(ImageModel.class);
+                                imageModels.add(image);
+                            }
+                            queryBagList.get(finalIdx).variation.images = imageModels;
+                        });
                     }
                 }
-                bagList.setValue(queryBagList);
+                Tasks.whenAllSuccess(imageTasks).addOnSuccessListener(tas -> {
+                    bagList.setValue(queryBagList);
+                });
             });
+
+
+
         }).addOnFailureListener(e -> {
             Log.d(TAG, "getBagList:failure: " + e.getLocalizedMessage());
         });
+
 
         return bagList;
     }
@@ -78,7 +100,7 @@ public class BagViewModel extends AndroidViewModel {
         if (newVal >= 1) {
             item.qty = newVal;
             repo.updateBagItem(db.document(item.path), item).addOnSuccessListener(unused -> {
-               bagList.setValue(queryBagList);
+                bagList.setValue(queryBagList);
             });
         }
     }
@@ -87,17 +109,23 @@ public class BagViewModel extends AndroidViewModel {
         repo.removeBagItem(db.document(Objects.requireNonNull(bagList.getValue()).get(i).path)).addOnSuccessListener(unused -> {
             queryBagList.remove(i);
             snackbar.dismiss();
+            bagList.setValue(queryBagList);
         });
     }
 
     public void addItem(BagItemModel item) {
-        repo.findByProductRef(item.product_ref).addOnSuccessListener(task->{
+        repo.findByProductRef(item.product_ref).addOnSuccessListener(task -> {
             List<DocumentSnapshot> docs = task.getDocuments();
-            if(docs.size() == 0){
+            if (docs.size() == 0) {
                 repo.add(item).addOnSuccessListener(documentReference -> {
                     queryBagList.add(item);
+                    bagList.setValue(queryBagList);
                 });
             }
         });
+    }
+
+    public void makeOrder() {
+
     }
 }

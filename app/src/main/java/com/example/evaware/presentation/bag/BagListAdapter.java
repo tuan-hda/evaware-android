@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.example.evaware.R;
 import com.example.evaware.data.model.BagItemModel;
+import com.example.evaware.data.model.ImageModel;
 import com.example.evaware.data.repo.BagRepository;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -29,6 +30,7 @@ public class BagListAdapter extends BaseAdapter {
     private List<BagItemModel> bagList;
     Boolean isPlain = false;
     private BagViewModel vm;
+    private static final String TAG = "BagListAdapter";
 
     public BagListAdapter(Activity context, List<BagItemModel> bagList, BagViewModel vm) {
         this.context = context;
@@ -69,6 +71,8 @@ public class BagListAdapter extends BaseAdapter {
             mViewHolder.textPrice = view.findViewById(R.id.text_price);
             mViewHolder.textDesc = view.findViewById(R.id.text_desc);
             mViewHolder.btnDelete = view.findViewById(R.id.btn_delete);
+            mViewHolder.textQtyAlt = view.findViewById(R.id.text_qty_alt);
+
             LinearLayout stepper = view.findViewById(R.id.stepper);
             mViewHolder.stepper = stepper;
             mViewHolder.textQty = stepper.findViewById(R.id.text_qty);
@@ -82,7 +86,14 @@ public class BagListAdapter extends BaseAdapter {
 
 //        Set value
         BagItemModel item = bagList.get(i);
-        Picasso.with(context).load("https://www.universalfurniture.com/images/pages/home/2022/U030501_RM.jpg?v=fcYu7oTsSUAyVfxWs5MbR2L0Jpeg0JzIiZ4Eaa_BqPw").into(mViewHolder.itemImage);
+        String img = "https://www.universalfurniture.com/images/pages/home/2022/U030501_RM.jpg?v=fcYu7oTsSUAyVfxWs5MbR2L0Jpeg0JzIiZ4Eaa_BqPw";
+        if (item.variation.images != null) {
+            String imgUrl = item.variation.images.get(0).img_url;
+            if (imgUrl != null) {
+                img = imgUrl;
+            }
+        }
+        Picasso.with(context).load(img).into(mViewHolder.itemImage);
 //        mViewHolder.itemImage.setImageResource(R.drawable.evaware_icon);
         mViewHolder.textDesc.setText(item.product.desc);
         mViewHolder.textPrice.setText(getFormattedPrice(item.product.price));
@@ -108,10 +119,13 @@ public class BagListAdapter extends BaseAdapter {
             Snackbar snackbar = showSnackDisable(context, finalView, viewGroup);
             vm.removeItem(i, snackbar);
         });
+        mViewHolder.textQtyAlt.setText("Qty: " + item.qty);
 
         if (isPlain) {
             mViewHolder.btnDelete.setVisibility(View.GONE);
             mViewHolder.stepper.setVisibility(View.GONE);
+        } else {
+            mViewHolder.textQtyAlt.setVisibility(View.GONE);
         }
 
 
@@ -132,7 +146,7 @@ public class BagListAdapter extends BaseAdapter {
 
     static class ViewHolder {
         ImageView itemImage;
-        TextView textPrice, textDesc, textQty;
+        TextView textPrice, textDesc, textQty, textQtyAlt;
         ImageButton btnDelete, btnMinus, btnPlus;
         LinearLayout stepper;
     }
