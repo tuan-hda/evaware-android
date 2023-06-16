@@ -76,6 +76,7 @@ public class BagListAdapter extends BaseAdapter {
             mViewHolder.textDesc = view.findViewById(R.id.text_desc);
             mViewHolder.btnDelete = view.findViewById(R.id.btn_delete);
             mViewHolder.textQtyAlt = view.findViewById(R.id.text_qty_alt);
+            mViewHolder.textVariation = view.findViewById(R.id.text_variation);
 
             LinearLayout stepper = view.findViewById(R.id.stepper);
             mViewHolder.stepper = stepper;
@@ -123,6 +124,7 @@ public class BagListAdapter extends BaseAdapter {
             Snackbar snackbar = showSnackDisable(context, finalView, viewGroup);
             vm.removeItem(i, snackbar);
         });
+        mViewHolder.textVariation.setText("Variation: " + item.variation.name);
         mViewHolder.textQtyAlt.setText("Qty: " + item.qty);
 
         if (isPlain) {
@@ -150,7 +152,7 @@ public class BagListAdapter extends BaseAdapter {
 
     static class ViewHolder {
         ImageView itemImage;
-        TextView textPrice, textDesc, textQty, textQtyAlt;
+        TextView textPrice, textDesc, textQty, textQtyAlt, textVariation;
         ImageButton btnDelete, btnMinus, btnPlus;
         LinearLayout stepper;
     }

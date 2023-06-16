@@ -52,6 +52,12 @@ public class BagFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.forceGet();
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentBagBinding.inflate(inflater, container, false);

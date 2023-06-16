@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.example.evaware.R;
 import com.example.evaware.presentation.filter.Option;
 import com.example.evaware.presentation.filter.OptionAdapter;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import java.util.List;
 //        }
 //Và gọi hàm trên khi cần show
 
-public class Sort extends Fragment {
+public class Sort  extends BottomSheetDialogFragment {
     List<Option> sorts = new ArrayList<>();
 
     @Override

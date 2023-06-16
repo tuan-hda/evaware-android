@@ -56,6 +56,13 @@ public class BagRepository {
         });
     }
 
+    public Task<QuerySnapshot> findByProductVariationRef(DocumentReference doc, DocumentReference variation) {
+        return barRef.whereEqualTo("product_ref", doc).whereEqualTo("variation_ref", variation).get().addOnFailureListener(e -> {
+            Log.e(TAG, "findByProductVariationRef: ", e);
+        });
+    }
+
+
     public Task<Void> deleteAllDocuments() {
         return getBagList()
                 .onSuccessTask(querySnapshot -> {

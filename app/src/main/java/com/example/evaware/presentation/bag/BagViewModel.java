@@ -14,6 +14,7 @@ import com.example.evaware.data.model.ImageModel;
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.repo.BagRepository;
+import com.example.evaware.data.repo.UserRepository;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,12 +32,14 @@ import java.util.Objects;
 public class BagViewModel extends AndroidViewModel {
     private static final String TAG = "BagViewModel";
     private BagRepository repo = new BagRepository();
+    private UserRepository userRepository;
     private MutableLiveData<List<BagItemModel>> bagList = new MutableLiveData<>();
     private List<BagItemModel> queryBagList = new ArrayList<>();
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     public BagViewModel(@NonNull Application application) {
         super(application);
+        userRepository = new UserRepository();
     }
 
     public LiveData<List<BagItemModel>> getBagList() {
@@ -131,15 +134,19 @@ public class BagViewModel extends AndroidViewModel {
     }
 
     public void addItem(BagItemModel item) {
-        repo.findByProductRef(item.product_ref).addOnSuccessListener(task -> {
+        repo.findByProductVariationRef(item.product_ref, item.variation_ref).addOnSuccessListener(task -> {
             List<DocumentSnapshot> docs = task.getDocuments();
             if (docs.size() == 0) {
                 repo.add(item).addOnSuccessListener(documentReference -> {
                     queryBagList.add(item);
                     bagList.setValue(queryBagList);
                 });
+            } else {
+                BagItemModel newItem = docs.get(0).toObject(BagItemModel.class);
+                Log.e(TAG, "addItem: " + docs.size());
+                Objects.requireNonNull(newItem).qty += 1;
+                repo.updateBagItem(userRepository.userDocRef.collection("cart").document(newItem.id), newItem);
             }
         });
     }
-
 }

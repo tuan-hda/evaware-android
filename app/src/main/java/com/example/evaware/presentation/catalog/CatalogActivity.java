@@ -14,6 +14,7 @@ import android.widget.GridView;
 
 import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.databinding.ActivityCatalogBinding;
+import com.example.evaware.presentation.bottomSheet.Sort;
 import com.example.evaware.presentation.category.CategoryViewModel;
 import com.example.evaware.utils.LoadingDialog;
 
@@ -110,5 +111,9 @@ public class CatalogActivity extends AppCompatActivity {
             finish();
         });
 
+        binding.btnSort.setOnClickListener(v -> {
+            Sort sort = new Sort();
+            sort.show(getSupportFragmentManager(), "Sort");
+        });
     }
 }

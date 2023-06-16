@@ -83,6 +83,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
         viewHolder.imvLoveLike.setOnClickListener(view->{
             List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+            if (list == null) {
+                return;
+            }
             if(item.saved){
                 for (WishItemModel listItem : list) {
                     if (listItem.getProduct_ref().getId().equals(item.getId())) {
@@ -111,6 +114,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             GlobalStore.getInstance().setData("wishList", list);
         });
         List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+        if (list == null) {
+            return convertView;
+        }
         for(WishItemModel wishItemModel : list) {
             if(wishItemModel.getProduct_ref().getId().equals(item.getId())) {
                 viewHolder.imvLoveLike.setBackgroundResource(R.drawable.heart_filled);
