@@ -1,5 +1,6 @@
 package com.example.evaware.presentation.order;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.ViewHolder>{
+    Context context;
     List<String> images;
 
-    public OrderImageAdapter(List<String> images) {
+    public OrderImageAdapter(Context context, List<String> images) {
+        this.context = context;
         this.images = images;
     }
 
@@ -28,7 +32,10 @@ public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        String image_url = images.get(position);
+        Picasso.with(context)
+                .load(image_url)
+                .into(holder.imageView);
     }
 
     @Override

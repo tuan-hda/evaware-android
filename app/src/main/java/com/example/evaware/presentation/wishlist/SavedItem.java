@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.example.evaware.R;
 import com.example.evaware.data.model.SavedModel;
 import com.example.evaware.databinding.FragmentSavedItemBinding;
+import com.example.evaware.presentation.home.HomeFragment;
 import com.example.evaware.presentation.other.Setting;
 import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
@@ -48,6 +49,7 @@ public class SavedItem extends Fragment implements FavorItemAdapter.ChooseVariat
 
         dialog = new LoadingDialog(getActivity());
 
+
         return binding.getRoot();
     }
 
@@ -55,25 +57,71 @@ public class SavedItem extends Fragment implements FavorItemAdapter.ChooseVariat
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter = new FavorItemAdapter(activity, new ArrayList<>(), viewModel);
+        adapter.setChooseVariationDialogListener(this);
+        binding.savedItemLvListProduct.setAdapter(adapter);
+
+        loadSavedItem();
+        setUpButton();
+    }
+
+    private void setUpButton() {
+//        binding.savedItemEmptyBtStartShopping.setOnClickListener(view -> {
+//            getActivity()
+//                    .getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.nav_host_fragment, new HomeFragment())
+//                    .addToBackStack("homeFragment")
+//                    .commit();
+//        });
+    }
+
+    private void loadSavedItem() {
         dialog.showDialog();
         viewModel.getSavedList().observe(activity, saveModels->{
             if(saveModels.size() == 0){
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment, new SavedItemEmpty())
-                        .addToBackStack("savedEmpty")
-                        .commit();
+                showSavedItem(false);
+                showSavedEmpty(true);
             }else{
-                adapter = new FavorItemAdapter(activity, saveModels, viewModel);
-                adapter.setChooseVariationDialogListener((FavorItemAdapter.ChooseVariationDialogListener) this);
-                binding.savedItemLvListProduct.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                showSavedItem(true);
+                showSavedEmpty(false);
+                adapter.updateItemList(saveModels);
             }
 
             dialog.dismissDialog();
         });
     }
+
+    private void showSavedEmpty(boolean b) {
+        if(b){
+            binding.savedItemEmptyView1.setVisibility(View.VISIBLE);
+            binding.savedItemEmptyView2.setVisibility(View.VISIBLE);
+            binding.savedItemEmptyText1.setVisibility(View.VISIBLE);
+            binding.savedItemEmptyText2.setVisibility(View.VISIBLE);
+            binding.savedItemEmptyImage.setVisibility(View.VISIBLE);
+            binding.savedItemEmptyButton.setVisibility(View.VISIBLE);
+        }else{
+            binding.savedItemEmptyView1.setVisibility(View.GONE);
+            binding.savedItemEmptyView2.setVisibility(View.GONE);
+            binding.savedItemEmptyText1.setVisibility(View.GONE);
+            binding.savedItemEmptyText2.setVisibility(View.GONE);
+            binding.savedItemEmptyImage.setVisibility(View.GONE);
+            binding.savedItemEmptyButton.setVisibility(View.GONE);
+        }
+    }
+
+    private void showSavedItem(boolean b) {
+        if(b){
+            binding.savedItemSearchBar.setVisibility(View.VISIBLE);
+            binding.savedItemSortFilter.setVisibility(View.VISIBLE);
+            binding.savedItemLvListProduct.setVisibility(View.VISIBLE);
+        }else{
+            binding.savedItemSearchBar.setVisibility(View.GONE);
+            binding.savedItemSortFilter.setVisibility(View.GONE);
+            binding.savedItemLvListProduct.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public void onMoveToBagClicked(SavedModel item) {
