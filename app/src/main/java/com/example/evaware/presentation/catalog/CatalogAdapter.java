@@ -33,6 +33,7 @@ import java.util.List;
 public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
     private Context context;
+    private static final String TAG = "CatalogAdapter";
     private List<ProductModel> dataList;
     private WishViewModel wishViewModel;
     private ProductViewModel productViewModel;
@@ -66,6 +67,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
         }
 
         final ProductModel item = dataList.get(position);
+        if (item == null) {
+            return convertView;
+        }
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvDescription.setText(item.getDesc());
         viewHolder.tvPrice.setText(CurrencyFormat.getFormattedPrice(item.getPrice()));

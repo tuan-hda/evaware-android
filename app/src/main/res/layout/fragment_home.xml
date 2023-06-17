@@ -77,12 +77,19 @@
             android:textColor="@color/black"
             android:textSize="@dimen/heading_2" />
 
+
         <GridView
             android:id="@+id/rv_popular_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:horizontalSpacing="10dp"
+            android:columnWidth="100dp"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp"
+            android:numColumns="2"
             android:layout_marginTop="@dimen/fab_margin"
-            android:numColumns="2" />
+   />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_show_all"

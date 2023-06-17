@@ -52,19 +52,9 @@
             app:layout_constraintBottom_toTopOf="@+id/txt_description"
             app:layout_constraintEnd_toEndOf="@+id/txt_description"
             app:layout_constraintStart_toStartOf="@+id/txt_description"
-            app:layout_constraintTop_toBottomOf="@+id/img_surprised" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_description" />
 
-        <ImageView
-            android:id="@+id/img_surprised"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/surprised_image"
-            android:src="@drawable/surprised"
-            app:layout_constraintBottom_toTopOf="@+id/txt_empty"
-            app:layout_constraintEnd_toEndOf="@+id/txt_empty"
-            app:layout_constraintStart_toStartOf="@+id/txt_empty"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+
 
         <TextView
             android:id="@+id/txt_description"

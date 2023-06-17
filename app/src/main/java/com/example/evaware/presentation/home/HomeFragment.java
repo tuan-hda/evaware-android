@@ -14,26 +14,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.evaware.data.model.CategoryModel;
+import com.example.evaware.data.model.ProductModel;
+import com.example.evaware.data.repo.ProductRepository;
 import com.example.evaware.databinding.FragmentHomeBinding;
 import com.example.evaware.presentation.catalog.CatalogActivity;
+import com.example.evaware.presentation.catalog.CatalogAdapter;
 import com.example.evaware.presentation.category.SearchCategoryActivity;
 import com.example.evaware.presentation.search_product.SearchProductActivity;
 import com.example.evaware.data.model.TypeofCategory;
 import com.example.evaware.presentation.wishlist.WishViewModel;
 import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
@@ -43,6 +53,7 @@ public class HomeFragment extends Fragment {
     private List<TypeofCategory> types = new ArrayList<>();
     private LoadingDialog dialog;
     private WishViewModel wishViewModel;
+    private ProductRepository repository;
 
 
     @Override
@@ -54,6 +65,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        repository = new ProductRepository();
         dialog = new LoadingDialog(getActivity());
         return binding.getRoot();
     }
@@ -82,10 +94,9 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d(TAG, "loadData: " + e.getMessage());
         }
-
 
 
         if (wishViewModel != null)
@@ -102,54 +113,92 @@ public class HomeFragment extends Fragment {
         init();
         loadData();
         setUpBtn();
+        handlePopular();
 
     }
 
     private void handlePopular() {
-        // Step 1: Create a Map to store the total sales for each product
-        Map<String, Integer> productSales;
-        productSales = new HashMap<>();
+        Map<String, Integer> productSales = new HashMap<>();
 
-        // Step 2: Query the orders collection
         FirebaseFirestore.getInstance()
                 .collection("orders")
+                .whereEqualTo("status", 0)
                 .get()
                 .addOnSuccessListener(querySnapshot -> {
-                    // Step 3: Iterate over the orders
+                    List<Task<?>> tasks = new ArrayList<>();
                     for (DocumentSnapshot orderDoc : querySnapshot.getDocuments()) {
-                        // Step 4: Iterate over the order items
-                        List<Map<String, Object>> orderItems = (List<Map<String, Object>>) orderDoc.get("order_items");
-                        if (orderItems != null) {
-                            for (Map<String, Object> orderItem : orderItems) {
-                                DocumentReference productRef = (DocumentReference) orderItem.get("product");
-
-                                // Step 5: Update the total sales for each product
-                                if (productRef != null) {
-                                    String productId = productRef.getId();
-                                    int sales = productSales.getOrDefault(productId, 0) + 1;
-                                    productSales.put(productId, sales);
+                        tasks.add(orderDoc.getReference().collection("order_items").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for (DocumentSnapshot orderItem : queryDocumentSnapshots.getDocuments()) {
+                                    DocumentReference productRef = (DocumentReference) orderItem.get("product_ref");
+                                    if (productRef != null) {
+                                        String productId = productRef.getId();
+                                        int sales = productSales.getOrDefault(productId, 0) + 1;
+                                        productSales.put(productId, sales);
+                                    }
                                 }
                             }
+                        }));
+                    }
+
+                    Tasks.whenAllSuccess(tasks).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+                        @Override
+                        public void onSuccess(List<Object> objects) {
+                            List<Map.Entry<String, Integer>> sortedProducts = new ArrayList<>(productSales.entrySet());
+
+                            sortedProducts.sort((e1, e2) -> {
+                                int valueComparison = e2.getValue().compareTo(e1.getValue());
+
+                                if (valueComparison != 0) {
+                                    return valueComparison;
+                                } else {
+                                    return e1.getKey().compareTo(e2.getKey());
+                                }
+                            });
+                            for (Map.Entry<String, Integer> item : sortedProducts) {
+                                Log.e(TAG, "onSuccess: " + item.getKey() + " " + item.getValue());
+                            }
+                            int num = 6;
+                            List<Task<?>> tasks1 = new ArrayList<>();
+                            List<ProductModel> topSellingProducts = new ArrayList<>();
+                            for (int i = 0; i< sortedProducts.size(); i++) {
+                                topSellingProducts.add(new ProductModel());
+                            }
+
+                            for (int i = 0; i < Math.min(num, sortedProducts.size()); i++) {
+
+                                tasks1.add(repository.getProductById(sortedProducts.get(i).getKey()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        for (int j = 0; j < sortedProducts.size();j ++) {
+                                            if (Objects.equals(sortedProducts.get(j).getKey(), documentSnapshot.getId())) {
+                                                topSellingProducts.set(j, documentSnapshot.toObject(ProductModel.class));
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }));
+                            }
+
+                            Tasks.whenAllSuccess(tasks1).addOnSuccessListener(new OnSuccessListener<List<Object>>() {
+                                @Override
+                                public void onSuccess(List<Object> objects) {
+                                    CatalogAdapter adapter = new CatalogAdapter(getActivity(), topSellingProducts.size(), topSellingProducts);
+                                    binding.rvPopularList.setAdapter(adapter);
+                                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) binding.rvPopularList.getLayoutParams();
+                                    layoutParams.height = Math.min(topSellingProducts.size() / 2 * 836, 2508);
+                                    binding.rvPopularList.setLayoutParams(layoutParams);
+
+                                }
+                            });
                         }
-                    }
+                    });
 
-                    // Sort the products based on total sales in descending order
-                    List<Map.Entry<String, Integer>> sortedProducts = new ArrayList<>(productSales.entrySet());
-                    sortedProducts.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-                    // Get the top-selling products (e.g., top 10)
-                    int topN = 10;
-                    List<String> topSellingProducts = new ArrayList<>();
-                    for (int i = 0; i < Math.min(topN, sortedProducts.size()); i++) {
-                        topSellingProducts.add(sortedProducts.get(i).getKey());
-                    }
-
-                    // Handle the top-selling products
-                    // ...
                 })
                 .addOnFailureListener(e -> {
-                    // Handle any errors
-                    // ...
+                    Log.e(TAG, "handlePopular: ", e);
                 });
 
     }
@@ -163,7 +212,7 @@ public class HomeFragment extends Fragment {
             Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
             requireActivity().startActivity(intent1);
         });
-        binding.llSeeAll.setOnClickListener(view ->{
+        binding.llSeeAll.setOnClickListener(view -> {
             Intent intent = new Intent(requireActivity(), SearchCategoryActivity.class);
             requireActivity().startActivity(intent);
         });

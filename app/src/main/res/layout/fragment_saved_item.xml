@@ -143,13 +143,7 @@
         android:visibility="gone"
         android:layout_weight="1" />
 
-    <ImageView
-        android:id="@+id/savedItem_empty_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone"
-        android:src="@drawable/surprised" />
+
 
     <TextView
         android:id="@+id/savedItem_empty_text1"
@@ -167,7 +161,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lexend_light"
         android:visibility="gone"
-        android:text="... no worries. Start saving as you shop by clicking the little heart"
+        android:text="click a little heart to add an item"
         android:textAlignment="center"
         android:textColor="@color/giratina_500"
         android:textSize="16dp" />
@@ -187,6 +181,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:paddingVertical="20dp"
+        android:textSize="@dimen/body_1"
+        android:fontFamily="@font/lexend_medium"
+
         android:text="Start shopping"
         app:cornerRadius="8dp" />
 </LinearLayout>

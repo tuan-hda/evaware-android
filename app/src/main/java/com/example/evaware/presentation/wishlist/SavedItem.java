@@ -98,14 +98,12 @@ public class SavedItem extends Fragment implements FavorItemAdapter.ChooseVariat
             binding.savedItemEmptyView2.setVisibility(View.VISIBLE);
             binding.savedItemEmptyText1.setVisibility(View.VISIBLE);
             binding.savedItemEmptyText2.setVisibility(View.VISIBLE);
-            binding.savedItemEmptyImage.setVisibility(View.VISIBLE);
             binding.savedItemEmptyButton.setVisibility(View.VISIBLE);
         }else{
             binding.savedItemEmptyView1.setVisibility(View.GONE);
             binding.savedItemEmptyView2.setVisibility(View.GONE);
             binding.savedItemEmptyText1.setVisibility(View.GONE);
             binding.savedItemEmptyText2.setVisibility(View.GONE);
-            binding.savedItemEmptyImage.setVisibility(View.GONE);
             binding.savedItemEmptyButton.setVisibility(View.GONE);
         }
     }
