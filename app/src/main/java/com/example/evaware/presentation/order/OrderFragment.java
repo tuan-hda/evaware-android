@@ -42,7 +42,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void initView() {
-        listView = binding.lvOrder;
+        listView = binding.orderDetailLvOrder;
         ArrayList<OrderProduct> orders = new ArrayList<>();
         orders.add(new OrderProduct(R.drawable.bedside_table_img, "$150.00", "Wooden beside table featuring a raised design"));
         orders.add(new OrderProduct(R.drawable.img_table, "$280.50", "Square beside table with legs, a rattan shelf and a..."));

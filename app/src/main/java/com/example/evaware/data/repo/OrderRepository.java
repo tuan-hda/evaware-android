@@ -33,4 +33,17 @@ public class OrderRepository {
                 }
         );
     }
+
+    public Task<QuerySnapshot> getOrdersOfUser(String userId) {
+        DocumentReference userRef = db.collection("users").document(userId);
+        return orderRef.whereEqualTo("user_ref", userRef).get().addOnFailureListener(e->{
+            Log.e(TAG, "getOrdersOfUser:failed" + e.getLocalizedMessage());
+        });
+    }
+
+    public Task<QuerySnapshot> getOrderItem(DocumentReference orderRef) {
+        return orderRef.collection("order_items").get().addOnFailureListener(e->{
+            Log.e(TAG, "getOrderItem:failed" + e.getLocalizedMessage());
+        });
+    }
 }

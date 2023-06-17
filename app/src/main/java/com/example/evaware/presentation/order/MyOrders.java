@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +15,18 @@ import android.view.ViewGroup;
 import com.example.evaware.R;
 import com.example.evaware.databinding.FragmentMyOrdersBinding;
 import com.example.evaware.databinding.FragmentSavedItemBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MyOrders extends Fragment {
     FragmentMyOrdersBinding binding;
     FragmentActivity activity;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    MyOrderViewModel viewModel;
+    OrderItemAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -30,7 +34,7 @@ public class MyOrders extends Fragment {
                              Bundle savedInstanceState) {
         activity = requireActivity();
         binding = FragmentMyOrdersBinding.inflate(inflater, container, false);
-
+        viewModel = new ViewModelProvider(this).get(MyOrderViewModel.class);
         return binding.getRoot();
     }
 
@@ -42,6 +46,11 @@ public class MyOrders extends Fragment {
     }
 
     private void setUpData() {
+        viewModel.getOrderOfUser(auth.getCurrentUser().getUid()).observe(activity, orderModels -> {
+            adapter = new OrderItemAdapter(activity, orderModels, viewModel);
+            binding.myOrdersLvListProduct.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        });
     }
 
     private void setUpButtons() {

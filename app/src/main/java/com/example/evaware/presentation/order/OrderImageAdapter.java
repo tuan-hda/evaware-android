@@ -1,6 +1,7 @@
 package com.example.evaware.presentation.order;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +11,32 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.evaware.R;
+import com.example.evaware.data.model.BagItemModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.ViewHolder>{
+public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.ViewHolder> {
+    public static final String TAG = "OrderImageAdapter";
     Context context;
+    List<BagItemModel> order_items;
     List<String> images;
 
-    public OrderImageAdapter(Context context, List<String> images) {
+    public OrderImageAdapter(Context context, List<BagItemModel> order_items) {
         this.context = context;
-        this.images = images;
+        this.order_items = order_items;
+        images = new ArrayList<>();
+
+        for (BagItemModel item : order_items) {
+            item.product_ref.get().addOnSuccessListener(task -> {
+                        images.add(task.getString("img_url"));
+                        notifyDataSetChanged();
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "get product image Url: failure" + e.getLocalizedMessage());
+                    });
+        }
     }
 
     @NonNull
@@ -32,15 +48,17 @@ public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String image_url = images.get(position);
-        Picasso.with(context)
-                .load(image_url)
-                .into(holder.imageView);
+        if(images.size() > position){
+            String image_url = images.get(position);
+            Picasso.with(context)
+                    .load(image_url)
+                    .into(holder.imageView);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return order_items.size();
     }
 
 

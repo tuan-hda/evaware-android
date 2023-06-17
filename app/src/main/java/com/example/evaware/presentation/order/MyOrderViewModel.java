@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.evaware.data.model.AddressModel;
@@ -31,6 +32,8 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,4 +163,36 @@ public class MyOrderViewModel extends AndroidViewModel {
             orderModel.order_items = bagItemModelList;
         });
     }
+
+    public LiveData<List<OrderModel>> getOrderOfUser(String userId) {
+        repo.getOrdersOfUser(userId)
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    list.clear();
+
+                    for (DocumentSnapshot orderDoc : queryDocumentSnapshots.getDocuments()) {
+                        OrderModel order = orderDoc.toObject(OrderModel.class);
+
+                        repo.getOrderItem(orderDoc.getReference())
+                                .addOnSuccessListener(task -> {
+                                    List<BagItemModel> itemModels = new ArrayList<>();
+                                    for (DocumentSnapshot itemDoc : task.getDocuments()) {
+                                        BagItemModel bagItem = itemDoc.toObject(BagItemModel.class);
+                                        itemModels.add(bagItem);
+                                    }
+                                    order.order_items = itemModels;
+                                    list.add(order);
+                                    data.setValue(list);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e(TAG, "getOrderItem:failed", e);
+                                });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "getOrderOfUser: Failed to get orders", e);
+                });
+
+        return data;
+    }
+
 }
