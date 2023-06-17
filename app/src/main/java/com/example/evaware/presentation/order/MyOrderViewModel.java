@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.evaware.data.model.AddressModel;
@@ -18,6 +19,7 @@ import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.model.VoucherModel;
 import com.example.evaware.data.repo.OrderRepository;
+import com.example.evaware.data.repo.ProductRepository;
 import com.example.evaware.data.repo.UserRepository;
 import com.example.evaware.presentation.bag.BagViewModel;
 import com.example.evaware.presentation.checkout.ConfirmOrderActivity;
@@ -31,6 +33,8 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,5 +163,63 @@ public class MyOrderViewModel extends AndroidViewModel {
         return Tasks.whenAllSuccess(tasks).addOnSuccessListener(objects -> {
             orderModel.order_items = bagItemModelList;
         });
+    }
+
+    public LiveData<List<OrderModel>> getOrderOfUser(String userId) {
+        repo.getOrdersOfUser(userId)
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    list.clear();
+
+                    for (DocumentSnapshot orderDoc : queryDocumentSnapshots.getDocuments()) {
+                        OrderModel order = orderDoc.toObject(OrderModel.class);
+
+                        repo.getOrderItem(orderDoc.getReference())
+                                .addOnSuccessListener(task -> {
+                                    List<BagItemModel> itemModels = new ArrayList<>();
+                                    for (DocumentSnapshot itemDoc : task.getDocuments()) {
+                                        BagItemModel bagItem = itemDoc.toObject(BagItemModel.class);
+                                        itemModels.add(bagItem);
+                                    }
+                                    order.order_items = itemModels;
+                                    list.add(order);
+                                    data.setValue(list);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e(TAG, "getOrderItem:failed", e);
+                                });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "getOrderOfUser: Failed to get orders", e);
+                });
+
+        return data;
+    }
+
+    public void cancelOrder(DocumentReference orderRef) {
+        repo.updateStatus(orderRef, 3)
+                .addOnSuccessListener(task -> {
+                    ProductRepository productRepo = new ProductRepository();
+                    orderRef.collection("order_items").get()
+                            .addOnSuccessListener(task1 -> {
+                                for (DocumentSnapshot snapshot : task1.getDocuments()) {
+                                    BagItemModel orderItem = snapshot.toObject(BagItemModel.class);
+                                    orderItem.variation_ref.get()
+                                            .addOnSuccessListener(task2 -> {
+                                                int old = task2.getLong("inventory").intValue();
+                                                productRepo.updateQuantity(orderItem.variation_ref, old + orderItem.qty);
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Log.e(TAG, "get old inventory: Failed", e);
+                                            });
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e(TAG, "update inventory for each item: Failed", e);
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "cancelOrder: Failed to cancel order", e);
+                });
     }
 }

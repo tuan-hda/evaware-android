@@ -1,103 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/fab_margin"
+    android:scrollbars="none"
     tools:context=".presentation.order.OrderFragment">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/Theme.Evaware.PopupOverlay">
-
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="4dp"
-                android:background="@color/transparent"
-                android:contentDescription="Go back"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/arrow_left" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lexend_medium"
-                    android:text="Order #12345"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/body_1" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/fab_margin"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="yesterdays, 10:00 AM"
-            android:fontFamily="@font/lexend_semibold"
-            android:textSize="@dimen/heading_2" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:textColor="@color/giratina_500"
-            android:text="waiting_for_payment"/>
-
-        <!-- Replace the ListView with a RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lv_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:paddingVertical="@dimen/fab_margin"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delivery info"
-            android:fontFamily="@font/lexend_semibold"
-            android:textSize="@dimen/heading_2"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/orderDetail_back"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@color/transparent"
+                android:contentDescription="Go back"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow_left" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/orderDetail_tv_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_medium"
+                android:text="Order #12345"
+                android:textColor="@color/black"
+                android:textSize="@dimen/body_1" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/orderDetail_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lexend_semibold"
+            android:text="yesterdays, 10:00 AM"
+            android:textSize="@dimen/heading_2" />
+
+        <TextView
+            android:id="@+id/orderDetail_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="8dp"
+            android:text="waiting_for_payment"
+            android:textColor="@color/giratina_500" />
+
+        <!-- Replace the ListView with a RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderDetail_lv_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:paddingVertical="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/lexend_semibold"
+            android:text="Delivery info"
+            android:textSize="@dimen/heading_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp">
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_car" />
+
             <TextView
+                android:id="@+id/orderDetail_paymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:textSize="16sp"
                 android:fontFamily="@font/lexend"
+                android:text="By courier"
                 android:textColor="@color/black"
-                android:text="By courier"/>
+                android:textSize="16sp" />
         </LinearLayout>
-        <include layout="@layout/delivery_address_item"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingVertical="9.5dp">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/pin" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/orderDetail_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend"
+                    android:maxLines="2"
+                    android:text="London, 221B Baker Street"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body_1" />
+
+                <TextView
+                    android:id="@+id/orderDetail_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_light"
+                    android:maxLines="1"
+                    android:text="Hanna Gouse, +7 932 123-43-23"
+                    android:textColor="@color/giratina_500"
+                    android:textSize="@dimen/body_2" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_semibold"
+                android:text="total"
+                android:textSize="@dimen/heading_2" />
+
+            <TextView
+                android:id="@+id/orderDetail_total"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lexend_semibold"
+                android:text="$420.50"
+                android:textAlignment="textEnd"
+                android:textSize="@dimen/heading_2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend"
+                android:text="Promocode"
+                android:textColor="@color/giratina_500"
+                android:textSize="@dimen/body_1" />
+
+            <TextView
+                android:id="@+id/orderDetail_promocode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lexend"
+                android:text="−$25.00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/giratina_500"
+                android:textSize="@dimen/body_1" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/orderDetail_bt_cancel"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="64dp"
+            android:layout_marginVertical="16dp"
+            android:backgroundTint="@color/giratina_100"
+            android:text="Cancel"
+            app:cornerRadius="8dp" />
     </LinearLayout>
-</LinearLayout>
+
+</ScrollView>

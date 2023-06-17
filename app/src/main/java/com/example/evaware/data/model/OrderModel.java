@@ -5,10 +5,11 @@ import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class OrderModel {
+public class OrderModel implements Serializable {
     @DocumentId
     public String id;
     public Date createdAt;
@@ -70,6 +71,12 @@ public class OrderModel {
         this.payment_method = payment_method;
         this.status = status;
         this.total = total;
+    }
 
+    public String getAddress(){
+        return this.street + ", " +
+                this.ward + ", " +
+                this.district + ", " +
+                this.province;
     }
 }

@@ -78,4 +78,13 @@ public class ProductRepository {
         return productRef.document(productId).collection("recommendations").get();
     }
 
+    public Task<Void> updateQuantity(DocumentReference variationRef, int qty){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("inventory", qty);
+        return variationRef.update(updates).addOnFailureListener(e -> {
+                    Log.e(TAG, "updateQuantity:failure " + e.getLocalizedMessage());
+                }
+        );
+    }
+
 }
