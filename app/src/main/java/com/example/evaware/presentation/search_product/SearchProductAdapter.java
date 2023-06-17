@@ -42,7 +42,7 @@ public class SearchProductAdapter extends RecyclerView.Adapter<SearchProductAdap
         ProductModel productModel = productModelList.get(position);
         holder.mTextView.setText(productModel.getName());
         Picasso.with(context)
-                .load(productModel.getImg_url())
+                .load(productModel.image_thumbnail)
                 .into(holder.mImageView);
         holder.container.setOnClickListener(view->{
             Intent intent = new Intent(context, ProductActivity.class);

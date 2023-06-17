@@ -7,6 +7,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
@@ -24,12 +25,20 @@ public class ProductRepository {
         return productRef.get().addOnFailureListener(e -> Log.e(TAG, "getAllProduct: ", e ));
     }
 
+    public Query getAllProductAlt(){
+        return productRef;
+    }
+
     public DocumentReference getProductById(String id) {
         return productRef.document(id);
     }
 
     public Task<QuerySnapshot> getAllProductsByCategory(DocumentReference category) {
         return productRef.whereEqualTo("category_ref", category).get();
+    }
+
+    public Query getAllProductsByCategoryAlt(DocumentReference category) {
+        return productRef.whereEqualTo("category_ref", category);
     }
 
     public Task<QuerySnapshot> getVariationOfProduct(String id) {

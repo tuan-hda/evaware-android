@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.evaware.R;
 import com.example.evaware.data.model.BagItemModel;
@@ -82,6 +83,7 @@ public class BagFragment extends Fragment {
                 binding.scrollView.setVisibility(View.VISIBLE);
                 adapter = new BagListAdapter(activity, bagItemModels, viewModel);
                 binding.listBagItem.setAdapter(adapter);
+                binding.listBagItem.setLayoutManager(new LinearLayoutManager(getActivity()));
                 updateTotal(bagItemModels);
             }
 

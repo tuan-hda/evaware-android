@@ -26,9 +26,14 @@ import com.example.evaware.presentation.wishlist.WishViewModel;
 import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
@@ -100,7 +105,60 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void handlePopular() {
+        // Step 1: Create a Map to store the total sales for each product
+        Map<String, Integer> productSales;
+        productSales = new HashMap<>();
+
+        // Step 2: Query the orders collection
+        FirebaseFirestore.getInstance()
+                .collection("orders")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    // Step 3: Iterate over the orders
+                    for (DocumentSnapshot orderDoc : querySnapshot.getDocuments()) {
+                        // Step 4: Iterate over the order items
+                        List<Map<String, Object>> orderItems = (List<Map<String, Object>>) orderDoc.get("order_items");
+                        if (orderItems != null) {
+                            for (Map<String, Object> orderItem : orderItems) {
+                                DocumentReference productRef = (DocumentReference) orderItem.get("product");
+
+                                // Step 5: Update the total sales for each product
+                                if (productRef != null) {
+                                    String productId = productRef.getId();
+                                    int sales = productSales.getOrDefault(productId, 0) + 1;
+                                    productSales.put(productId, sales);
+                                }
+                            }
+                        }
+                    }
+
+                    // Sort the products based on total sales in descending order
+                    List<Map.Entry<String, Integer>> sortedProducts = new ArrayList<>(productSales.entrySet());
+                    sortedProducts.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
+                    // Get the top-selling products (e.g., top 10)
+                    int topN = 10;
+                    List<String> topSellingProducts = new ArrayList<>();
+                    for (int i = 0; i < Math.min(topN, sortedProducts.size()); i++) {
+                        topSellingProducts.add(sortedProducts.get(i).getKey());
+                    }
+
+                    // Handle the top-selling products
+                    // ...
+                })
+                .addOnFailureListener(e -> {
+                    // Handle any errors
+                    // ...
+                });
+
+    }
+
     private void setUpBtn() {
+        binding.btnShowAll.setOnClickListener(view -> {
+            Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
+            requireActivity().startActivity(intent1);
+        });
         binding.cvSearchProduct.setOnClickListener(view -> {
             Intent intent1 = new Intent(requireActivity(), SearchProductActivity.class);
             requireActivity().startActivity(intent1);

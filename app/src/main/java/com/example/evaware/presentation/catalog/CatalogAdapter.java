@@ -22,6 +22,7 @@ import com.example.evaware.presentation.product.ProductActivity;
 import com.example.evaware.R;
 import com.example.evaware.presentation.product.ProductViewModel;
 import com.example.evaware.presentation.wishlist.WishViewModel;
+import com.example.evaware.utils.CurrencyFormat;
 import com.example.evaware.utils.GlobalStore;
 import com.google.firebase.Timestamp;
 import com.squareup.picasso.Picasso;
@@ -57,6 +58,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             viewHolder.tvDescription = convertView.findViewById(R.id.tv_product_description);
             viewHolder.imvProduct = convertView.findViewById(R.id.imv_product_img);
             viewHolder.imvLoveLike = convertView.findViewById(R.id.iv_love_like);
+            viewHolder.tvPrice = convertView.findViewById(R.id.text_price);
 
             convertView.setTag(viewHolder);
         } else {
@@ -66,6 +68,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
         final ProductModel item = dataList.get(position);
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvDescription.setText(item.getDesc());
+        viewHolder.tvPrice.setText(CurrencyFormat.getFormattedPrice(item.getPrice()));
         Picasso.with(context)
                 .load(item.image_thumbnail)
                 .into(viewHolder.imvProduct);
@@ -129,7 +132,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
 
     private static class ViewHolder {
-        TextView tvName;
+        TextView tvName, tvPrice;
         TextView tvDescription;
         ImageView imvProduct;
         ImageButton imvLoveLike;

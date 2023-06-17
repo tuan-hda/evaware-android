@@ -128,7 +128,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
                 variantsDetail.add(variantDetail);
             }
 
-            variationAdapter = new VariationProductAdapter(variantsDetail);
+            variationAdapter = new VariationProductAdapter(variantsDetail, binding, this);
             productDetail.setVariationModelDetails(variantsDetail);
             variationAdapter.setOnVariationProductListener(this);
             binding.rvVariations.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -155,6 +155,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
         binding.imgBtnSavedItem.setOnClickListener(view -> {
             SnackBar.showSnackSuccessful(ProductActivity.this, binding.getRoot(), (ViewGroup) findViewById(android.R.id.content));
         });
+        binding.btnAddToBag.setClickable(false);
         binding.btnAddToBag.setOnClickListener(view -> {
             productViewModel.getProductRefBbyId(productModelId).observe(this, documentReference -> {
                 try{

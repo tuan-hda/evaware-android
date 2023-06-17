@@ -16,6 +16,8 @@ import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.databinding.ActivityCatalogBinding;
 import com.example.evaware.presentation.bottomSheet.Sort;
 import com.example.evaware.presentation.category.CategoryViewModel;
+import com.example.evaware.presentation.filter.Filter;
+import com.example.evaware.utils.GlobalStore;
 import com.example.evaware.utils.LoadingDialog;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ public class CatalogActivity extends AppCompatActivity {
     private CatalogViewModel viewModel;
     private LoadingDialog loadingDialog;
     private EditText edtSearch;
+    private Sort sort;
+    private static final String TAG = "CatalogActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +47,12 @@ public class CatalogActivity extends AppCompatActivity {
         categoryId = intent.getStringExtra("categoryId");
         categoryName = intent.getStringExtra("categoryName");
 
+
         init();
+        sort = new Sort(categoryId, viewModel);
         loadData();
         setUpEditText();
+        GlobalStore.getInstance().setData("filterPrice", null);
     }
 
     private void setUpEditText() {
@@ -90,10 +97,12 @@ public class CatalogActivity extends AppCompatActivity {
     private void loadData() {
         loadingDialog.showDialog();
         viewModel.getAllProductsByCategory(categoryId).observe(this, productModels -> {
+            dataList = new ArrayList<>();
             for (ProductModel product : productModels) {
                 dataList.add(product);
             }
             adapter = new CatalogAdapter(this, dataList.size(), dataList);
+            Log.e(TAG, "loadData: " + dataList.size());
             gridView.setAdapter(adapter);
             loadingDialog.dismissDialog();
         });
@@ -112,8 +121,15 @@ public class CatalogActivity extends AppCompatActivity {
         });
 
         binding.btnSort.setOnClickListener(v -> {
-            Sort sort = new Sort();
             sort.show(getSupportFragmentManager(), "Sort");
+        });
+
+        binding.btnFilter.setOnClickListener(v -> {
+            Intent intent = new Intent(CatalogActivity.this, Filter.class);
+            intent.putExtra("categoryId", categoryId);
+            CatalogViewModel catalogViewModel = new ViewModelProvider(this).get(CatalogViewModel.class);
+            GlobalStore.getInstance().setData("catalogViewModel", catalogViewModel);
+            startActivity(intent);
         });
     }
 }
