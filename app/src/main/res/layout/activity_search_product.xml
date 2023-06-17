@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:padding="@dimen/fab_margin"
     tools:context=".presentation.search_product.SearchProductActivity">
+    <include android:id="@+id/appbar" layout="@layout/app_appbar" />
+
     <EditText
         android:id="@+id/edt_search_product"
         style="@style/EditText"

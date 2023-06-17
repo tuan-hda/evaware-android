@@ -7,15 +7,17 @@
     android:orientation="vertical"
     tools:context=".presentation.catalog.CatalogActivity">
 
-    <include android:id="@+id/appbar" layout="@layout/app_appbar" />
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/app_appbar" />
     <!--    search-->
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/fab_margin"
         android:layout_marginVertical="8dp"
         android:backgroundTint="@color/giratina_100"
         app:cardCornerRadius="8dp"
-        android:layout_marginHorizontal="@dimen/fab_margin"
         app:strokeWidth="0dp">
 
         <LinearLayout
@@ -51,6 +53,7 @@
         android:paddingVertical="8dp">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_sort"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginRight="15dp"
@@ -91,6 +94,7 @@
             app:strokeWidth="0dp">
 
             <LinearLayout
+                android:id="@+id/btn_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -115,15 +119,15 @@
     </LinearLayout>
     <!--List item-->
     <GridView
-        android:padding="@dimen/fab_margin"
         android:id="@+id/gv_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
         android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:padding="@dimen/fab_margin"
         android:scrollbarThumbHorizontal="@null"
         android:scrollbars="none"
-        android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp" />
 
 </LinearLayout>

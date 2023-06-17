@@ -23,7 +23,7 @@ public class ProductModel implements Serializable {
     }
 
     public DocumentReference category_ref;
-    private String img_url;
+    public String img_url;
     @Exclude
     public Boolean saved = false;
     @ServerTimestamp

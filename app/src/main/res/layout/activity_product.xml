@@ -91,16 +91,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" />
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_add_to_bag"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/round_button"
-                        android:drawableEnd="@drawable/ic_bag"
+                        android:layout_height="64dp"
+                        android:enabled="false"
+                        android:background="@drawable/button_selector"
                         android:fontFamily="@font/lexend_medium"
                         android:text="@string/add_to_bag"
                         android:textSize="@dimen/body_1"
@@ -112,13 +113,11 @@
                         android:id="@+id/myIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginStart="274dp"
-                        android:layout_marginBottom="14dp"
-                        android:src="@drawable/ic_bag"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        android:src="@drawable/ic_bag" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
             </LinearLayout>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

@@ -28,7 +28,7 @@ public class CategoryRepository {
         return categoryRef.document(id);
     }
     public Task<QuerySnapshot> getAllCategories(){
-        return categoryRef.get();
+        return categoryRef.orderBy("name").get();
     }
 
 }

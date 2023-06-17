@@ -13,7 +13,7 @@ import com.example.evaware.data.model.PaymentMethodModel;
 import com.example.evaware.data.model.VoucherModel;
 import com.example.evaware.data.repo.UserRepository;
 import com.example.evaware.databinding.ActivityConfirmOrderBinding;
-import com.example.evaware.presentation.bag.BagListAdapter;
+import com.example.evaware.presentation.bag.BagListAdapterAlt;
 import com.example.evaware.presentation.bag.BagViewModel;
 import com.example.evaware.presentation.order.MyOrderViewModel;
 import com.example.evaware.utils.CurrencyFormat;
@@ -31,7 +31,7 @@ import java.util.Objects;
 
 public class ConfirmOrderActivity extends AppCompatActivity {
     ActivityConfirmOrderBinding binding;
-    BagListAdapter adapter;
+    BagListAdapterAlt adapter;
     private BagViewModel viewModel;
     private MyOrderViewModel myOrderViewModel;
     private VoucherModel voucher;
@@ -124,7 +124,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         viewModel.getBagList().observe(this, bagItemModels -> {
             Double calcSubtotal = 0.0;
 
-            adapter = new BagListAdapter(this, bagItemModels, true);
+            adapter = new BagListAdapterAlt(this, bagItemModels, true);
             binding.listBagItem.removeAllViews();
             for (int i = 0; i < bagItemModels.size(); i++) {
                 binding.listBagItem.addView(adapter.getView(i, null, binding.listBagItem));

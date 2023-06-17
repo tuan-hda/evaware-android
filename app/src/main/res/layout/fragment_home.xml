@@ -57,28 +57,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fab_margin" />
-        <LinearLayout
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ll_see_all"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/fab_margin"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="See all"
-                android:textSize="@dimen/body_1"
-                android:fontFamily="@font/lexend"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/chevron_right"/>
-        </LinearLayout>
+            android:layout_height="64dp"
+            android:background="@drawable/round_button"
+            android:theme="@style/OutlineButton"
+            android:text="See all categories"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,12 +77,30 @@
             android:textColor="@color/black"
             android:textSize="@dimen/heading_2" />
 
+
         <GridView
             android:id="@+id/rv_popular_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:horizontalSpacing="10dp"
+            android:columnWidth="100dp"
+            android:scrollbarThumbHorizontal="@null"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp"
+            android:numColumns="2"
             android:layout_marginTop="@dimen/fab_margin"
-            android:numColumns="2" />
+   />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_show_all"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/round_button"
+            android:theme="@style/OutlineButton"
+            android:text="See all products"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
