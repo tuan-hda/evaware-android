@@ -41,21 +41,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/fab_margin"
+            android:maxLines="1"
             android:text="wooden bedside table featuring a raised design"
             android:textColor="@color/giratina_500"
             android:textSize="@dimen/body_3" />
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_order_again"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_weight="1">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_order_again"
-                style="@style/Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Order again" />
-        </LinearLayout>
+            android:text="Order again" />
 
     </LinearLayout>
 </LinearLayout>

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/fab_margin"
     android:scrollbars="none"
     tools:context=".presentation.order.OrderFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,39 +32,44 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <TextView
+                android:id="@+id/orderDetail_tv_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lexend_medium"
                 android:text="Order #12345"
                 android:textColor="@color/black"
                 android:textSize="@dimen/body_1" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+
             <View
                 android:layout_width="24dp"
-                android:layout_height="0dp"/>
+                android:layout_height="0dp" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/orderDetail_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="yesterdays, 10:00 AM"
             android:fontFamily="@font/lexend_semibold"
+            android:text="yesterdays, 10:00 AM"
             android:textSize="@dimen/heading_2" />
 
         <TextView
+            android:id="@+id/orderDetail_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/giratina_500"
-            android:text="waiting_for_payment"/>
+            android:paddingTop="8dp"
+            android:text="waiting_for_payment"
+            android:textColor="@color/giratina_500" />
 
         <!-- Replace the ListView with a RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -71,51 +77,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@null"
-            android:paddingVertical="16dp"/>
+            android:paddingVertical="16dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Delivery info"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/lexend_semibold"
-            android:textSize="@dimen/heading_2"/>
+            android:text="Delivery info"
+            android:textSize="@dimen/heading_2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:paddingVertical="20dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp">
+
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_car" />
+
             <TextView
+                android:id="@+id/orderDetail_paymentMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:textSize="16sp"
                 android:fontFamily="@font/lexend"
+                android:text="By courier"
                 android:textColor="@color/black"
-                android:text="By courier"/>
+                android:textSize="16sp" />
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingVertical="9.5dp">
 
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/pin"/>
+                android:src="@drawable/pin" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/orderDetail_address"
                     android:layout_width="match_parent"
@@ -124,66 +135,82 @@
                     android:maxLines="2"
                     android:text="London, 221B Baker Street"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/body_1"/>
+                    android:textSize="@dimen/body_1" />
 
                 <TextView
-                    android:id="@+id/orderDetail__contact"
+                    android:id="@+id/orderDetail_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lexend_light"
                     android:maxLines="1"
                     android:text="Hanna Gouse, +7 932 123-43-23"
                     android:textColor="@color/giratina_500"
-                    android:textSize="@dimen/body_2"/>
+                    android:textSize="@dimen/body_2" />
             </LinearLayout>
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="total"
                 android:fontFamily="@font/lexend_semibold"
-                android:textSize="@dimen/heading_2"/>
+                android:text="total"
+                android:textSize="@dimen/heading_2" />
+
             <TextView
                 android:id="@+id/orderDetail_total"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textAlignment="textEnd"
                 android:layout_height="wrap_content"
-                android:text="$420.50"
+                android:layout_weight="1"
                 android:fontFamily="@font/lexend_semibold"
-                android:textSize="@dimen/heading_2"/>
+                android:text="$420.50"
+                android:textAlignment="textEnd"
+                android:textSize="@dimen/heading_2" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend"
                 android:text="Promocode"
-                android:fontFamily="@font/lexend"
                 android:textColor="@color/giratina_500"
-                android:textSize="@dimen/body_1"/>
+                android:textSize="@dimen/body_1" />
+
             <TextView
-                android:id="@+id/orderDetail_sale"
+                android:id="@+id/orderDetail_promocode"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textAlignment="textEnd"
                 android:layout_height="wrap_content"
-                android:text="−$25.00"
+                android:layout_weight="1"
                 android:fontFamily="@font/lexend"
+                android:text="−$25.00"
+                android:textAlignment="textEnd"
                 android:textColor="@color/giratina_500"
-                android:textSize="@dimen/body_1"/>
+                android:textSize="@dimen/body_1" />
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/orderDetail_bt_cancel"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="64dp"
+            android:layout_marginVertical="16dp"
+            android:backgroundTint="@color/giratina_100"
+            android:text="Cancel"
+            app:cornerRadius="8dp" />
     </LinearLayout>
 
 </ScrollView>

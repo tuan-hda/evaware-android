@@ -19,6 +19,7 @@ import com.example.evaware.data.model.ProductModel;
 import com.example.evaware.data.model.VariationModel;
 import com.example.evaware.data.model.VoucherModel;
 import com.example.evaware.data.repo.OrderRepository;
+import com.example.evaware.data.repo.ProductRepository;
 import com.example.evaware.data.repo.UserRepository;
 import com.example.evaware.presentation.bag.BagViewModel;
 import com.example.evaware.presentation.checkout.ConfirmOrderActivity;
@@ -195,4 +196,30 @@ public class MyOrderViewModel extends AndroidViewModel {
         return data;
     }
 
+    public void cancelOrder(DocumentReference orderRef) {
+        repo.updateStatus(orderRef, 3)
+                .addOnSuccessListener(task -> {
+                    ProductRepository productRepo = new ProductRepository();
+                    orderRef.collection("order_items").get()
+                            .addOnSuccessListener(task1 -> {
+                                for (DocumentSnapshot snapshot : task1.getDocuments()) {
+                                    BagItemModel orderItem = snapshot.toObject(BagItemModel.class);
+                                    orderItem.variation_ref.get()
+                                            .addOnSuccessListener(task2 -> {
+                                                int old = task2.getLong("inventory").intValue();
+                                                productRepo.updateQuantity(orderItem.variation_ref, old + orderItem.qty);
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Log.e(TAG, "get old inventory: Failed", e);
+                                            });
+                                }
+                            })
+                            .addOnFailureListener(e -> {
+                                Log.e(TAG, "update inventory for each item: Failed", e);
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "cancelOrder: Failed to cancel order", e);
+                });
+    }
 }

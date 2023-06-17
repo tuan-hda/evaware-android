@@ -3,6 +3,7 @@ package com.example.evaware.presentation.order;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,14 @@ import com.example.evaware.presentation.wishlist.WishViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderItemAdapter extends BaseAdapter {
+    public static final String TAG = "OrderItemAdapter";
     FragmentActivity activity;
     List<OrderModel> itemList;
+    List<String> imageList;
     MyOrderViewModel vm;
     ViewHolder mViewHolder;
 
@@ -77,35 +81,35 @@ public class OrderItemAdapter extends BaseAdapter {
             mViewHolder = (ViewHolder) view.getTag();
         }
 
-        setData(i);
-        setUpButton();
+        OrderModel item = itemList.get(i);
+        setData(item);
+        setUpButton(item);
 
         return view;
     }
 
-    private void setUpButton() {
+    private void setUpButton(OrderModel item) {
         mViewHolder.llItem.setOnClickListener(view -> {
             Fragment fragment = new OrderFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("orderId", "tét");
+            bundle.putSerializable("orderItem", item);
             fragment.setArguments(bundle);
 
             activity.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.nav_host_fragment, new OrderFragment())
+                    .replace(R.id.nav_host_fragment, fragment)
                     .addToBackStack("orderDetail")
                     .commit();
         });
     }
 
-    private void setData(int i) {
-        OrderModel item = itemList.get(i);
+    private void setData(OrderModel item) {
         OrderImageAdapter imageAdapter = new OrderImageAdapter(activity, item.order_items);
 
         DateFormat dateFormat = new SimpleDateFormat("EEEE, dd/MM/yyyy, hh:mm a");
         mViewHolder.date.setText(dateFormat.format(item.created_at.toDate()));
         mViewHolder.price.setText("$"+item.total);
-        mViewHolder.id.setText(item.id);
+        mViewHolder.id.setText("#"+item.id);
         getStatus(item);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
@@ -115,10 +119,19 @@ public class OrderItemAdapter extends BaseAdapter {
 
     private void getStatus(OrderModel item) {
         if(item.status == 0){
-            mViewHolder.status.setText("Waiting for payment");
-        }else{
-            mViewHolder.status.setText("Delivered");
-            mViewHolder.status.setTextColor(Color.parseColor("#66BB6A"));
+            mViewHolder.status.setText("In progress");
+        }
+        else if(item.status == 1){
+            mViewHolder.status.setText("Delivering");
+            mViewHolder.status.setTextColor(Color.parseColor("#FEE440"));
+        }
+        else if(item.status == 2){
+            mViewHolder.status.setText("Success");
+            mViewHolder.status.setTextColor(Color.parseColor("#FEEB70"));
+        }
+        else if(item.status == 3){
+            mViewHolder.status.setText("Cancelled");
+            mViewHolder.status.setTextColor(Color.parseColor("#EF5350"));
         }
     }
 

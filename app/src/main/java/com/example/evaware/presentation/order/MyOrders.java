@@ -42,7 +42,6 @@ public class MyOrders extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpButtons();
-        setUpData();
     }
 
     private void setUpData() {
@@ -57,5 +56,11 @@ public class MyOrders extends Fragment {
         binding.myOrdersIbReturn.setOnClickListener(view -> {
             getActivity().getSupportFragmentManager().popBackStack();
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpData();
     }
 }
