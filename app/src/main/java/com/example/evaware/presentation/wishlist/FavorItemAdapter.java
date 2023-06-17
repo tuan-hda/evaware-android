@@ -71,6 +71,7 @@ public class FavorItemAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.item_small_card, null);
 
             mViewHolder.image = view.findViewById(R.id.itemSmallCard_iv_product);
+            mViewHolder.name= view.findViewById(R.id.itemSmallCard_tv_name);
             mViewHolder.price = view.findViewById(R.id.itemSmallCard_tv_price);
             mViewHolder.desc = view.findViewById(R.id.itemSmallCard_tv_desc);
             mViewHolder.btMoveToBag = view.findViewById(R.id.itemSmallCard_bt_moveToBag);
@@ -90,6 +91,7 @@ public class FavorItemAdapter extends BaseAdapter {
                 .load(item.imageUrl)
                 .into(mViewHolder.image);
 
+        mViewHolder.name.setText(item.name);
         mViewHolder.price.setText("$" + item.price);
         mViewHolder.desc.setText(item.desc);
 //      Set event
@@ -150,6 +152,7 @@ public class FavorItemAdapter extends BaseAdapter {
 
     static class ViewHolder {
         ImageView image;
+        TextView name;
         TextView price;
         TextView desc;
 

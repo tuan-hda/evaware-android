@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:theme="@style/BottomSheetModal"
+    tools:context=".presentation.filter.Filter">
+    <!--Header-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/filter_ib_close"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/lexend_medium"
+            android:paddingVertical="16dp"
+            android:text="Filter"
+            android:textAlignment="center"
+            android:textSize="@dimen/body_1" />
+
+        <TextView
+            android:id="@+id/filter_tv_clear"
+            android:layout_width="56dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:fontFamily="@font/lexend_medium"
+            android:text="Clear"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/body_1" />
+    </LinearLayout>
+    <!--Slider-->
+   <androidx.core.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       android:fillViewport="true">
+       <androidx.appcompat.widget.LinearLayoutCompat
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+           android:layout_height="match_parent">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               android:paddingVertical="16dp">
+               <!--Price-->
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:paddingHorizontal="16dp">
+
+                   <TextView
+                       android:id="@+id/filter_tv_minPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:fontFamily="@font/lexend_medium"
+                       android:text="$0"
+                       android:textAlignment="textStart"
+                       android:textSize="@dimen/body_1" />
+
+                   <TextView
+                       android:id="@+id/filter_tv_maxPrice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"
+                       android:fontFamily="@font/lexend_medium"
+                       android:text="$700"
+                       android:textAlignment="textEnd"
+                       android:textSize="@dimen/body_1" />
+               </LinearLayout>
+               <!--Slider-->
+               <com.google.android.material.slider.RangeSlider
+                   android:id="@+id/filter_rs_price"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginHorizontal="6dp"
+                   android:valueTo="99999"
+                   app:trackHeight='2dp' />
+               <!--List categories-->
+           </LinearLayout>
+
+           <TextView
+               android:id="@+id/text_categories"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/lexend_semibold"
+               android:text="Category"
+               android:textSize="20sp"
+               android:paddingHorizontal="16dp"/>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/filter_lv_listCategories"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:divider="@null"
+               android:paddingHorizontal="16dp"
+               android:scrollbars="none"
+               tools:listitem="@layout/item_category" />
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/lexend_semibold"
+               android:text="Colour"
+               android:layout_marginTop="12dp"
+               android:textSize="20sp"
+               android:paddingHorizontal="16dp"/>
+
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/filter_lv_listColours"
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:divider="@null"
+               android:paddingHorizontal="16dp"
+               android:scrollbars="none"
+               tools:listitem="@layout/item_category" />
+
+
+
+       </androidx.appcompat.widget.LinearLayoutCompat>
+   </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/filter_bt_showMore"
+        style="@style/Button"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:text="Show 25 items" />
+</LinearLayout>

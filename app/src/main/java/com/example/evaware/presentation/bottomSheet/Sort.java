@@ -13,8 +13,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.evaware.R;
+import com.example.evaware.presentation.catalog.CatalogViewModel;
 import com.example.evaware.presentation.filter.Option;
 import com.example.evaware.presentation.filter.OptionAdapter;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -29,8 +31,19 @@ import java.util.List;
 //        }
 //Và gọi hàm trên khi cần show
 
-public class Sort extends Fragment {
+public class Sort extends BottomSheetDialogFragment {
     List<Option> sorts = new ArrayList<>();
+    int selectedIndex = 0;
+    private CatalogViewModel catalogViewModel;
+    private String categoryId;
+
+    public Sort() {
+    }
+
+    public Sort(String categoryId, CatalogViewModel catalogViewModel) {
+        this.categoryId = categoryId;
+        this.catalogViewModel = catalogViewModel;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,10 +55,13 @@ public class Sort extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        sorts.add(new Option("Price: high to low", true));
-        sorts.add(new Option("Price: low to high", false));
-        sorts.add(new Option("New first", false));
-        sorts.add(new Option("Popular first", false));
+        if (sorts.size() < 4) {
+
+            sorts.add(new Option("Price: high to low", true));
+            sorts.add(new Option("Price: low to high", false));
+            sorts.add(new Option("New first", false));
+            sorts.add(new Option("Old first", false));
+        }
 
         ListView listView = (ListView) view.findViewById(R.id.sort_lv);
         OptionAdapter adapter = new OptionAdapter(getContext(), sorts);
@@ -55,17 +71,22 @@ public class Sort extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Option old = (Option) adapterView.getItemAtPosition(selectedIndex);
+                old.setChecked(false);
                 Option selected = (Option) adapterView.getItemAtPosition(i);
                 selected.setChecked(!selected.isChecked());
+                selectedIndex = i;
                 adapter.notifyDataSetChanged();
+
+                catalogViewModel.forceGet(categoryId, selectedIndex);
+                dismiss();
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = (Dialog) getParentFragment();
-                dialog.dismiss();
+                dismiss();
             }
         });
     }

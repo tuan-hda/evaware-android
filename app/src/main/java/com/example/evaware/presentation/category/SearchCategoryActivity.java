@@ -20,8 +20,6 @@ import java.util.List;
 public class SearchCategoryActivity extends AppCompatActivity{
     private ActivitySearchCategoryBinding binding;
     private RecyclerView recyclerView;
-    private String typeOfCategoryId;
-    private String typeOfCategoryName;
     private List<CategoryModel> categories;
     private CategoryViewModel categoryViewModel;
 
@@ -31,9 +29,6 @@ public class SearchCategoryActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = ActivitySearchCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = getIntent();
-        typeOfCategoryId = intent.getStringExtra("itemId");
-        typeOfCategoryName = intent.getStringExtra("itemName");
         init();
         loadData();
         setUpEditText();
@@ -60,7 +55,7 @@ public class SearchCategoryActivity extends AppCompatActivity{
     }
 
     private void filterCategories(String query) {
-        List<CategoryModel> originalCategories = categoryViewModel.getCategoryByType(typeOfCategoryId).getValue();
+        List<CategoryModel> originalCategories = categoryViewModel.getAllCategory().getValue();
         if (originalCategories != null) {
             List<CategoryModel> filteredCategories = new ArrayList<>();
             for (CategoryModel category : originalCategories) {
@@ -76,7 +71,7 @@ public class SearchCategoryActivity extends AppCompatActivity{
     public void init() {
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         recyclerView = binding.rcvCategories;
-        binding.appbar.appbarTitle.setText(typeOfCategoryName);
+        binding.appbar.appbarTitle.setText("Categories");
         categories = new ArrayList<CategoryModel>();
         CategoryAdapter adapter = new CategoryAdapter(categories, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -88,7 +83,7 @@ public class SearchCategoryActivity extends AppCompatActivity{
     }
 
     private void loadData() {
-        categoryViewModel.getCategoryByType(typeOfCategoryId).observe(this, categoryModels -> {
+        categoryViewModel.getAllCategory().observe(this, categoryModels -> {
             if (categoryModels.size() == 0) {
                 Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show();
             } else {

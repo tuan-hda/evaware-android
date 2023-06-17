@@ -210,8 +210,10 @@ public class ProductViewModel extends AndroidViewModel {
         productRepository.getAllProduct().addOnSuccessListener(task -> {
             List<DocumentSnapshot> docs = task.getDocuments();
             for (DocumentSnapshot doc : docs) {
-                ProductModel product = doc.toObject(ProductModel.class);
-                products.add(product);
+
+                    ProductModel product = doc.toObject(ProductModel.class);
+                    products.add(product);
+
             }
             liveData.setValue(products);
         });

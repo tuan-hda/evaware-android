@@ -22,6 +22,7 @@ import com.example.evaware.presentation.product.ProductActivity;
 import com.example.evaware.R;
 import com.example.evaware.presentation.product.ProductViewModel;
 import com.example.evaware.presentation.wishlist.WishViewModel;
+import com.example.evaware.utils.CurrencyFormat;
 import com.example.evaware.utils.GlobalStore;
 import com.google.firebase.Timestamp;
 import com.squareup.picasso.Picasso;
@@ -32,6 +33,7 @@ import java.util.List;
 public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
     private Context context;
+    private static final String TAG = "CatalogAdapter";
     private List<ProductModel> dataList;
     private WishViewModel wishViewModel;
     private ProductViewModel productViewModel;
@@ -57,6 +59,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             viewHolder.tvDescription = convertView.findViewById(R.id.tv_product_description);
             viewHolder.imvProduct = convertView.findViewById(R.id.imv_product_img);
             viewHolder.imvLoveLike = convertView.findViewById(R.id.iv_love_like);
+            viewHolder.tvPrice = convertView.findViewById(R.id.text_price);
 
             convertView.setTag(viewHolder);
         } else {
@@ -64,10 +67,14 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
         }
 
         final ProductModel item = dataList.get(position);
+        if (item == null) {
+            return convertView;
+        }
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvDescription.setText(item.getDesc());
+        viewHolder.tvPrice.setText(CurrencyFormat.getFormattedPrice(item.getPrice()));
         Picasso.with(context)
-                .load(item.getImg_url())
+                .load(item.image_thumbnail)
                 .into(viewHolder.imvProduct);
         if(item.saved){
             viewHolder.imvLoveLike.setBackgroundResource(R.drawable.heart_filled);
@@ -83,6 +90,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
         viewHolder.imvLoveLike.setOnClickListener(view->{
             List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+            if (list == null) {
+                return;
+            }
             if(item.saved){
                 for (WishItemModel listItem : list) {
                     if (listItem.getProduct_ref().getId().equals(item.getId())) {
@@ -111,6 +121,9 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
             GlobalStore.getInstance().setData("wishList", list);
         });
         List<WishItemModel> list = (List<WishItemModel>) GlobalStore.getInstance().getData("wishList");
+        if (list == null) {
+            return convertView;
+        }
         for(WishItemModel wishItemModel : list) {
             if(wishItemModel.getProduct_ref().getId().equals(item.getId())) {
                 viewHolder.imvLoveLike.setBackgroundResource(R.drawable.heart_filled);
@@ -123,7 +136,7 @@ public class CatalogAdapter extends ArrayAdapter<ProductModel> {
 
 
     private static class ViewHolder {
-        TextView tvName;
+        TextView tvName, tvPrice;
         TextView tvDescription;
         ImageView imvProduct;
         ImageButton imvLoveLike;

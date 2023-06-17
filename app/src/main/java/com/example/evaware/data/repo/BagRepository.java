@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -29,7 +30,7 @@ public class BagRepository {
     }
 
     public Task<QuerySnapshot> getBagList() {
-        return barRef.get();
+        return barRef.orderBy("created_at", Query.Direction.DESCENDING).get();
     }
 
     public Task<Void> updateBagItem(DocumentReference ref, BagItemModel item) {
@@ -55,6 +56,13 @@ public class BagRepository {
             Log.e(TAG, "findByProductRef: ", e);
         });
     }
+
+    public Task<QuerySnapshot> findByProductVariationRef(DocumentReference doc, DocumentReference variation) {
+        return barRef.whereEqualTo("product_ref", doc).whereEqualTo("variation_ref", variation).get().addOnFailureListener(e -> {
+            Log.e(TAG, "findByProductVariationRef: ", e);
+        });
+    }
+
 
     public Task<Void> deleteAllDocuments() {
         return getBagList()

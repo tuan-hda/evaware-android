@@ -3,24 +3,18 @@
     android:id="@+id/ll_container"
     android:layout_width="wrap_content"
     android:gravity="center"
-    android:clickable="true"
+    android:clickable="false"
     android:layout_marginRight="@dimen/fab_margin"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:background="@drawable/round_button_white"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView
-        android:id="@+id/im_icon_variation"
-        android:src="@drawable/ic_black_variation"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/tv_variation_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="black"
         android:paddingVertical="8dp"
+
+        android:paddingLeft="8dp"
         android:paddingEnd="@dimen/fab_margin"
         android:layout_marginStart="8dp"
         android:textSize="@dimen/body_2"

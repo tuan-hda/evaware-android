@@ -22,11 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/surprised"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="... no worries. Start saving as you shop by clicking the little heart"
+        android:text="find something for you right now"
         android:textSize="16dp"
         android:textAlignment="center"
         android:fontFamily="@font/lexend_light"

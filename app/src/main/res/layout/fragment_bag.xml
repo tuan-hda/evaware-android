@@ -52,19 +52,9 @@
             app:layout_constraintBottom_toTopOf="@+id/txt_description"
             app:layout_constraintEnd_toEndOf="@+id/txt_description"
             app:layout_constraintStart_toStartOf="@+id/txt_description"
-            app:layout_constraintTop_toBottomOf="@+id/img_surprised" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_description" />
 
-        <ImageView
-            android:id="@+id/img_surprised"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/surprised_image"
-            android:src="@drawable/surprised"
-            app:layout_constraintBottom_toTopOf="@+id/txt_empty"
-            app:layout_constraintEnd_toEndOf="@+id/txt_empty"
-            app:layout_constraintStart_toStartOf="@+id/txt_empty"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+
 
         <TextView
             android:id="@+id/txt_description"
@@ -81,52 +71,64 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_empty" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/layout_bag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingBottom="16dp">
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_bag_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@null"
                 android:dividerHeight="0dp"
+                android:scrollbars="none"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="16dp" />
 
-            <TextView
-                android:id="@+id/text_total"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/lexend_semibold"
-                android:text="total"
-                android:textColor="@color/black"
-                android:textSize="@dimen/heading_2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_bag_item" />
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/text_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/lexend_semibold"
+                    android:text="total"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/list_bag_item" />
 
-            <TextView
-                android:id="@+id/text_total_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/lexend_semibold"
-                android:text="$0"
-                android:textColor="@color/black"
-                android:textSize="@dimen/heading_2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_bag_item" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/text_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/lexend_semibold"
+                    android:text="$0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/heading_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/list_bag_item" />
+            </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_checkout"
@@ -142,6 +144,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_total"
                 app:layout_constraintVertical_bias="1.0"
                 tools:layout_editor_absoluteX="16dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

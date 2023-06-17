@@ -58,7 +58,7 @@ public class WishViewModel extends AndroidViewModel {
 
                 wishItemModel.getProduct_ref().get().addOnSuccessListener(snapshot -> {
                     ProductModel product = snapshot.toObject(ProductModel.class);
-                    SavedModel item = new SavedModel(doc.getReference(), wishItemModel.getProduct_ref(), product.getImg_url(), (Double) product.price, product.desc);
+                    SavedModel item = new SavedModel(doc.getReference(), wishItemModel.getProduct_ref(), product.image_thumbnail, product.name, (Double) product.price, product.desc);
                     taskCompletionSource.setResult(item);
                 }).addOnFailureListener(e -> {
                     Log.e(TAG, "getProductInfo: failure" + e.getLocalizedMessage());

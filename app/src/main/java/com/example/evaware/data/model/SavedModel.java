@@ -9,11 +9,13 @@ public class SavedModel {
     public String imageUrl;
     public Double price;
     public String desc;
+    public String name;
 
-    public SavedModel(DocumentReference wishListRef, DocumentReference productRef, String imageUrl, Double price, String desc) {
+    public SavedModel(DocumentReference wishListRef, DocumentReference productRef, String imageUrl, String name, Double price, String desc) {
         this.wishListRef = wishListRef;
         this.productRef = productRef;
         this.imageUrl = imageUrl;
+        this.name = name;
         this.price = price;
         this.desc = desc;
     }

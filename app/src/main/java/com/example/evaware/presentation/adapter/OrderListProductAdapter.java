@@ -58,7 +58,9 @@ public class OrderListProductAdapter extends RecyclerView.Adapter<OrderListProdu
         ProductModel orderItem = mOrderItemList.get(position);
 
         Picasso.with(mContext).load(orderItem.image_thumbnail).into(holder.imageView);
+        holder.name.setText(orderItem.name);
         holder.priceTextView.setText("$" + orderItem.price);
+        holder.qty.setText("x"+orderList.get(position).qty);
         holder.descriptionTextView.setText(orderItem.desc);
 
         holder.orderAgain.setOnClickListener(view -> {
@@ -81,14 +83,18 @@ public class OrderListProductAdapter extends RecyclerView.Adapter<OrderListProdu
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        TextView name;
         TextView priceTextView;
         TextView descriptionTextView;
+        TextView qty;
         MaterialButton orderAgain;
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_product_img);
+            name = itemView.findViewById(R.id.tv_order_product_name);
             priceTextView = itemView.findViewById(R.id.tv_order_product_price);
+            qty = itemView.findViewById(R.id.tv_order_product_qty);
             descriptionTextView = itemView.findViewById(R.id.tv_order_product_description);
             orderAgain = itemView.findViewById(R.id.btn_order_again);
         }

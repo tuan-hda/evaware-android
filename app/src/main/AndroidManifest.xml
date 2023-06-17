@@ -31,6 +31,9 @@
             android:name=".presentation.new_review.NewReviewActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.filter.Filter"
+            android:exported="false" />
+        <activity
             android:name=".presentation.review.ReviewsActivity"
             android:exported="false" />
         <activity
