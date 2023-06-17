@@ -37,7 +37,6 @@ public class OrderItemAdapter extends BaseAdapter {
     List<OrderModel> itemList;
     List<String> imageList;
     MyOrderViewModel vm;
-    ViewHolder mViewHolder;
 
     public OrderItemAdapter(FragmentActivity activity, List<OrderModel> itemList, MyOrderViewModel vm) {
         this.activity = activity;
@@ -62,7 +61,7 @@ public class OrderItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        mViewHolder = null;
+        ViewHolder mViewHolder = null;
         if(view == null){
             mViewHolder = new ViewHolder();
             LayoutInflater inflater = activity.getLayoutInflater();
@@ -82,13 +81,13 @@ public class OrderItemAdapter extends BaseAdapter {
         }
 
         OrderModel item = itemList.get(i);
-        setData(item);
-        setUpButton(item);
+        setData(item, mViewHolder);
+        setUpButton(item,mViewHolder);
 
         return view;
     }
 
-    private void setUpButton(OrderModel item) {
+    private void setUpButton(OrderModel item, ViewHolder mViewHolder) {
         mViewHolder.llItem.setOnClickListener(view -> {
             Fragment fragment = new OrderFragment();
             Bundle bundle = new Bundle();
@@ -103,31 +102,32 @@ public class OrderItemAdapter extends BaseAdapter {
         });
     }
 
-    private void setData(OrderModel item) {
+    private void setData(OrderModel item, ViewHolder mViewHolder ) {
         OrderImageAdapter imageAdapter = new OrderImageAdapter(activity, item.order_items);
 
         DateFormat dateFormat = new SimpleDateFormat("EEEE, dd/MM/yyyy, hh:mm a");
         mViewHolder.date.setText(dateFormat.format(item.created_at.toDate()));
         mViewHolder.price.setText("$"+item.total);
         mViewHolder.id.setText("#"+item.id);
-        getStatus(item);
+        getStatus(item, mViewHolder);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
         mViewHolder.images.setLayoutManager(layoutManager);
         mViewHolder.images.setAdapter(imageAdapter);
     }
 
-    private void getStatus(OrderModel item) {
+    private void getStatus(OrderModel item,ViewHolder mViewHolder) {
         if(item.status == 0){
             mViewHolder.status.setText("In progress");
+            mViewHolder.status.setTextColor(Color.parseColor("#fbc403"));
         }
         else if(item.status == 1){
             mViewHolder.status.setText("Delivering");
-            mViewHolder.status.setTextColor(Color.parseColor("#FEE440"));
+            mViewHolder.status.setTextColor(Color.parseColor("#2929cc"));
         }
         else if(item.status == 2){
             mViewHolder.status.setText("Success");
-            mViewHolder.status.setTextColor(Color.parseColor("#FEEB70"));
+            mViewHolder.status.setTextColor(Color.parseColor("#388e3c"));
         }
         else if(item.status == 3){
             mViewHolder.status.setText("Cancelled");

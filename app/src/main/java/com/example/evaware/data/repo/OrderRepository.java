@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class OrderRepository {
 
     public Task<QuerySnapshot> getOrdersOfUser(String userId) {
         DocumentReference userRef = db.collection("users").document(userId);
-        return orderRef.whereEqualTo("user_ref", userRef).get().addOnFailureListener(e->{
+        return orderRef.whereEqualTo("user_ref", userRef).orderBy("created_at", Query.Direction.DESCENDING).get().addOnFailureListener(e->{
             Log.e(TAG, "getOrdersOfUser:failed" + e.getLocalizedMessage());
         });
     }

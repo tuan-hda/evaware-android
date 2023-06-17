@@ -97,14 +97,15 @@ public class OrderFragment extends Fragment {
         if(item.status == 0){
             binding.orderDetailStatus.setText("In progress");
             binding.orderDetailBtCancel.setVisibility(View.VISIBLE);
+            binding.orderDetailStatus.setTextColor(Color.parseColor("#fbc403"));
         }
         else if(item.status == 1){
             binding.orderDetailStatus.setText("Delivering");
-            binding.orderDetailStatus.setTextColor(Color.parseColor("#FEE440"));
+            binding.orderDetailStatus.setTextColor(Color.parseColor("#2929cc"));
         }
         else if(item.status == 2){
             binding.orderDetailStatus.setText("Success");
-            binding.orderDetailStatus.setTextColor(Color.parseColor("#FEEB70"));
+            binding.orderDetailStatus.setTextColor(Color.parseColor("#388e3c"));
         }
         else if(item.status == 3){
             binding.orderDetailStatus.setText("Cancelled");

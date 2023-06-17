@@ -170,24 +170,32 @@ public class MyOrderViewModel extends AndroidViewModel {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     list.clear();
 
+                    List<Task<?>> tasks = new ArrayList<>();
+
                     for (DocumentSnapshot orderDoc : queryDocumentSnapshots.getDocuments()) {
                         OrderModel order = orderDoc.toObject(OrderModel.class);
+                        list.add(order);
 
-                        repo.getOrderItem(orderDoc.getReference())
+                        tasks.add(repo.getOrderItem(orderDoc.getReference())
                                 .addOnSuccessListener(task -> {
                                     List<BagItemModel> itemModels = new ArrayList<>();
                                     for (DocumentSnapshot itemDoc : task.getDocuments()) {
                                         BagItemModel bagItem = itemDoc.toObject(BagItemModel.class);
                                         itemModels.add(bagItem);
                                     }
-                                    order.order_items = itemModels;
-                                    list.add(order);
-                                    data.setValue(list);
+                                    list.get(list.indexOf(order)).order_items = itemModels;
                                 })
                                 .addOnFailureListener(e -> {
                                     Log.e(TAG, "getOrderItem:failed", e);
-                                });
+                                }));
                     }
+
+                    Tasks.whenAll(tasks).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            data.setValue(list);
+                        }
+                    });
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "getOrderOfUser: Failed to get orders", e);

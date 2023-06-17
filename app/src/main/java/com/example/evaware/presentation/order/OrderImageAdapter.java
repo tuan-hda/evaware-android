@@ -52,6 +52,7 @@ public class OrderImageAdapter extends RecyclerView.Adapter<OrderImageAdapter.Vi
             String image_url = images.get(position);
             Picasso.with(context)
                     .load(image_url)
+                    .fit()
                     .into(holder.imageView);
         }
     }
