@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.evaware.R;
@@ -167,6 +168,7 @@ public class ProductActivity extends AppCompatActivity implements VariationProdu
                     productViewModel.getVariationRef(productModelId, productDetail.getVariationModelDetails().get(variationAdapter.getSelectedItem()).getModel().getId()).observe(this, variationRef -> {
                         bagItemModel.variation_ref = variationRef;
                         bagViewModel.addItem(bagItemModel);
+                        Toast.makeText(this, "Added to bag", Toast.LENGTH_SHORT).show();
                     });
                 }catch (Exception e){
                     Log.d("dcm", "setUpBtn: " + e.getMessage());
