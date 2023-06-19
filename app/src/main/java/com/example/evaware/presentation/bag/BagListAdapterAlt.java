@@ -76,6 +76,7 @@ public class BagListAdapterAlt extends BaseAdapter {
             mViewHolder.textDesc = view.findViewById(R.id.text_desc);
             mViewHolder.btnDelete = view.findViewById(R.id.btn_delete);
             mViewHolder.textQtyAlt = view.findViewById(R.id.text_qty_alt);
+            mViewHolder.textVar = view.findViewById(R.id.text_variation);
 
             LinearLayout stepper = view.findViewById(R.id.stepper);
             mViewHolder.stepper = stepper;
@@ -102,6 +103,7 @@ public class BagListAdapterAlt extends BaseAdapter {
         mViewHolder.textDesc.setText(item.product.desc);
         mViewHolder.textPrice.setText(getFormattedPrice(item.product.price));
         mViewHolder.textQty.setText(item.qty + "");
+        mViewHolder.textVar.setText("Variation: " + item.variation.name);
 //        End set value
 
         checkQty(mViewHolder);
@@ -150,7 +152,7 @@ public class BagListAdapterAlt extends BaseAdapter {
 
     static class ViewHolder {
         ImageView itemImage;
-        TextView textPrice, textDesc, textQty, textQtyAlt;
+        TextView textPrice, textDesc, textQty, textQtyAlt, textVar;
         ImageButton btnDelete, btnMinus, btnPlus;
         LinearLayout stepper;
     }

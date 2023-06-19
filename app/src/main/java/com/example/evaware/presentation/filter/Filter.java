@@ -104,14 +104,27 @@ public class Filter extends AppCompatActivity {
         filterViewModel.selectCategories.observe(this, categoryModels -> {
             selectCategories = categoryModels;
             List<Float> values = binding.filterRsPrice.getValues();
-            viewModel.forceGet(categoryId, values.get(0), values.get(1), false, binding, selectCategories, selectVariations);
-
+            float vl1 = 0, vl2 = 0;
+            if (values.size() == 1) {
+                vl1 = values.get(0);
+            }
+            if (values.size() == 2) {
+                vl2 = values.get(1);
+            }
+            viewModel.forceGet(categoryId, vl1, vl2, false, binding, selectCategories, selectVariations);
         });
 
         filterViewModel.selectVariations.observe(this, models -> {
             selectVariations = models;
             List<Float> values = binding.filterRsPrice.getValues();
-            viewModel.forceGet(categoryId, values.get(0), values.get(1), false, binding, selectCategories, selectVariations);
+            float vl1 = 0, vl2 = 0;
+            if (values.size() == 1) {
+                vl1 = values.get(0);
+            }
+            if (values.size() == 2) {
+                vl2 = values.get(1);
+            }
+            viewModel.forceGet(categoryId, vl1, vl2, false, binding, selectCategories, selectVariations);
         });
     }
 
@@ -129,10 +142,10 @@ public class Filter extends AppCompatActivity {
     private void handleIntent() {
         viewModel = (CatalogViewModel) GlobalStore.getInstance().getData("catalogViewModel");
         if (GlobalStore.getInstance().getData("filterVariations") != null) {
-//            filterViewModel.setVariations((List<VariationModel>) GlobalStore.getInstance().getData("filterVariations"));
+            filterViewModel.setVariations((List<VariationModel>) GlobalStore.getInstance().getData("filterVariations"));
         }
         if (GlobalStore.getInstance().getData("filterCategories") != null) {
-//            filterViewModel.setCategories((List<CategoryModel>) GlobalStore.getInstance().getData("filterCategories"));
+            filterViewModel.setCategories((List<CategoryModel>) GlobalStore.getInstance().getData("filterCategories"));
         }
 
         categoryId = getIntent().getStringExtra("categoryId");

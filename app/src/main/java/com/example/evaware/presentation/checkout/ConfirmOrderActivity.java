@@ -158,7 +158,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
 
                 user_repo.userDocRef.collection("used_vouchers").get().addOnSuccessListener(queryDocumentSnapshots1 -> {
                     Boolean flag1 = false;
-                    for (QueryDocumentSnapshot snapshot: queryDocumentSnapshots1) {
+                    for (QueryDocumentSnapshot snapshot : queryDocumentSnapshots1) {
                         VoucherModel tempVoucher = snapshot.toObject(VoucherModel.class);
                         if (Objects.equals(tempVoucher.code, voucher.code)) {
                             flag1 = true;
@@ -193,14 +193,14 @@ public class ConfirmOrderActivity extends AppCompatActivity {
             Double discountAmount = subtotal * (voucher.percent / 100.0);
             binding.textPromo.setVisibility(View.VISIBLE);
             binding.textPromoDiscount.setVisibility(View.VISIBLE);
-            binding.textPromoDiscount.setText(CurrencyFormat.getFormattedPrice(discountAmount));
+            binding.textPromoDiscount.setText("-" + CurrencyFormat.getFormattedPrice(discountAmount));
             binding.textTotalPrice.setText(CurrencyFormat.getFormattedPrice(subtotal - discountAmount + 10));
             binding.btnPay.setText("Pay " + CurrencyFormat.getFormattedPrice(subtotal - discountAmount + 10));
 
         } else {
             binding.textPromo.setVisibility(View.GONE);
             binding.textPromoDiscount.setVisibility(View.GONE);
-            binding.textTotalPrice.setText(CurrencyFormat.getFormattedPrice(subtotal + 10));
+            binding.textTotalPrice.setText("-" + CurrencyFormat.getFormattedPrice(subtotal + 10));
             binding.btnPay.setText("Pay " + CurrencyFormat.getFormattedPrice(subtotal + 10));
         }
         updateClickApply();

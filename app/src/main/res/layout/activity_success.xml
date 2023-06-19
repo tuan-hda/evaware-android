@@ -58,7 +58,7 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/transparent"
         android:fontFamily="@font/lexend_medium"
-        android:text="To my orders"
+        android:text="Go back home"
         android:textColor="@color/black"
         android:textSize="@dimen/body_1"
         android:theme="@style/blackPrimary"

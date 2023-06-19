@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingHorizontal="16dp"
+    android:theme="@style/BottomSheetModal"
     tools:context=".presentation.wishlist.ChooseVariationDialog">
 
     <TextView
@@ -31,11 +32,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/chooseVariation_bt_select"
+        style="@style/Button"
+        android:background="@drawable/button_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:paddingVertical="20dp"
-        android:background="@color/charizard_400"
         android:text="Select"
         app:cornerRadius="8dp" />
 
