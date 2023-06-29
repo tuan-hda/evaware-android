@@ -5,12 +5,19 @@ Welcome to the Evaware Furniture App! This Android application is designed to pr
 
 ## Preview
 ![Login and Sign in](https://github.com/tuan-hda/evaware-android/assets/93902080/e5820ded-a184-4eb3-a167-ec749972441a)
+
 ![Categories](https://github.com/tuan-hda/evaware-android/assets/93902080/ed6144b5-892a-44a1-8c69-4951e3493057)
+
 ![Catalog](https://github.com/tuan-hda/evaware-android/assets/93902080/52e4d19f-b99e-40ff-9929-5b007c8d9121)
+
 ![Sorting and Filtering](https://github.com/tuan-hda/evaware-android/assets/93902080/f34cca8d-5fa6-4e7b-ab2f-813e661f844c)
+
 ![Product detail](https://github.com/tuan-hda/evaware-android/assets/93902080/265a43a0-7793-4c52-a369-ff0c4240bc26)
+
 ![Purchase order](https://github.com/tuan-hda/evaware-android/assets/93902080/43d0fd6b-179d-4f59-aa3b-65ae0a5fc940)
+
 ![Manage order](https://github.com/tuan-hda/evaware-android/assets/93902080/9270f0e5-5b77-4717-972c-64ff055e81c2)
+
 ![Add card](https://github.com/tuan-hda/evaware-android/assets/93902080/d899b9cb-a275-4111-9220-c073e9a4c584)
 
 
