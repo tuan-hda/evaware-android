@@ -1,4 +1,4 @@
-#Evaware Furniture App
+# Evaware Furniture Mobile App
 ![Evaware Logo](https://github.com/tuan-hda/evaware-android/assets/93902080/612797b0-f774-4a9c-84de-db2594f31bc8)
 
 Welcome to the Evaware Furniture App! This Android application is designed to provide users with a seamless and enjoyable furniture shopping experience. With Evaware, users can browse through a wide range of furniture items, explore different styles, and make hassle-free purchases, all from the convenience of their mobile devices.
@@ -39,13 +39,3 @@ Welcome to the Evaware Furniture App! This Android application is designed to pr
 - Firebase
 - Jet Admin
 - Architecture: Clean architecture (using Data layer and UI layer), associated with MVVM and ViewBinding feature.
-  
-## Installation
-To install the Evaware Furniture App, follow these steps:
-1. Make sure you have Android Studio installed on your computer.
-2. Once you have Android Studio installed, open it on your computer.
-3. Clone this repository or download the ZIP file and extract its contents to a folder on your computer.
-4. In Android Studio, go to File -> Open and navigate to the folder where you extracted the app's source code. Select the project folder and click OK.
-5. Android Studio will build the project and set up the necessary dependencies. This may take a few moments.
-6. In Android Studio, click on the Run button or press Shift + F10 to build and run the app on your emulator.
-7. The Evaware Furniture App will be installed and launched on emulator. You can now explore the app and start browsing and purchasing furniture items.
